@@ -1,0 +1,13 @@
+package structures;
+
+public interface IWPList<E> {
+    public void add(E element);
+
+    public E get(int index); 
+
+    public int indexOf(E element);
+
+    public E set(int index, E element);
+
+    public void remove(E element);
+}

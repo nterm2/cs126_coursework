@@ -1,7 +1,5 @@
 package structures;
 
-import java.util.NoSuchElementException;
-
 /**
  * get an eleement of the array
  * get the index of an array 
@@ -11,7 +9,7 @@ import java.util.NoSuchElementException;
  * The current size of the array list
  * and the capacity of the arraylist
  */
-public class WPArrayList<E> {
+public class WPArrayList<E> implements IWPList<E>{
     Object[] internalArray;
     int size;
     int capacity;
@@ -65,7 +63,7 @@ public class WPArrayList<E> {
                 return i;
             }
         }
-        throw new NoSuchElementException("Element not found in the array");
+        throw new IllegalArgumentException("Element not found in the array");
     }
 
     /**
