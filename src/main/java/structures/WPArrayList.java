@@ -8,6 +8,9 @@ package structures;
  * We will need to store internal representation of the array (Array of objects)
  * The current size of the array list
  * and the capacity of the arraylist
+ * 
+ * Improvements: when internalarray reaches full capacity, doubles in size in size
+ * can lead to memory issues. check if arrau is growing infitely
  */
 public class WPArrayList<E> implements IWPList<E>{
     Object[] internalArray;
