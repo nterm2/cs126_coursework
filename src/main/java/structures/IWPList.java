@@ -12,4 +12,6 @@ public interface IWPList<E> {
     public boolean remove(E element);
 
     public int size();
+
+    public boolean contains(E element);
 }

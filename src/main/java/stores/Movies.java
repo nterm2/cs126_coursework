@@ -8,6 +8,7 @@ import structures.*;
 public class Movies implements IMovies{
     Stores stores;
     WPHashMap<Integer, WPMovie> movies;
+    WPHashMap<Integer, WPCollection> collections;
     /**
      * The constructor for the Movies data store. This is where you should
      * initialise your data structures.
@@ -17,6 +18,7 @@ public class Movies implements IMovies{
     public Movies(Stores stores) {
         this.stores = stores;
         this.movies = new WPHashMap<Integer, WPMovie>();
+        this.collections = new WPHashMap<Integer, WPCollection>();
     }
 
     /**
@@ -422,8 +424,23 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addToCollection(int filmID, int collectionID, String collectionName, String collectionPosterPath, String collectionBackdropPath) {
-        // TODO Implement this function
-        return false;
+        WPMovie movie = movies.get(filmID);
+        if (movie == null) {
+            return false;
+        } else {
+            WPCollection collection = collections.get(collectionID);
+            if (collections.get(collectionID) == null) {
+                collection = new WPCollection(collectionID, collectionName, collectionPosterPath, collectionBackdropPath); 
+            }
+            if (!collection.containsMovie(movie)) {
+                movie.addToCollection(collection);
+                collection.addToCollection(movie);
+                return true;
+            }
+
+            return false;
+        }
+
     }
 
     /**

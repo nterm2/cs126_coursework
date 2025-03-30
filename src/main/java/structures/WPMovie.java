@@ -26,7 +26,7 @@ public class WPMovie {
     String poster;
 
     // Attributes that are added through other methods in the Movies class. 
-    WPArrayList<WPCollection> belongsToCollection;
+    WPCollection belongsToCollection;
     String imdbID;
     double popularity;
     WPArrayList<Company> productionCompanies; 
@@ -52,6 +52,9 @@ public class WPMovie {
         this.adult = adult;
         this.video = video;
         this.poster = poster;
+
+        this.productionCompanies = new WPArrayList<Company>();
+        this.productionCountries = new WPArrayList<WPCountry>();
     }
 
     public int getID() {
@@ -122,7 +125,7 @@ public class WPMovie {
         return this.poster;
     }
 
-    public WPArrayList<WPCollection> getBelongsToCollection() {
+    public WPCollection getBelongsToCollection() {
         return this.belongsToCollection;
     }
 
@@ -175,8 +178,8 @@ public class WPMovie {
         this.voteCount = voteCount;
     }
 
-    public boolean addToCollection(WPCollection collection) {
-        return this.belongsToCollection.add(collection);
+    public void addToCollection(WPCollection collection) {
+        this.belongsToCollection = collection;
     }
 
     public boolean addProductionCompany(Company company) {
@@ -186,6 +189,4 @@ public class WPMovie {
     public boolean addProductionCountry(WPCountry country) {
         return this.productionCountries.add(country);
     }
-
-
 }

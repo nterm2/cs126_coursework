@@ -113,6 +113,13 @@ public class WPArrayList<E> implements IWPList<E>{
         return false;
     }
 
+    public boolean contains(E element) {
+        for (int i = 0; i < size; i++) {
+            if (element.equals(this.internalArray[i])) {return true;}
+        }
+        return false;
+    }
+
     public int size() {
         return this.size;
     }
