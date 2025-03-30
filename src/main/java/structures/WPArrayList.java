@@ -31,17 +31,24 @@ public class WPArrayList<E> implements IWPList<E>{
      * 
      * CONSIDERATION - WHAT HAPPENS IF CAPACITY IS TOO LARGE AND FAILS? 
      */
-    public void add(E element) {
-        if (this.size >= this.capacity) {
-            this.capacity *= 2;
-            Object[] newInternalArray = new Object[this.capacity];
-            for (int i=0; i < this.size; i++) {
-                newInternalArray[i] = this.internalArray[i];
+    public boolean add(E element) {
+        try {
+            if (this.size >= this.capacity) {
+                this.capacity *= 2;
+                Object[] newInternalArray = new Object[this.capacity];
+                for (int i=0; i < this.size; i++) {
+                    newInternalArray[i] = this.internalArray[i];
+                }
+                this.internalArray = newInternalArray;
             }
-            this.internalArray = newInternalArray;
+            this.internalArray[this.size] = element;
+            this.size++;
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
-        this.internalArray[this.size] = element;
-        this.size++;
+
     }
     
     /**
@@ -66,7 +73,7 @@ public class WPArrayList<E> implements IWPList<E>{
                 return i;
             }
         }
-        throw new IllegalArgumentException("Element not found in the array");
+        return -1;
     }
 
     /**
@@ -93,12 +100,20 @@ public class WPArrayList<E> implements IWPList<E>{
      * list, and set the elemnt to i - 1 (taking up empty space from the removed element.)
      * as such, the last lemnt willl not be null - set it to null, and decrase the size
      */
-    public void remove(E element) {
+    public boolean remove(E element) {
         int toRemoveIndex = this.indexOf(element);
-        for (int i=toRemoveIndex+1; i<this.size; i++) {
-            this.set(i-1, this.get(i));
+        if (toRemoveIndex >= 0) {
+            for (int i=toRemoveIndex+1; i<this.size; i++) {
+                this.set(i-1, this.get(i));
+            }
+            this.internalArray[size-1] = null;
+            this.size--;
+            return true;
         }
-        this.internalArray[size-1] = null;
-        this.size--;
+        return false;
+    }
+
+    public int size() {
+        return this.size;
     }
 }

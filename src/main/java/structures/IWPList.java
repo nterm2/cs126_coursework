@@ -1,7 +1,7 @@
 package structures;
 
 public interface IWPList<E> {
-    public void add(E element);
+    public boolean add(E element);
 
     public E get(int index); 
 
@@ -9,5 +9,7 @@ public interface IWPList<E> {
 
     public E set(int index, E element);
 
-    public void remove(E element);
+    public boolean remove(E element);
+
+    public int size();
 }
