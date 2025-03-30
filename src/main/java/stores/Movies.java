@@ -3,13 +3,11 @@ package stores;
 import java.time.LocalDate;
 
 import interfaces.IMovies;
-import structures.WPArrayList;
-import structures.WPHashMap;
+import structures.*;
 
 public class Movies implements IMovies{
     Stores stores;
-    WPArrayList<WPHashMap<Object, Object>> films;
-    WPArrayList<WPHashMap<Object, Object>> collections;
+    WPHashMap<Integer, WPMovie> movies;
     /**
      * The constructor for the Movies data store. This is where you should
      * initialise your data structures.
@@ -18,8 +16,7 @@ public class Movies implements IMovies{
      */
     public Movies(Stores stores) {
         this.stores = stores;
-        this.films = new WPArrayList<WPHashMap<Object, Object>>();
-        this.collections = new WPArrayList<WPHashMap<Object, Object>>();
+        this.movies = new WPHashMap<Integer, WPMovie>();
     }
 
     /**
@@ -49,26 +46,12 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean add(int id, String title, String originalTitle, String overview, String tagline, String status, Genre[] genres, LocalDate release, long budget, long revenue, String[] languages, String originalLanguage, double runtime, String homepage, boolean adult, boolean video, String poster) {
-        WPHashMap<Object, Object> film = new WPHashMap<>();
-        film.put("id", id);
-        film.put("title", title);
-        film.put("originalTitle", originalTitle);
-        film.put("overview", overview);
-        film.put("tagline", tagline);
-        film.put("status", status);
-        film.put("genres", genres);
-        film.put("release", release);
-        film.put("budget", budget);
-        film.put("revenue", revenue);
-        film.put("languages", languages);
-        film.put("originalLanguage", originalLanguage);
-        film.put("runtime", runtime);
-        film.put("homepage", homepage);
-        film.put("adult", adult);
-        film.put("video", video);
-        film.put("poster", poster);
-
-        return films.add(film);
+        if (movies.get(id) == null) {
+            WPMovie newMovie = new WPMovie(id, title, originalTitle, overview, tagline, status, genres, release, budget, revenue, languages, originalLanguage, runtime, homepage, adult, video, poster);
+            movies.put(id, newMovie);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -80,14 +63,7 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean remove(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                this.films.remove(film);
-                return true;
-            }
-        }
-        return false;
+        return movies.remove(id);
     }
 
     /**
@@ -97,11 +73,8 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] getAllIDs() {
-        int[] allIDs = new int[this.films.size()];
-        for (int i=0; i < this.films.size(); i++) {
-            allIDs[i] = (int) this.films.get(i).get("id");
-        }
-        return allIDs;
+        // TODO Implement this function
+        return null;
     }
 
     /**
@@ -115,21 +88,8 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] getAllIDsReleasedInRange(LocalDate start, LocalDate end) {
-        /**
-         * iterate through each film. get the release date
-         */
-        WPArrayList<Integer> tmpIDs = new WPArrayList<Integer>();
-        for (int i=0; i < this.films.size(); i++) {
-            LocalDate filmReleaseDate = (LocalDate) this.films.get(i).get("release");
-            if (filmReleaseDate.isBefore(end) && filmReleaseDate.isAfter(start)) {
-                tmpIDs.add((int) this.films.get(i).get("id"));
-            }
-        } 
-        int[] idsInRange = new int[tmpIDs.size()];
-        for (int i=0; i < tmpIDs.size(); i++) {
-            idsInRange[i] = tmpIDs.get(i);
-        }
-        return idsInRange;
+        // TODO Implement this function
+        return null;
     }
 
     /**
@@ -141,13 +101,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getTitle(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("title");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getTitle();
     }
 
     /**
@@ -160,13 +118,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getOriginalTitle(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("originalTitle");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getOriginialTitle();
     }
 
     /**
@@ -178,13 +134,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getOverview(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("overview");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getOverview();
     }
 
     /**
@@ -196,13 +150,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getTagline(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("tagline");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getTagline();
     }
 
     /**
@@ -214,13 +166,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getStatus(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("status");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getStatus();
     }
 
     /**
@@ -232,13 +182,11 @@ public class Movies implements IMovies{
      */
     @Override
     public Genre[] getGenres(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (Genre[]) film.get("genres");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getGenres();
     }
 
     /**
@@ -250,13 +198,11 @@ public class Movies implements IMovies{
      */
     @Override
     public LocalDate getRelease(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (LocalDate) film.get("release");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getRelease();
     }
 
     /**
@@ -268,13 +214,11 @@ public class Movies implements IMovies{
      */
     @Override
     public long getBudget(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (long) film.get("budget");
-            }
-        }
-        return -1;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return -1; 
+        } 
+        return movie.getBudget();
     }
 
     /**
@@ -286,13 +230,11 @@ public class Movies implements IMovies{
      */
     @Override
     public long getRevenue(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (long) film.get("revenue");
-            }
-        }
-        return -1;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return -1; 
+        } 
+        return movie.getRevenue();
     }
 
     /**
@@ -304,13 +246,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String[] getLanguages(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String[]) film.get("languages");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getLanguages();
     }
 
     /**
@@ -323,13 +263,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getOriginalLanguage(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("originalLanguage");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getOriginalLanguage();
     }
 
     /**
@@ -341,13 +279,11 @@ public class Movies implements IMovies{
      */
     @Override
     public double getRuntime(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (double) film.get("runtime");
-            }
-        }
-        return -1.0d;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return -1.0d; 
+        } 
+        return movie.getRuntime();
     }
 
     /**
@@ -359,13 +295,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getHomepage(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("homepage");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getHomepage();
     }
 
     /**
@@ -378,13 +312,11 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean getAdult(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (boolean) film.get("adult");
-            }
-        }
-        return false;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return false; 
+        } 
+        return movie.getAdult();
     }
 
     /**
@@ -397,13 +329,11 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean getVideo(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (boolean) film.get("video");
-            }
-        }
-        return false;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return false; 
+        } 
+        return movie.getVideo();
     }
 
     /**
@@ -415,13 +345,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getPoster(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (String) film.get("poster");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getPoster();
     }
 
     /**
@@ -436,15 +364,13 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean setVote(int id, double voteAverage, int voteCount) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                film.put("voteAverage", voteAverage);
-                film.put("voteCount", voteCount);
-                return true;
-            }
-        }
-        return false;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return false; 
+        } 
+        movie.setVoteAverage(voteAverage);
+        movie.setVoteCount(voteCount);
+        return true;
     }
 
     /**
@@ -457,13 +383,11 @@ public class Movies implements IMovies{
      */
     @Override
     public double getVoteAverage(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (double) film.get("voteAverage");
-            }
-        }
-        return -1.0d;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return -1.0d; 
+        } 
+        return movie.getVoteAverage();
     }
 
     /**
@@ -476,13 +400,11 @@ public class Movies implements IMovies{
      */
     @Override
     public int getVoteCount(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (int) film.get("voteCount");
-            }
-        }
-        return -1;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return -1; 
+        } 
+        return movie.getVoteCount();
     }
 
     /**
@@ -500,13 +422,8 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addToCollection(int filmID, int collectionID, String collectionName, String collectionPosterPath, String collectionBackdropPath) {
-        WPHashMap<Object, Object> collection = new WPHashMap<Object, Object>();
-        collection.put("filmID", filmID);
-        collection.put("collectionID", collectionID);
-        collection.put("collectionName", collectionName);
-        collection.put("collectionPosterPath", collectionPosterPath);
-        collection.put("collectionBackdropPath", collectionBackdropPath);
-        return this.collections.add(collection);
+        // TODO Implement this function
+        return false;
     }
 
     /**
@@ -519,22 +436,8 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] getFilmsInCollection(int collectionID) {
-        WPArrayList<Integer> tmpIDs = new WPArrayList<Integer>();
-
-        for (int i=0; i < this.collections.size(); i++) {
-            WPHashMap<Object, Object> collection = this.collections.get(i);
-            if ((int) collection.get("collectionID") == collectionID) {
-                tmpIDs.add((int) collection.get("filmID"));
-            }
-        }
-        if (tmpIDs.size() > 0) {
-            int[] filmsInCollection = new int[tmpIDs.size()];
-            for (int i=0; i < tmpIDs.size(); i++) {
-                filmsInCollection[i] = tmpIDs.get(i);
-            }
-            return filmsInCollection;
-        }
-        return new int[0];
+        // TODO Implement this function
+        return null;
     }
 
     /**
@@ -546,12 +449,7 @@ public class Movies implements IMovies{
      */
     @Override
     public String getCollectionName(int collectionID) {
-        for (int i=0; i < this.collections.size(); i++) {
-            WPHashMap<Object, Object> collection = this.collections.get(i);
-            if ((int) collection.get("collectionID") == collectionID) {
-                return (String) collection.get("collectionName");
-            }
-        }
+        // TODO Implement this function
         return null;
     }
 
@@ -564,12 +462,7 @@ public class Movies implements IMovies{
      */
     @Override
     public String getCollectionPoster(int collectionID) {
-        for (int i=0; i < this.collections.size(); i++) {
-            WPHashMap<Object, Object> collection = this.collections.get(i);
-            if ((int) collection.get("collectionID") == collectionID) {
-                return (String) collection.get("collectionPosterPath");
-            }
-        }
+        // TODO Implement this function
         return null;
     }
 
@@ -582,12 +475,7 @@ public class Movies implements IMovies{
      */
     @Override
     public String getCollectionBackdrop(int collectionID) {
-        for (int i=0; i < this.collections.size(); i++) {
-            WPHashMap<Object, Object> collection = this.collections.get(i);
-            if ((int) collection.get("collectionID") == collectionID) {
-                return (String) collection.get("collectionBackdropPath");
-            }
-        }
+        // TODO Implement this function
         return null;
     }
 
@@ -600,13 +488,8 @@ public class Movies implements IMovies{
      */
     @Override
     public int getCollectionID(int filmID) {
-        for (int i=0; i < this.collections.size(); i++) {
-            WPHashMap<Object, Object> collection = this.collections.get(i);
-            if ((int) collection.get("filmID") == filmID) {
-                return (int) collection.get("collectionID");
-            }
-        }
-        return -1;
+        // TODO Implement this function
+        return -2;
     }
 
     /**
@@ -618,14 +501,12 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean setIMDB(int filmID, String imdbID) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == filmID) {
-                film.put("imdbID", imdbID);
-                return true;
-            }
-        }
-        return false;
+        WPMovie movie = movies.get(filmID);
+        if (movie == null) {
+            return false; 
+        } 
+        movie.setIMDB(imdbID);
+        return true;
     }
 
     /**
@@ -637,13 +518,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getIMDB(int filmID) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == filmID) {
-                return (String) film.get("imdbID");
-            }
-        }
-        return null;
+        WPMovie movie = movies.get(filmID);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getImbdID();
     }
 
     /**
@@ -655,14 +534,12 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean setPopularity(int id, double popularity) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                film.put("popularity", popularity);
-                return true;
-            }
-        }
-        return false;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return false; 
+        } 
+        movie.setPopularity(popularity);
+        return true;
     }
 
     /**
@@ -674,13 +551,11 @@ public class Movies implements IMovies{
      */
     @Override
     public double getPopularity(int id) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                return (double) film.get("popularity");
-            }
-        }
-        return -1.0d;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return -1.0d; 
+        } 
+        return movie.getPopularity();
     }
 
     /**
@@ -693,13 +568,7 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addProductionCompany(int id, Company company) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                film.put("company", company);
-                return true;
-            }
-        }
+        // TODO Implement this function
         return false;
     }
 
@@ -712,13 +581,7 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addProductionCountry(int id, String country) {
-        for (int i=0; i < this.films.size(); i++) {
-            WPHashMap<Object, Object> film = this.films.get(i);
-            if ((int) film.get("id") == id) {
-                film.put("productionCountry", country);
-                return true;
-            }
-        }
+        // TODO Implement this function
         return false;
     }
 
@@ -732,6 +595,7 @@ public class Movies implements IMovies{
      */
     @Override
     public Company[] getProductionCompanies(int id) {
+        // TODO Implement this function
         return null;
     }
 
@@ -756,7 +620,8 @@ public class Movies implements IMovies{
      */
     @Override
     public int size() {
-        return this.films.size();
+        // TODO Implement this function
+        return -1;
     }
 
     /**

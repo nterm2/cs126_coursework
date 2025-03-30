@@ -147,7 +147,7 @@ public class WPMovie {
         return this.voteAverage;
     }
 
-    public double getVoteCount() {
+    public int getVoteCount() {
         return this.voteCount;
     }
 
@@ -187,5 +187,5 @@ public class WPMovie {
         return this.productionCountries.add(country);
     }
 
-    
+
 }
