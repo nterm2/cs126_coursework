@@ -34,7 +34,7 @@ public class WPHashMap<K, V> {
 
     // Uses hashing to determine bucket index.
     private int getBucketIndex(K key) {
-        return key.hashCode() % capacity;
+        return Math.abs(key.hashCode() % capacity);
     }
 
     public void put(K key, V value) {

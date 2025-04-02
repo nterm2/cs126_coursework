@@ -125,11 +125,14 @@ public class WPMovie {
         return this.poster;
     }
 
-    public WPCollection getBelongsToCollection() {
-        return this.belongsToCollection;
-    }
+    // public WPCollection getBelongsToCollection() {
+    //     return this.belongsToCollection;
+    // }
 
     public int getCollectionID() {
+        if (this.belongsToCollection == null) {
+            return -1;
+        }
         return this.belongsToCollection.getCollectionID();
     }
     

@@ -98,17 +98,13 @@ public class Movies implements IMovies{
         int releasedInRangeCounter = 0;
 
         for (int i = 0; i < movies.size(); i++) {
-            WPMovie givenMovie = movies.get(keys[i]);
-            LocalDate release = givenMovie.getRelease();
+            if (movies.get(keys[i]).getRelease() != null) {
+                WPMovie givenMovie = movies.get(keys[i]);
+                LocalDate release = givenMovie.getRelease();
 
-            System.out.println("Checking movie ID: " + givenMovie.getID());
-            System.out.println("Release Date: " + release);
-
-            if (release.isAfter(start) && release.isBefore(end)) {
-                System.out.println("Movie ID " + givenMovie.getID() + " is within range.");
-                idsReleasedInRange[releasedInRangeCounter++] = givenMovie.getID();
-            } else {
-                System.out.println("Movie ID " + givenMovie.getID() + " is out of range.");
+                if (release.isAfter(start) && release.isBefore(end)) {
+                    idsReleasedInRange[releasedInRangeCounter++] = givenMovie.getID();
+                }
             }
         }
 
@@ -447,25 +443,38 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addToCollection(int filmID, int collectionID, String collectionName, String collectionPosterPath, String collectionBackdropPath) {
+        System.out.println("Attempting to add film " + filmID + " to collection " + collectionID);
         
-        if (movies.get(filmID) == null || collectionID < 0) {
-            return false;
-        } else {
-            WPMovie movie = movies.get(filmID);
-            WPCollection collection = collections.get(collectionID);
-            if (collections.get(collectionID) == null) {
-                collection = new WPCollection(collectionID, collectionName, collectionPosterPath, collectionBackdropPath); 
-            }
-            if (!collection.containsMovie(movie)) {
-                movie.addToCollection(collection);
-                collection.addToCollection(movie);
-                return true;
-            }
-
+        if (movies.get(filmID) == null) {
+            System.out.println("Error: Movie with ID " + filmID + " does not exist.");
             return false;
         }
-
+        if (collectionID < 0) {
+            System.out.println("Error: Invalid collection ID " + collectionID);
+            return false;
+        }
+        
+        if (!collections.containsKey(collectionID)) {
+            System.out.println("Collection " + collectionID + " does not exist. Creating new collection.");
+            WPCollection collection = new WPCollection(collectionID, collectionName, collectionPosterPath, collectionBackdropPath);
+            collections.put(collectionID, collection);
+        }
+        
+        WPMovie movie = movies.get(filmID);
+        WPCollection collection = collections.get(collectionID);
+        
+        System.out.println("Adding movie " + filmID + " to collection " + collectionID);
+        movie.addToCollection(collection);
+        movies.put(filmID, movie);
+        
+        System.out.println("Adding collection " + collectionID + " to movie " + filmID);
+        collection.addToCollection(movie);
+        collections.put(collectionID, collection);
+        
+        System.out.println("Successfully added movie " + filmID + " to collection " + collectionID);
+        return true;
     }
+    
 
     /**
      * Get all films that belong to a given collection
