@@ -143,7 +143,7 @@ public class Movies implements IMovies{
         if (movie == null) {
             return null; 
         } 
-        return movie.getOriginialTitle();
+        return movie.getOriginalTitle();
     }
 
     /**
@@ -443,35 +443,27 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addToCollection(int filmID, int collectionID, String collectionName, String collectionPosterPath, String collectionBackdropPath) {
-        System.out.println("Attempting to add film " + filmID + " to collection " + collectionID);
-        
         if (movies.get(filmID) == null) {
-            System.out.println("Error: Movie with ID " + filmID + " does not exist.");
             return false;
         }
         if (collectionID < 0) {
-            System.out.println("Error: Invalid collection ID " + collectionID);
             return false;
         }
         
         if (!collections.containsKey(collectionID)) {
-            System.out.println("Collection " + collectionID + " does not exist. Creating new collection.");
             WPCollection collection = new WPCollection(collectionID, collectionName, collectionPosterPath, collectionBackdropPath);
             collections.put(collectionID, collection);
         }
         
         WPMovie movie = movies.get(filmID);
         WPCollection collection = collections.get(collectionID);
-        
-        System.out.println("Adding movie " + filmID + " to collection " + collectionID);
+    
         movie.addToCollection(collection);
         movies.put(filmID, movie);
         
-        System.out.println("Adding collection " + collectionID + " to movie " + filmID);
         collection.addToCollection(movie);
         collections.put(collectionID, collection);
         
-        System.out.println("Successfully added movie " + filmID + " to collection " + collectionID);
         return true;
     }
     
@@ -711,7 +703,18 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] findFilms(String searchTerm) {
-        // TODO Implement this function
-        return null;
+        int[] matchingMovies = new int[movies.size()];
+        int counter = 0;
+        Integer[] keys = movies.getKeys();
+        for (int i=0; i < movies.size(); i++) {
+            WPMovie movie = movies.get(keys[i]);
+            if (movie.getTitle().contains(searchTerm) || movie.getOriginalTitle().contains(searchTerm) || movie.getOverview().contains(searchTerm)) {
+                matchingMovies[counter++] = movie.getID();
+            }
+        }
+
+        int[] trimmedMatchingMovies = new int[counter];
+        System.arraycopy(matchingMovies, 0, trimmedMatchingMovies, 0, counter);
+        return trimmedMatchingMovies;
     }
 }

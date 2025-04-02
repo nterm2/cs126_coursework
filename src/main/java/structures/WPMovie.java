@@ -65,7 +65,7 @@ public class WPMovie {
         return this.title;
     }
 
-    public String getOriginialTitle() {
+    public String getOriginalTitle() {
         return this.originalTitle;
     }
 
