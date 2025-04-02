@@ -1,130 +1,181 @@
 package structures;
 
-/**
- * Implement a hashmap from scratch, using chaining for collision resolution 
- * Used for now as it is easier to understand right now, but may switch to a 
- * more efficent solution (but complex solution), such as double hashing . 
- * quadratic probing. 
- */
+public class WPHashMap<K, V> {
+    private static final int INITIAL_CAPACITY = 100;
+    private static final int INCREASE_FACTOR = 2;
+    private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
-public class WPHashMap<K, V> implements IWPHashMap<K, V>{
-    private Entry<K, V>[] table; // List of entries representing a table
-    private int capacity = 10; // Initial number of buckets
+    private int size;
+    private EntryNode<K,V>[] buckets;
+    private int capacity;
 
-    // A bucket in the table stores a linked list of entries. Therefore, each 
-    // entry stores the key, value, and then a pointer to the next entry in the 
-    // linked list.
-    static class Entry<K, V> {
-        K key;
-        V value;
-        Entry<K, V> next; 
-
-        public Entry(K key, V value, Entry<K, V> next) {
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
-    }
-
-    // Constructor initialises the table to be an empty array of entries
+    // INitialise buckets to contain the default number of entries
     @SuppressWarnings("unchecked")
     public WPHashMap() {
-        table = new Entry[capacity];
+        this.size = 0;
+        this.capacity = INITIAL_CAPACITY;
+        this.buckets = new EntryNode[capacity];
     }
 
-    // Method to put a AN ENTRY INSTO THE MAP M. if the key k is 
-    // not already in m, then return null, else, return old value 
-    // associated with k. 
-    public void put(K newKey, V data) {
-        if (newKey == null)
-            return;    //does not allow to store null.
+    // Entrynode represents element in linkedlist, representing an entry.
+    // Store key, value, and pointer to next entry within the bucket. If at
+    // the end of the linked list, set next to null.
+    private static class EntryNode<K, V> {
+        private K key;
+        private V value;
+        private EntryNode<K, V> next;
 
-        //calculate hash of key.
-        int hash = hash(newKey);
-        //create new entry.
-        Entry<K, V> newEntry = new Entry<K, V>(newKey, data, null);
+        EntryNode(K key, V value) {
+            this.key = key;
+            this.value = value;
+            this.next = null;
+        }
+    }
 
-        //if table location does not contain any entry, store entry there.
-        if (table[hash] == null) {
-            table[hash] = newEntry;
+    // Uses hashing to determine bucket index.
+    private int getBucketIndex(K key) {
+        return key.hashCode() % capacity;
+    }
+
+    public void put(K key, V value) {
+        // Disallow storing null keys.
+        if (key == null || value == null) {
+            return;
+        }
+        // In the case that the current factor is greater than or equal to default load
+        // factor, rehash the dictionary
+        if (((double) size / capacity) >= DEFAULT_LOAD_FACTOR) {
+            reHash();
+        }
+        // calculate the bucket index based on the key
+        int index = getBucketIndex(key);
+        // create a new entry
+        EntryNode<K, V> entryNode = new EntryNode<>(key, value);
+
+        EntryNode<K, V> current = buckets[index];
+        // In the case that the bucket is empty, simply add the entrynode to the bucket.
+        if (current == null) {
+            buckets[index] = entryNode;
         } else {
-            Entry<K, V> previous = null;
-            Entry<K, V> current = table[hash];
+            // Store previous node in linked list
+            EntryNode<K, V> previous = null;
 
-            while (current != null) { //we have reached last entry of bucket.
-                if (current.key.equals(newKey)) {
-                    if (previous == null) {  //node has to be insert on first of bucket.
-                        newEntry.next = current.next;
-                        table[hash] = newEntry;
-                        return;
-                    } else {
-                        newEntry.next = current.next;
-                        previous.next = newEntry;
-                        return;
-                    }
+            while (current != null) {
+                // In the case the key already exists, simply update the value of that node and exit.
+                if (current.key.equals(key)) {
+                    current.value = value;
+                    return;
                 }
+                // Otherwise, move on to the next element
                 previous = current;
                 current = current.next;
             }
-            previous.next = newEntry;
+            // At this stage, previous represents last element in the linked list. 
+            // Set next for previous to point to th new entry
+            previous.next = entryNode;
         }
+        
+        this.size++;
     }
-    /**
-     * Method returns value corresponding to key.
-     *
-     * @param key
-     */
+
     public V get(K key) {
-        int hash = hash(key);
-        if (table[hash] == null) {
-            return null;
-        } else {
-            Entry<K, V> temp = table[hash];
-            while (temp != null) {
-                if (temp.key.equals(key))
-                    return temp.value;
-                temp = temp.next; //return value corresponding to key.
+        int index = getBucketIndex(key);
+
+        EntryNode<K, V> current = buckets[index];
+
+        while (current != null) {
+            if (current.key.equals(key)) {
+                return current.value;
             }
-            return null;   //returns null if key is not found.
+            current = current.next;
         }
+        return null;
     }
 
+    // todo
+    public boolean remove(K key) {
+        // get bucket index for kv pair we want to remove
+        int index = getBucketIndex(key);
 
-    /**
-     * Method removes key-value pair from HashMapCustom.
-     *
-     * @param key
-     */
-    public boolean remove(K deleteKey) {
+        // get the first entry stored in the designated bucket.
+        // store previous 
+        EntryNode<K, V> previousNode = null;
+        EntryNode<K, V> currentNode = buckets[index];
 
-        int hash = hash(deleteKey);
-
-        if (table[hash] == null) {
-            return false;
-        } else {
-            Entry<K, V> previous = null;
-            Entry<K, V> current = table[hash];
-
-            while (current != null) { //we have reached last entry node of bucket.
-                if (current.key.equals(deleteKey)) {
-                    if (previous == null) {  //delete first entry node.
-                        table[hash] = table[hash].next;
-                        return true;
-                    } else {
-                        previous.next = current.next;
-                        return true;
-                    }
+        // iterate through each entry whilst current is not null
+        while (currentNode != null) {
+            if (currentNode.key.equals(key)) {
+                // in the case that the entry we are currently considering matches 
+                // the key, if this is the first node, update the head to point to the next node
+                if (previousNode == null) {
+                    buckets[index] = currentNode.next;
+                } else {
+                    // Otherwise, set the next pointer of the previous node to the next pointer of the
+                    // currnent node, in essence removing the current pointer.
+                    previousNode.next = currentNode.next;
                 }
-                previous = current;
+                size--;
+                return true;
+            }
+            // otherwise set current to current.next, previous to current.
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+        }
+
+        // if current node is false, we return null - there doesn't exist a key in the hashmap
+        // that we can remove
+        return false;
+    }
+
+    public Integer[] getKeys() {
+        Integer[] keysArray = new Integer[size]; // Allocate array of exact required size
+        int index = 0;
+    
+        for (EntryNode<K, V> bucket : buckets) {
+            EntryNode<K, V> current = bucket;
+    
+            while (current != null) {
+                keysArray[index++] = (Integer) current.key; // Directly store the key
                 current = current.next;
             }
-            return false;
         }
+        return keysArray;
+    }    
+    
+    public boolean containsKey(K key) {
+        return get(key) != null;
+    }
+    
+    // Increase size of intrnal array.
+    private void reHash() {
+        // Double hash map capacity
+        capacity *= INCREASE_FACTOR;
+        // Set buckets to array of buckets with the new length, all buckets storing null.
+        @SuppressWarnings("unchecked")
+        EntryNode<K,V>[] newBuckets = new EntryNode[capacity];
+        // Iterate through each bucket
+        for (EntryNode<K, V> bucket: buckets) {
+            EntryNode<K, V> current = bucket;
 
+            while (current != null){
+                EntryNode<K, V> next = current.next;
+
+                // calcualte bucket index for current key
+                int index = getBucketIndex(current.key);
+
+                // insert the current entry into the new bucket array
+                current.next = newBuckets[index];
+                newBuckets[index] = current;
+
+                // move onto the next entry
+                current = next;
+            }
+        }
+        buckets = newBuckets;
     }
 
-    private int hash(K key) {
-        return Math.abs(key.hashCode()) % capacity;
+    // return how many k-v pairs are being stored in the hashmap
+    public int size() {
+        return this.size;
     }
-
 }

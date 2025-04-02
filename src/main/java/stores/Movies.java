@@ -1,7 +1,6 @@
 package stores;
 
 import java.time.LocalDate;
-
 import interfaces.IMovies;
 import structures.*;
 
@@ -75,8 +74,12 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] getAllIDs() {
-        // TODO Implement this function
-        return null;
+        Integer[] keys = movies.getKeys();
+        int[] castedKeys = new int[movies.size()];
+        for (int i=0; i < movies.size(); i++) {
+            castedKeys[i] = (int) keys[i];
+        }
+        return castedKeys;
     }
 
     /**
@@ -90,8 +93,28 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] getAllIDsReleasedInRange(LocalDate start, LocalDate end) {
-        // TODO Implement this function
-        return null;
+        Integer[] keys = movies.getKeys();
+        int[] idsReleasedInRange = new int[movies.size()];
+        int releasedInRangeCounter = 0;
+
+        for (int i = 0; i < movies.size(); i++) {
+            WPMovie givenMovie = movies.get(keys[i]);
+            LocalDate release = givenMovie.getRelease();
+
+            System.out.println("Checking movie ID: " + givenMovie.getID());
+            System.out.println("Release Date: " + release);
+
+            if (release.isAfter(start) && release.isBefore(end)) {
+                System.out.println("Movie ID " + givenMovie.getID() + " is within range.");
+                idsReleasedInRange[releasedInRangeCounter++] = givenMovie.getID();
+            } else {
+                System.out.println("Movie ID " + givenMovie.getID() + " is out of range.");
+            }
+        }
+
+        int[] trimmedIDsReleasedInRange = new int[releasedInRangeCounter];
+        System.arraycopy(idsReleasedInRange, 0, trimmedIDsReleasedInRange, 0, releasedInRangeCounter);
+        return trimmedIDsReleasedInRange;
     }
 
     /**
@@ -424,10 +447,11 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addToCollection(int filmID, int collectionID, String collectionName, String collectionPosterPath, String collectionBackdropPath) {
-        WPMovie movie = movies.get(filmID);
-        if (movie == null) {
+        
+        if (movies.get(filmID) == null || collectionID < 0) {
             return false;
         } else {
+            WPMovie movie = movies.get(filmID);
             WPCollection collection = collections.get(collectionID);
             if (collections.get(collectionID) == null) {
                 collection = new WPCollection(collectionID, collectionName, collectionPosterPath, collectionBackdropPath); 
@@ -664,8 +688,7 @@ public class Movies implements IMovies{
      */
     @Override
     public int size() {
-        // TODO Implement this function
-        return -1;
+        return movies.size();
     }
 
     /**
