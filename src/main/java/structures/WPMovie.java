@@ -30,7 +30,7 @@ public class WPMovie {
     String imdbID;
     double popularity;
     WPArrayList<Company> productionCompanies; 
-    WPArrayList<WPCountry> productionCountries;
+    WPArrayList<String> productionCountries;
     double voteAverage;
     int voteCount;
 
@@ -54,7 +54,7 @@ public class WPMovie {
         this.poster = poster;
 
         this.productionCompanies = new WPArrayList<Company>();
-        this.productionCountries = new WPArrayList<WPCountry>();
+        this.productionCountries = new WPArrayList<String>();
     }
 
     public int getID() {
@@ -129,6 +129,10 @@ public class WPMovie {
         return this.belongsToCollection;
     }
 
+    public int getCollectionID() {
+        return this.belongsToCollection.getCollectionID();
+    }
+    
     public String getImbdID() {
         return this.imdbID;
     }
@@ -138,12 +142,20 @@ public class WPMovie {
     }
 
 
-    public WPArrayList<Company> getProductionCompanies() {
-        return this.productionCompanies;
+    public Company[] getProductionCompanies() {
+        Company[] companies = new Company[this.productionCompanies.size()];
+        for (int i=0; i < this.productionCompanies.size(); i++) {
+            companies[i] = this.productionCompanies.get(i);
+        }
+        return companies;
     }
 
-    public WPArrayList<WPCountry> getProductionCountries() {
-        return this.productionCountries;
+    public String[] getProductionCountries() {
+        String[] stringCountries = new String[this.productionCountries.size()];
+        for (int i=0; i < this.productionCountries.size(); i++) {
+            stringCountries[i] = this.productionCountries.get(i);
+        }
+        return stringCountries;
     }
 
     public double getVoteAverage() {
@@ -186,7 +198,7 @@ public class WPMovie {
         return this.productionCompanies.add(company);
     }
 
-    public boolean addProductionCountry(WPCountry country) {
+    public boolean addProductionCountry(String country) {
         return this.productionCountries.add(country);
     }
 }

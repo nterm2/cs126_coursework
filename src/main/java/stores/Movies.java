@@ -453,8 +453,11 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] getFilmsInCollection(int collectionID) {
-        // TODO Implement this function
-        return null;
+        WPCollection collection = collections.get(collectionID);
+        if (collection == null) {
+            return new int[0]; 
+        } 
+        return collection.getMovies();
     }
 
     /**
@@ -466,8 +469,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getCollectionName(int collectionID) {
-        // TODO Implement this function
-        return null;
+        WPCollection collection = collections.get(collectionID);
+        if (collection == null) {
+            return null; 
+        } 
+        return collection.getCollctionName();
     }
 
     /**
@@ -479,8 +485,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getCollectionPoster(int collectionID) {
-        // TODO Implement this function
-        return null;
+        WPCollection collection = collections.get(collectionID);
+        if (collection == null) {
+            return null; 
+        } 
+        return collection.getCollectionPosterPath();
     }
 
     /**
@@ -492,8 +501,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String getCollectionBackdrop(int collectionID) {
-        // TODO Implement this function
-        return null;
+        WPCollection collection = collections.get(collectionID);
+        if (collection == null) {
+            return null; 
+        } 
+        return collection.getCollectionBackdropPath();
     }
 
     /**
@@ -505,8 +517,11 @@ public class Movies implements IMovies{
      */
     @Override
     public int getCollectionID(int filmID) {
-        // TODO Implement this function
-        return -2;
+        WPMovie movie = movies.get(filmID);
+        if (movie == null) {
+            return -1; 
+        } 
+        return movie.getCollectionID();
     }
 
     /**
@@ -585,8 +600,11 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addProductionCompany(int id, Company company) {
-        // TODO Implement this function
-        return false;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return false; 
+        } 
+        return movie.addProductionCompany(company);
     }
 
     /**
@@ -598,8 +616,11 @@ public class Movies implements IMovies{
      */
     @Override
     public boolean addProductionCountry(int id, String country) {
-        // TODO Implement this function
-        return false;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return false; 
+        } 
+        return movie.addProductionCountry(country);
     }
 
     /**
@@ -612,8 +633,11 @@ public class Movies implements IMovies{
      */
     @Override
     public Company[] getProductionCompanies(int id) {
-        // TODO Implement this function
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getProductionCompanies();
     }
 
     /**
@@ -626,8 +650,11 @@ public class Movies implements IMovies{
      */
     @Override
     public String[] getProductionCountries(int id) {
-        // TODO Implement this function
-        return null;
+        WPMovie movie = movies.get(id);
+        if (movie == null) {
+            return null; 
+        } 
+        return movie.getProductionCountries();
     }
 
     /**

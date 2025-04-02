@@ -19,7 +19,31 @@ public class WPCollection {
         this.movies.add(movie);
     }
 
+    public String getCollctionName() {
+        return this.collectionName;
+    }
+
+    public String getCollectionPosterPath() {
+        return this.collectionPosterPath;
+    }
+
+    public String getCollectionBackdropPath() {
+        return this.collectionBackdropPath;
+    }
+
     public boolean containsMovie(WPMovie movie) {
         return this.movies.contains(movie);
+    }
+
+    public int getCollectionID() {
+        return this.collectionID;
+    }
+
+    public int[] getMovies() {
+        int[] movieIDs = new int[movies.size()];
+        for (int i=0; i < movies.size(); i++) {
+            movieIDs[i] = movies.get(i).getID();
+        }
+        return movieIDs;
     }
 }

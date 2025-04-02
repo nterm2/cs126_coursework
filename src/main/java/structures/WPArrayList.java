@@ -23,6 +23,9 @@ public class WPArrayList<E> implements IWPList<E>{
         this.internalArray = new Object[this.capacity];
     }
 
+    public Object[] getInternalArray() {
+        return this.internalArray;
+    }
     /**
      * First check that we have enough space in our internalArray to add an element. IN the case that we don't 
      * , create a new internalArray that is double the size of the old array. then copy all the elements in the 

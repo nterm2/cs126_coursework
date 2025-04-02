@@ -14,4 +14,6 @@ public interface IWPList<E> {
     public int size();
 
     public boolean contains(E element);
+
+    public Object[] getInternalArray();
 }
