@@ -1,7 +1,5 @@
 package structures;
 
-import java.util.Objects;
-
 public class WPHashMap2<K, V> {
     private static final int INITIAL_CAPACITY = 4;
     private static final int INCREASE_FACTOR = 2;
@@ -12,6 +10,7 @@ public class WPHashMap2<K, V> {
     private int capacity;
 
     // INitialise buckets to contain the default number of entries
+    @SuppressWarnings("unchecked")
     public WPHashMap2() {
         this.size = 0;
         this.capacity = INITIAL_CAPACITY;
@@ -35,12 +34,12 @@ public class WPHashMap2<K, V> {
 
     // Uses hashing to determine bucket index.
     private int getBucketIndex(K key) {
-        return Math.abs(key.hashCode()) % capacity;
+        return key.hashCode() % capacity;
     }
 
     public void put(K key, V value) {
         // Disallow storing null keys.
-        if (key == null) {
+        if (key == null || value == null) {
             return;
         }
         // In the case that the current factor is greater than or equal to default load
@@ -94,44 +93,50 @@ public class WPHashMap2<K, V> {
     }
 
     // todo
-    public V remove(K key) {
+    public boolean remove(K key) {
+        // get bucket index for kv pair we want to remove
         int index = getBucketIndex(key);
-        EntryNode<K, V> node = buckets[index];
-        if (node != null) {
-            if (node.next == null && Objects.equals(node.key, key)) {
-                V value = buckets[index].value;
-                size--;
-                buckets[index] = null;
-                return value;
-            } else if (node.next != null && Objects.equals(node.key, key)) {
-                V value = buckets[index].value;
-                size--;
-                buckets[index] = node.next;
-                return value;
-            } else {
-                while (node.next != null) {
-                    if (node.next.key.equals(key)) {
-                        node.next = node.next.next;
-                        this.size--;
-                        return node.value;
-                    }
-                    node = node.next;
+
+        // get the first entry stored in the designated bucket.
+        // store previous 
+        EntryNode<K, V> previousNode = null;
+        EntryNode<K, V> currentNode = buckets[index];
+
+        // iterate through each entry whilst current is not null
+        while (currentNode != null) {
+            if (currentNode.key.equals(key)) {
+                // in the case that the entry we are currently considering matches 
+                // the key, if this is the first node, update the head to point to the next node
+                if (previousNode == null) {
+                    buckets[index] = currentNode.next;
+                } else {
+                    // Otherwise, set the next pointer of the previous node to the next pointer of the
+                    // currnent node, in essence removing the current pointer.
+                    previousNode.next = currentNode.next;
                 }
+                size--;
+                return true;
             }
+            // otherwise set current to current.next, previous to current.
+            previousNode = currentNode;
+            currentNode = currentNode.next;
         }
-        return null;
+
+        // if current node is false, we return null - there doesn't exist a key in the hashmap
+        // that we can remove
+        return false;
     }
-    // todo
+    
     public boolean containsKey(K key) {
-        return this.getNode(key) != null;
+        return get(key) != null;
     }
-
-
+    
     // Increase size of intrnal array.
     private void reHash() {
         // Double hash map capacity
         capacity *= INCREASE_FACTOR;
         // Set buckets to array of buckets with the new length, all buckets storing null.
+        @SuppressWarnings("unchecked")
         EntryNode<K,V>[] newBuckets = new EntryNode[capacity];
         // Iterate through each bucket
         for (EntryNode<K, V> bucket: buckets) {
@@ -156,6 +161,6 @@ public class WPHashMap2<K, V> {
 
     // return how many k-v pairs are being stored in the hashmap
     public int size() {
-        return this.size();
+        return this.size;
     }
 }
