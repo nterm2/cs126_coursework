@@ -6,7 +6,7 @@ import interfaces.ICredits;
 
 public class Credits implements ICredits{
     Stores stores;
-
+    WPHashMap<Integer, WPCredit> credits;
     /**
      * The constructor for the Credits data store. This is where you should
      * initialise your data structures.
@@ -16,7 +16,7 @@ public class Credits implements ICredits{
      */
     public Credits (Stores stores) {
         this.stores = stores;
-        // TODO Add initialisation of data structure here
+        this.credits = new WPHashMap<Integer, WPCredit>();
     }
 
     /**
@@ -30,7 +30,11 @@ public class Credits implements ICredits{
      */
     @Override
     public boolean add(CastCredit[] cast, CrewCredit[] crew, int id) {
-        // TODO Implement this function
+        if (credits.get(id) == null) {
+            WPCredit newCredit = new WPCredit(cast, crew, id);
+            credits.put(id, newCredit);
+            return true;
+        }
         return false;
     }
 
@@ -42,8 +46,7 @@ public class Credits implements ICredits{
      */
     @Override
     public boolean remove(int id) {
-        // TODO Implement this function
-        return false;
+        return credits.remove(id);
     }
 
     /**
@@ -57,8 +60,10 @@ public class Credits implements ICredits{
      */
     @Override
     public CastCredit[] getFilmCast(int filmID) {
-        // TODO Implement this function
-        return null;
+        if (credits.get(filmID) == null) {
+            return new CastCredit[0];
+        }
+        return credits.get(filmID).getFilmCast();
     }
 
     /**
@@ -72,8 +77,10 @@ public class Credits implements ICredits{
      */
     @Override
     public CrewCredit[] getFilmCrew(int filmID) {
-        // TODO Implement this function
-        return null;
+        if (credits.get(filmID) == null) {
+            return new CrewCredit[0];
+        }
+        return credits.get(filmID).getFilmCrew();
     }
 
     /**
@@ -85,8 +92,10 @@ public class Credits implements ICredits{
      */
     @Override
     public int sizeOfCast(int filmID) {
-        // TODO Implement this function
-        return -2;
+        if (credits.get(filmID) == null) {
+            return -1;
+        }
+        return credits.get(filmID).getCastSize();
     }
 
     /**
@@ -98,8 +107,10 @@ public class Credits implements ICredits{
      */
     @Override
     public int sizeOfCrew(int filmID) {
-        // TODO Implement this function
-        return -2;
+        if (credits.get(filmID) == null) {
+            return -1;
+        }
+        return credits.get(filmID).getCrewSize();
     }
 
     /**
@@ -267,7 +278,6 @@ public class Credits implements ICredits{
      */
     @Override
     public int size() {
-        // TODO Implement this function
-        return -1;
+        return credits.size();
     }
 }
