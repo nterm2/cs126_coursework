@@ -975,7 +975,7 @@ class MoviesTest {
     @Test void testMoviesGetFilmsInCollectionPos() {
         int[] expected = {2};
         int[] result = stores.getMovies().getFilmsInCollection(1);
-        System.out.println(result.length);
+
         assertTrue(checkContentsOfArray(expected, result), "The values do not match what is expected");
     }
 

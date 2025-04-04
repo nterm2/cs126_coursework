@@ -12,10 +12,13 @@ public class WPCredit {
         this.id = id;
     }
 
+    // todo - add sorting based on 'order' of cast
+    // something like, for each cast
     public CastCredit[] getFilmCast() {
         return this.cast;
     }
 
+    // todo - add sorting based on 'id' of cast
     public CrewCredit[] getFilmCrew() {
         return this.crew;
     }
