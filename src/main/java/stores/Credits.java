@@ -7,8 +7,8 @@ import interfaces.ICredits;
 public class Credits implements ICredits{
     Stores stores;
     WPHashMap<Integer, WPCredit> credits;
-    WPHashMap<Integer, Person> castData; 
-    WPHashMap<Integer, Person> crewData;
+    WPHashMap<Integer, WPCastMember> castData; 
+    WPHashMap<Integer, WPCrewMember> crewData;
     /**
      * The constructor for the Credits data store. This is where you should
      * initialise your data structures.
@@ -19,8 +19,8 @@ public class Credits implements ICredits{
     public Credits (Stores stores) {
         this.stores = stores;
         this.credits = new WPHashMap<Integer, WPCredit>();
-        this.castData = new WPHashMap<Integer, Person>();
-        this.crewData = new WPHashMap<Integer, Person>();
+        this.castData = new WPHashMap<Integer, WPCastMember>();
+        this.crewData = new WPHashMap<Integer, WPCrewMember>();
     }
 
     /**
@@ -43,21 +43,33 @@ public class Credits implements ICredits{
             // Store each individual person in array of CastCredit 
             //, with the value being the person and the key being the id.
             for (CastCredit singleCast : cast) {
-                if (!castData.containsKey(singleCast.getID())) {
-                    Person castPerson = new Person(singleCast.getID(), singleCast.getName(), singleCast.getProfilePath());
-                    castData.put(singleCast.getID(), castPerson);
+
+                Person castPerson = new Person(singleCast.getID(), singleCast.getName(), singleCast.getProfilePath());
+                WPCastMember castMember = new WPCastMember(castPerson);
+                int currentCastID = singleCast.getID();
+
+                if (castData.containsKey(currentCastID)) {
+                    castMember.setPerson(castData.get(currentCastID).getPerson());
+                    castMember.addStarredFilm(id);
                 }
+
+                castData.put(singleCast.getID(), castMember);
+
 
             }
 
             // Store each individual in the array of CrewCredit, with the value 
             // being the person, and the key being the id.
             for (CrewCredit singleCrew : crew) {
-                if (!crewData.containsKey(singleCrew.getID())) {
-                    Person crewPerson = new Person(singleCrew.getID(), singleCrew.getName(), singleCrew.getProfilePath());
-                    crewData.put(singleCrew.getID(), crewPerson);
-                }
+                Person crewPerson = new Person(singleCrew.getID(), singleCrew.getName(), singleCrew.getProfilePath());
+                WPCrewMember crewMember = new WPCrewMember(crewPerson);
+                int currentCrewID = singleCrew.getID();
 
+                if (crewData.containsKey(currentCrewID)) {
+                    crewMember.setPerson(crewData.get(currentCrewID).getPerson());
+                    crewMember.addStarredFilm(id);
+                }
+                crewData.put(singleCrew.getID(), crewMember);
             }
 
             return true;
@@ -153,7 +165,7 @@ public class Credits implements ICredits{
         int counter = 0;
 
         for (int i = 0; i < castData.size(); i++) {
-            uniqueCast[counter++] = castData.get(keys[i]);
+            uniqueCast[counter++] = castData.get(keys[i]).getPerson();
         }
 
         Person[] trimmedUniqueCast = new Person[counter];
@@ -174,7 +186,7 @@ public class Credits implements ICredits{
         int counter = 0;
 
         for (int i = 0; i < crewData.size(); i++) {
-            uniqueCrew[counter++] = crewData.get(keys[i]);
+            uniqueCrew[counter++] = crewData.get(keys[i]).getPerson();
         }
 
         Person[] trimmedUniqueCrew = new Person[counter];
@@ -197,7 +209,7 @@ public class Credits implements ICredits{
         int counter = 0;
 
         for (int i = 0; i < castData.size(); i++) {
-            Person givenPerson = castData.get(keys[i]);
+            Person givenPerson = castData.get(keys[i]).getPerson();
             if (givenPerson.getName().contains(cast)) {
                 matchingCast[counter++] = givenPerson;
             }
@@ -222,7 +234,7 @@ public class Credits implements ICredits{
         Person[] matchingCrew = new Person[crewData.size()];
         int counter = 0;
         for (int i = 0; i < crewData.size(); i++) {
-            Person givenPerson = crewData.get(keys[i]);
+            Person givenPerson = crewData.get(keys[i]).getPerson();
             if (givenPerson.getName().contains(crew)) {
                 matchingCrew[counter++] = givenPerson;
             }
@@ -242,7 +254,9 @@ public class Credits implements ICredits{
      */
     @Override
     public Person getCast(int castID) {
-        // TODO Implement this function
+        if (castData.containsKey(castID)) {
+            return castData.get(castID).getPerson();
+        }
         return null;
     }
 
@@ -255,7 +269,9 @@ public class Credits implements ICredits{
      */
     @Override
     public Person getCrew(int crewID){
-        // TODO Implement this function
+        if (crewData.containsKey(crewID)) {
+            return crewData.get(crewID).getPerson();
+        }
         return null;
     }
 

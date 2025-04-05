@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CreditsTest" tests="90" skipped="0" failures="38" errors="0" timestamp="2025-04-04T20:29:07" hostname="code" time="0.236">
+<testsuite name="CreditsTest" tests="90" skipped="0" failures="34" errors="0" timestamp="2025-04-05T05:37:36" hostname="code" time="0.28">
   <properties/>
-  <testcase name="testCreditsSizeOfCrewDefault()" classname="CreditsTest" time="0.013"/>
-  <testcase name="testCreditsGetFilmCrewPos2Reorder()" classname="CreditsTest" time="0.017">
+  <testcase name="testCreditsSizeOfCrewDefault()" classname="CreditsTest" time="0.021"/>
+  <testcase name="testCreditsGetFilmCrewPos2Reorder()" classname="CreditsTest" time="0.029">
     <failure message="org.opentest4j.AssertionFailedError: The crew member objects were in the wrong order, so the first elements in the input should be the second element in the result ==&gt; expected: &lt;Element ID: 201&#9;Name: Test crew name&#9;Department : Test crew department&#9;Job: Test crew job&#9;ID: 2001&#9;Profile Path: Test crew profile path&gt; but was: &lt;Element ID: 202&#9;Name: Test crew name2&#9;Department : Test crew department2&#9;Job: Test crew job2&#9;ID: 2002&#9;Profile Path: Test crew profile path2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The crew member objects were in the wrong order, so the first elements in the input should be the second element in the result ==&gt; expected: &lt;Element ID: 201	Name: Test crew name	Department : Test crew department	Job: Test crew job	ID: 2001	Profile Path: Test crew profile path&gt; but was: &lt;Element ID: 202	Name: Test crew name2	Department : Test crew department2	Job: Test crew job2	ID: 2002	Profile Path: Test crew profile path2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -91,10 +91,10 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsFindCastDefault()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsFindCastDefault()" classname="CreditsTest" time="0.002"/>
   <testcase name="testCreditsFindCastNeg()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsFindCastPos()" classname="CreditsTest" time="0.0"/>
-  <testcase name="testCreditsGetCastFilmsPos2Mix()" classname="CreditsTest" time="0.001">
+  <testcase name="testCreditsFindCastPos()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsGetCastFilmsPos2Mix()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -184,8 +184,8 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetUniqueCastPos2()" classname="CreditsTest" time="0.006"/>
-  <testcase name="testCreditsGetNumCastCreditsDefault()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetUniqueCastPos2()" classname="CreditsTest" time="0.008"/>
+  <testcase name="testCreditsGetNumCastCreditsDefault()" classname="CreditsTest" time="0.003">
     <failure message="org.opentest4j.AssertionFailedError: There are no cast members in the store, so should return -1 ==&gt; expected: &lt;-1&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: There are no cast members in the store, so should return -1 ==&gt; expected: &lt;-1&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -274,7 +274,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetUniqueCastDefault()" classname="CreditsTest" time="0.0"/>
+  <testcase name="testCreditsGetUniqueCastDefault()" classname="CreditsTest" time="0.002"/>
   <testcase name="testCreditsSizeOfCastPos2()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetMostCastCreditsPos2TwoInMovie()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;
@@ -366,7 +366,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetNumCastCreditsPos2TwoInMovie()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetNumCastCreditsPos2TwoInMovie()" classname="CreditsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The cast member has been in 1 movie, and has 2 credits in the movie. Therefore, the number of credits for the cast member is 2 ==&gt; expected: &lt;2&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The cast member has been in 1 movie, and has 2 credits in the movie. Therefore, the number of credits for the cast member is 2 ==&gt; expected: &lt;2&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -457,196 +457,18 @@
   </testcase>
   <testcase name="testCreditsFindCrewNeg()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsFindCrewPos()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsSizeDefault()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsSizeDefault()" classname="CreditsTest" time="0.0"/>
   <testcase name="testCreditsSizeAfterAdd()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCastPos2()" classname="CreditsTest" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: The cast member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The cast member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
-	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
-	at app//org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:47)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:36)
-	at app//org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:291)
-	at app//CreditsTest.testCreditsGetCastPos2(CreditsTest.java:812)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at app//org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
-	at app//org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
-	at app//org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
-	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-</failure>
-  </testcase>
-  <testcase name="testCreditsGetUniqueCastPos()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsGetCastPos2()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsGetUniqueCastPos()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsSizeAfterRemove()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetFilmCrewPos2()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsGetFilmCrewPos2()" classname="CreditsTest" time="0.0"/>
   <testcase name="testCreditsGetCastDefault()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetCastNeg()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCastPos()" classname="CreditsTest" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: The cast member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The cast member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
-	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
-	at app//org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:47)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:36)
-	at app//org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:291)
-	at app//CreditsTest.testCreditsGetCastPos(CreditsTest.java:792)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at app//org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
-	at app//org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
-	at app//org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
-	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-</failure>
-  </testcase>
-  <testcase name="testCreditsSizeAfterAdd2Remove()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetUniqueCrewPos()" classname="CreditsTest" time="0.002"/>
-  <testcase name="testCreditsFindCrewDefault()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsGetCastPos()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsSizeAfterAdd2Remove()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsGetUniqueCrewPos()" classname="CreditsTest" time="0.003"/>
+  <testcase name="testCreditsFindCrewDefault()" classname="CreditsTest" time="0.002"/>
   <testcase name="testCreditsGetStarsInFilmsPos2NotAllFirst()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -828,97 +650,8 @@
 </failure>
   </testcase>
   <testcase name="testCreditsGetUniqueCrewDefault()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCrewNeg()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCrewPos()" classname="CreditsTest" time="0.001">
-    <failure message="org.opentest4j.AssertionFailedError: The crew member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The crew member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
-	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
-	at app//org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:47)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:36)
-	at app//org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:291)
-	at app//CreditsTest.testCreditsGetCrewPos(CreditsTest.java:851)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at app//org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
-	at app//org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
-	at app//org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
-	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-</failure>
-  </testcase>
+  <testcase name="testCreditsGetCrewNeg()" classname="CreditsTest" time="0.0"/>
+  <testcase name="testCreditsGetCrewPos()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetCrewFilmsPos2Mix()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCrewFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCrewFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -1099,7 +832,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetCastStarsInFilmsPos()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetCastStarsInFilmsPos()" classname="CreditsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1189,8 +922,8 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetUniqueCrewPos2()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCastFilmsDefault()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetUniqueCrewPos2()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsGetCastFilmsDefault()" classname="CreditsTest" time="0.003">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1371,7 +1104,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetNumCastCreditsNeg()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetNumCastCreditsNeg()" classname="CreditsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The cast member does not appear in any movie (even though there are both movies and credits). Therefore, -1 should be returned ==&gt; expected: &lt;-1&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The cast member does not appear in any movie (even though there are both movies and credits). Therefore, -1 should be returned ==&gt; expected: &lt;-1&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -1460,7 +1193,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetNumCastCreditsPos()" classname="CreditsTest" time="0.001">
+  <testcase name="testCreditsGetNumCastCreditsPos()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The cast member has been in 1 movie, and has 1 credit in the movie. Therefore, the number of credits for the cast member is 1 ==&gt; expected: &lt;1&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The cast member has been in 1 movie, and has 1 credit in the movie. Therefore, the number of credits for the cast member is 1 ==&gt; expected: &lt;1&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -1549,15 +1282,15 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsSizeOfCrewPos2()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsSizeOfCrewPos2()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsFindCastPos2()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetUniqueCrewPos2Duplicate()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsGetUniqueCrewPos2Duplicate()" classname="CreditsTest" time="0.003"/>
   <testcase name="testCreditsSizeOfCastNeg()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsSizeOfCastPos()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsFindCastPosPart()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetFilmCastNeg()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetFilmCastPos()" classname="CreditsTest" time="0.0"/>
-  <testcase name="testCreditsGetStarsInFilmsPos2Multi()" classname="CreditsTest" time="0.001">
+  <testcase name="testCreditsGetFilmCastPos()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsGetStarsInFilmsPos2Multi()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1647,101 +1380,12 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetFilmCastDefault()" classname="CreditsTest" time="0.0"/>
+  <testcase name="testCreditsGetFilmCastDefault()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsSizeAfterAddRemove()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsSizeAfterAdd2()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCrewPos2()" classname="CreditsTest" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: The crew member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The crew member exists, so should be able to be found ==&gt; expected: not &lt;null&gt;
-	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
-	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
-	at app//org.junit.jupiter.api.AssertNotNull.failNull(AssertNotNull.java:47)
-	at app//org.junit.jupiter.api.AssertNotNull.assertNotNull(AssertNotNull.java:36)
-	at app//org.junit.jupiter.api.Assertions.assertNotNull(Assertions.java:291)
-	at app//CreditsTest.testCreditsGetCrewPos2(CreditsTest.java:871)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at app//org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:688)
-	at app//org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:149)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:140)
-	at app//org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:84)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(ExecutableInvoker.java:115)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.lambda$invoke$0(ExecutableInvoker.java:105)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
-	at app//org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:104)
-	at app//org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(ExecutableInvoker.java:98)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(TestMethodTestDescriptor.java:210)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:206)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:131)
-	at app//org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:65)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at java.base@21.0.6/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:143)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:129)
-	at app//org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:127)
-	at app//org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:126)
-	at app//org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:84)
-	at app//org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at app//org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
-	at app//org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
-	at app//org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
-	at app//org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:124)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:99)
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:94)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:63)
-	at java.base@21.0.6/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base@21.0.6/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:92)
-	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:200)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:132)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63)
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:121)
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
-	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-</failure>
-  </testcase>
+  <testcase name="testCreditsSizeAfterAdd2()" classname="CreditsTest" time="0.0"/>
+  <testcase name="testCreditsGetCrewPos2()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetCrewDefault()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetStarsInFilmsPos2Mix()" classname="CreditsTest" time="0.001">
+  <testcase name="testCreditsGetStarsInFilmsPos2Mix()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1833,7 +1477,7 @@
   </testcase>
   <testcase name="testCreditsSizeOfCrewNeg()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsSizeOfCrewPos()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCastFilmsNeg()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetCastFilmsNeg()" classname="CreditsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1923,7 +1567,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetCastFilmsPos()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetCastFilmsPos()" classname="CreditsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2013,7 +1657,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsSizeOfCastDefault()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsSizeOfCastDefault()" classname="CreditsTest" time="0.0"/>
   <testcase name="testCreditsGetFilmCrewNeg()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetFilmCrewPos()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetCastFilmsPos2()" classname="CreditsTest" time="0.002">
@@ -2106,7 +1750,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetMostCastCreditsPos2MultiOver()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetMostCastCreditsPos2MultiOver()" classname="CreditsTest" time="0.003">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2286,7 +1930,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetNumCastCreditsPos2()" classname="CreditsTest" time="0.002">
+  <testcase name="testCreditsGetNumCastCreditsPos2()" classname="CreditsTest" time="0.003">
     <failure message="org.opentest4j.AssertionFailedError: The cast member has been in 2 movies, and has 1 credit in the movie. Therefore, the number of credits for the cast member is 2 ==&gt; expected: &lt;2&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The cast member has been in 2 movies, and has 1 credit in the movie. Therefore, the number of credits for the cast member is 2 ==&gt; expected: &lt;2&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -2375,7 +2019,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetCastStarsInFilmsNegOrder()" classname="CreditsTest" time="0.001">
+  <testcase name="testCreditsGetCastStarsInFilmsNegOrder()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2465,7 +2109,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsFindCrewPos2Part()" classname="CreditsTest" time="0.0"/>
+  <testcase name="testCreditsFindCrewPos2Part()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsAddDefault()" classname="CreditsTest" time="0.002"/>
   <testcase name="testCreditsGetMostCastCreditsPos()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;
@@ -2557,7 +2201,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetUniqueCastPos2Duplicate()" classname="CreditsTest" time="0.003"/>
+  <testcase name="testCreditsGetUniqueCastPos2Duplicate()" classname="CreditsTest" time="0.002"/>
   <testcase name="testCreditsGetCastStarsInFilmsPos2()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCastStarsInFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -2648,12 +2292,12 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetFilmCastPos2()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsAddNeg()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsAddPos()" classname="CreditsTest" time="0.001"/>
+  <testcase name="testCreditsGetFilmCastPos2()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsAddNeg()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsAddPos()" classname="CreditsTest" time="0.002"/>
   <testcase name="testCreditsRemoveDefault()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsFindCrewPosPart()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCrewFilmsDefault()" classname="CreditsTest" time="0.003">
+  <testcase name="testCreditsGetCrewFilmsDefault()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCrewFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCrewFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2923,10 +2567,10 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsRemoveNeg()" classname="CreditsTest" time="0.0"/>
+  <testcase name="testCreditsRemoveNeg()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsRemovePos()" classname="CreditsTest" time="0.001"/>
   <testcase name="testCreditsGetFilmCrewDefault()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetCrewFilmsPos2()" classname="CreditsTest" time="0.001">
+  <testcase name="testCreditsGetCrewFilmsPos2()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getCrewFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getCrewFilms&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -3196,8 +2840,8 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsFindCrewPos2()" classname="CreditsTest" time="0.001"/>
-  <testcase name="testCreditsGetMostCastCreditsPosOver()" classname="CreditsTest" time="0.001">
+  <testcase name="testCreditsFindCrewPos2()" classname="CreditsTest" time="0.002"/>
+  <testcase name="testCreditsGetMostCastCreditsPosOver()" classname="CreditsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function &quot;getMostCastCredits&quot; should never return null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -3287,7 +2931,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testCreditsGetFilmCastPos2Reorder()" classname="CreditsTest" time="0.009">
+  <testcase name="testCreditsGetFilmCastPos2Reorder()" classname="CreditsTest" time="0.013">
     <failure message="org.opentest4j.AssertionFailedError: The cast member objects were in the wrong order, so the first elements in the input should be the second element in the result ==&gt; expected: &lt;Element ID: 101&#9;Name: Test cast name&#9;Character: Test cast character1&#9;Credit IDTest cast creditID1&#9;ID: 1001&#9;Order: 1&#9;Profile Path: Test cast profile path&gt; but was: &lt;Element ID: 102&#9;Name: Test cast name2&#9;Character: Test cast character2&#9;Credit IDTest cast creditID2&#9;ID: 1002&#9;Order: 2&#9;Profile Path: Test cast profile path2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The cast member objects were in the wrong order, so the first elements in the input should be the second element in the result ==&gt; expected: &lt;Element ID: 101	Name: Test cast name	Character: Test cast character1	Credit IDTest cast creditID1	ID: 1001	Order: 1	Profile Path: Test cast profile path&gt; but was: &lt;Element ID: 102	Name: Test cast name2	Character: Test cast character2	Credit IDTest cast creditID2	ID: 1002	Order: 2	Profile Path: Test cast profile path2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
