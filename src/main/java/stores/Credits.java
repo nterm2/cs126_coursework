@@ -37,6 +37,8 @@ public class Credits implements ICredits{
         
         if (credits.get(id) == null) {
             // Store the credit object in the hashmap of credits
+            // need to sort cast and need to sort crew here. 
+            // Quicksort seems to be the best bet
             WPCredit newCredit = new WPCredit(cast, crew, id);
             credits.put(id, newCredit);
 
@@ -367,8 +369,10 @@ public class Credits implements ICredits{
      */
     @Override
     public int getNumCastCredits(int castID) {
-        // TODO Implement this function
-        return -2;
+        if (castData.containsKey(castID)) {
+            return castData.get(castID).getAppearances();
+        }
+        return -1;
     }
 
     /**
