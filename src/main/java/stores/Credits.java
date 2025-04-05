@@ -42,35 +42,47 @@ public class Credits implements ICredits{
 
             // Store each individual person in array of CastCredit 
             //, with the value being the person and the key being the id.
+            // For cast credits:
             for (CastCredit singleCast : cast) {
-
-                Person castPerson = new Person(singleCast.getID(), singleCast.getName(), singleCast.getProfilePath());
-                WPCastMember castMember = new WPCastMember(castPerson);
                 int currentCastID = singleCast.getID();
-
+                WPCastMember castMember;
+                
                 if (castData.containsKey(currentCastID)) {
-                    castMember.setPerson(castData.get(currentCastID).getPerson());
-                    castMember.addStarredFilm(id);
+                    // Retrieve and update the existing instance
+                    castMember = castData.get(currentCastID);
+                } else {
+                    // Create a new cast member and add the film
+                    Person castPerson = new Person(singleCast.getID(), singleCast.getName(), singleCast.getProfilePath());
+                    castMember = new WPCastMember(castPerson);
                 }
-
-                castData.put(singleCast.getID(), castMember);
-
-
+                
+                // Add the film ID (avoid duplicate addition inside addStarredFilm)
+                castMember.addStarredFilm(id);
+                castData.put(currentCastID, castMember);
             }
+
 
             // Store each individual in the array of CrewCredit, with the value 
             // being the person, and the key being the id.
+            // For cast credits:
             for (CrewCredit singleCrew : crew) {
-                Person crewPerson = new Person(singleCrew.getID(), singleCrew.getName(), singleCrew.getProfilePath());
-                WPCrewMember crewMember = new WPCrewMember(crewPerson);
                 int currentCrewID = singleCrew.getID();
-
+                WPCrewMember crewMember;
+                
                 if (crewData.containsKey(currentCrewID)) {
-                    crewMember.setPerson(crewData.get(currentCrewID).getPerson());
-                    crewMember.addStarredFilm(id);
+                    // Retrieve and update the existing instance
+                    crewMember = crewData.get(currentCrewID);
+                } else {
+                    // Create a new cast member and add the film
+                    Person crewPerson = new Person(singleCrew.getID(), singleCrew.getName(), singleCrew.getProfilePath());
+                    crewMember = new WPCrewMember(crewPerson);
                 }
-                crewData.put(singleCrew.getID(), crewMember);
+                
+                // Add the film ID (avoid duplicate addition inside addStarredFilm)
+                crewMember.addStarredFilm(id);
+                crewData.put(currentCrewID, crewMember);
             }
+
 
             return true;
         }
@@ -286,8 +298,10 @@ public class Credits implements ICredits{
      */
     @Override
     public int[] getCastFilms(int castID){
-        // TODO Implement this function
-        return null;
+        if (castData.containsKey(castID)) {
+            return castData.get(castID).getStarredFilms();
+        }
+        return new int[0];
     }
 
     /**
@@ -300,8 +314,10 @@ public class Credits implements ICredits{
      */
     @Override
     public int[] getCrewFilms(int crewID) {
-        // TODO Implement this function
-        return null;
+        if (crewData.containsKey(crewID)) {
+            return crewData.get(crewID).getStarredFilms();
+        }
+        return new int[0];
     }
 
     /**
