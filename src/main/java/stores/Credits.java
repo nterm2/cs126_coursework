@@ -85,8 +85,11 @@ public class Credits implements ICredits{
                     castMember = new WPCastMember(castPerson);
                 }
                 
+                if (singleCast.getOrder() <= 3) {
+                    castMember.addStarredFilm(id);
+                }
                 // Add the film ID (avoid duplicate addition inside addStarredFilm)
-                castMember.addStarredFilm(id);
+                castMember.addFilm(id);
                 castData.put(currentCastID, castMember);
             }
 
@@ -108,7 +111,7 @@ public class Credits implements ICredits{
                 }
                 
                 // Add the film ID (avoid duplicate addition inside addStarredFilm)
-                crewMember.addStarredFilm(id);
+                crewMember.addFilm(id);
                 crewData.put(currentCrewID, crewMember);
             }
 
@@ -361,8 +364,11 @@ public class Credits implements ICredits{
      */
     @Override
     public int[] getCastStarsInFilms(int castID){
-        // TODO Implement this function
-        return null;
+        if (castData.containsKey(castID)) {
+            WPCastMember cast = castData.get(castID);
+            return cast.getStarredFilms();
+        }
+        return new int[0];
     }
     
     /**

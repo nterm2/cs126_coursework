@@ -11,7 +11,7 @@ public class WPCrewMember {
         this.films = new WPArrayList<Integer>();
     }
 
-    public void addStarredFilm(int filmID) {
+    public void addFilm(int filmID) {
         if (!this.films.contains(filmID)) {
             this.films.add(filmID);
         }
