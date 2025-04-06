@@ -33,42 +33,9 @@ public class Credits implements ICredits{
      * @return TRUE if the data able to be added, FALSE otherwise
      */
     @Override
-    /**
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * 
-     * CHECK FOR UNIQUENESS FIRST, THEN  CREATE CREDIT OBJECT. ALLOWS US TO DO IT IN PLACE THAN HAVING TO CREATE A CLONEEEEE! LESS MEMORY USED
-     */
     public boolean add(CastCredit[] cast, CrewCredit[] crew, int id) {
         
         if (credits.get(id) == null) {
-            // Store the credit object in the hashmap of credits
-            // need to sort cast and need to sort crew here. 
-            // Quicksort seems to be the best bet
-            WPCredit newCredit = new WPCredit(cast.clone(), crew.clone(), id);
-            credits.put(id, newCredit);
-
             // Store each individual person in array of CastCredit 
             //, with the value being the person and the key being the id.
             // For cast credits:
@@ -113,6 +80,13 @@ public class Credits implements ICredits{
                 // Add the film ID (avoid duplicate addition inside addStarredFilm)
                 crewMember.addFilm(id);
                 crewData.put(currentCrewID, crewMember);
+
+                // Store the credit object in the hashmap of credits
+                // need to sort cast and need to sort crew here. 
+                // Quicksort seems to be the best bet
+                // CHECK FOR UNIQUENESS FIRST, THEN  CREATE CREDIT OBJECT. ALLOWS US TO DO IT IN PLACE THAN HAVING TO CREATE A CLONEEEEE! LESS MEMORY USED
+                WPCredit newCredit = new WPCredit(cast, crew, id);
+                credits.put(id, newCredit);
             }
 
 
