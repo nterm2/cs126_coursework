@@ -33,6 +33,33 @@ public class Credits implements ICredits{
      * @return TRUE if the data able to be added, FALSE otherwise
      */
     @Override
+    /**
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * CHECK FOR UNIQUENESS FIRST, THEN  CREATE CREDIT OBJECT. ALLOWS US TO DO IT IN PLACE THAN HAVING TO CREATE A CLONEEEEE! LESS MEMORY USED
+     */
     public boolean add(CastCredit[] cast, CrewCredit[] crew, int id) {
         
         if (credits.get(id) == null) {
@@ -301,7 +328,7 @@ public class Credits implements ICredits{
     @Override
     public int[] getCastFilms(int castID){
         if (castData.containsKey(castID)) {
-            return castData.get(castID).getStarredFilms();
+            return castData.get(castID).getFilms();
         }
         return new int[0];
     }
@@ -317,7 +344,7 @@ public class Credits implements ICredits{
     @Override
     public int[] getCrewFilms(int crewID) {
         if (crewData.containsKey(crewID)) {
-            return crewData.get(crewID).getStarredFilms();
+            return crewData.get(crewID).getFilms();
         }
         return new int[0];
     }
