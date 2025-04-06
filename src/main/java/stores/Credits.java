@@ -386,8 +386,27 @@ public class Credits implements ICredits{
      */
     @Override
     public Person[] getMostCastCredits(int numResults) {
-        // TODO Implement this function
-        return null;
+        if (castData.size() == 0) {
+            return new Person[0];
+        }
+        Integer[] keys = castData.getKeys();
+        // What we need to do is quicksort on all th cast members based on 
+        // appearances. Then create a list of person of the size of wanted 
+        // results. Iterate through each result, store the person by getting 
+        // index at sorted list.getPerson().
+        WPCastMember[] castMembers = new WPCastMember[castData.size()];
+        for (int i=0; i < castData.size(); i++) {
+            castMembers[i] = castData.get(keys[i]);
+        }
+        // Perform quicksort on castMembers
+        castMemberQuickSort(castMembers, 0, castMembers.length - 1);
+        numResults = numResults < castMembers.length ? numResults : castMembers.length;
+        Person[] peopleMostCastCredits = new Person[numResults];
+        for (int i=0; i < peopleMostCastCredits.length; i++) {
+            peopleMostCastCredits[i] = castMembers[i].getPerson();
+        }
+        return peopleMostCastCredits;
+
     }
 
     /**
@@ -416,5 +435,56 @@ public class Credits implements ICredits{
     @Override
     public int size() {
         return credits.size();
+    }
+
+    private void castMemberQuickSort(WPCastMember[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = castMembertMedianOfThreePartition(arr, low, high);
+            castMemberQuickSort(arr, low, pivotIndex - 1);
+            castMemberQuickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    private int castMembertMedianOfThreePartition(WPCastMember[] arr, int low, int high) {
+        int mid = low + (high - low) / 2;
+
+        int lowOrder = arr[low].getAppearances();
+        int midOrder = arr[mid].getAppearances();
+        int highOrder = arr[high].getAppearances();
+
+        // Find the median index among low, mid, high
+        int medianIndex;
+        if ((lowOrder <= midOrder && midOrder <= highOrder) || (highOrder <= midOrder && midOrder <= lowOrder)) {
+            medianIndex = mid;
+        } else if ((midOrder <= lowOrder && lowOrder <= highOrder) || (highOrder <= lowOrder && lowOrder <= midOrder)) {
+            medianIndex = low;
+        } else {
+            medianIndex = high;
+        }
+
+        // Move median to the end to use as pivot
+        castMemberSwap(arr, medianIndex, high);
+        return castMemberPartition(arr, low, high);
+    }
+
+    private int castMemberPartition(WPCastMember[] arr, int low, int high) {
+        int pivot = arr[high].getAppearances();
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j].getAppearances() >= pivot) {
+                i++;
+                castMemberSwap(arr, i, j);
+            }
+        }
+
+        castMemberSwap(arr, i + 1, high);
+        return i + 1;
+    }
+
+    private void castMemberSwap(WPCastMember[] arr, int i, int j) {
+        WPCastMember temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
