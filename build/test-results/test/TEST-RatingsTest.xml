@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RatingsTest" tests="84" skipped="0" failures="79" errors="0" timestamp="2025-04-06T02:35:29" hostname="code" time="0.052">
+<testsuite name="RatingsTest" tests="84" skipped="0" failures="79" errors="0" timestamp="2025-04-06T03:01:33" hostname="code" time="0.044">
   <properties/>
-  <testcase name="testRatingsGetUserRatingsMix()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetUserRatingsMix()" classname="RatingsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -91,7 +91,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetUserRatingsNeg()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetUserRatingsNeg()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -181,7 +181,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetUserRatingsPos()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetUserRatingsPos()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -361,7 +361,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedMoviesPosMixLimit()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMostRatedMoviesPosMixLimit()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -451,7 +451,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesPosMixOver()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetTopAverageRatedMoviesPosMixOver()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -541,7 +541,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSizeAfterAddThenSet()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsSizeAfterAddThenSet()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: An element was added, then was altered using set. As there is still only 1 element, the size should be 1 ==&gt; expected: &lt;1&gt; but was: &lt;-1&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: An element was added, then was altered using set. As there is still only 1 element, the size should be 1 ==&gt; expected: &lt;1&gt; but was: &lt;-1&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -810,7 +810,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSetPosSameUserAndMovie()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsSetPosSameUserAndMovie()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: Data should be able to be set, as user and movie IDs together match a record in the store ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Data should be able to be set, as user and movie IDs together match a record in the store ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -898,7 +898,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedUsersPosMixLimit2()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMostRatedUsersPosMixLimit2()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1078,7 +1078,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSizeAfterAddViaSet()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsSizeAfterAddViaSet()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: An element was added via the set function, so the size should be 1 ==&gt; expected: &lt;1&gt; but was: &lt;-1&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: An element was added via the set function, so the size should be 1 ==&gt; expected: &lt;1&gt; but was: &lt;-1&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -1167,7 +1167,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedUsersPos2()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedUsersPos2()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1257,7 +1257,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesPosMix2Swap()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetTopAverageRatedMoviesPosMix2Swap()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1347,7 +1347,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsAddPosUnique()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsAddPosUnique()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: Data should be able to be added as user and movie IDs together are unique ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Data should be able to be added as user and movie IDs together are unique ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -1435,7 +1435,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedMoviesPos2()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMostRatedMoviesPos2()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1794,7 +1794,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSizeRemove()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsSizeRemove()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: Removing an element from an empty store will result in an empty store. Therefore, the size should be 0 ==&gt; expected: &lt;0&gt; but was: &lt;-1&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Removing an element from an empty store will result in an empty store. Therefore, the size should be 0 ==&gt; expected: &lt;0&gt; but was: &lt;-1&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -1883,7 +1883,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMovieAverageRatingsNegNoRatings()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMovieAverageRatingsNegNoRatings()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: There is no rating for the film, but the film does exist in Movies. Therefore, 0.0f should be returned. ==&gt; expected: &lt;0.0&gt; but was: &lt;-2.0&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: There is no rating for the film, but the film does exist in Movies. Therefore, 0.0f should be returned. ==&gt; expected: &lt;0.0&gt; but was: &lt;-2.0&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -1972,7 +1972,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedUsersPos()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMostRatedUsersPos()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2152,7 +2152,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetNumRatingsPos2()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetNumRatingsPos2()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The Movies store has an entry for the movie, and there are 2 ratings for this movie ==&gt; expected: &lt;2&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The Movies store has an entry for the movie, and there are 2 ratings for this movie ==&gt; expected: &lt;2&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -2241,7 +2241,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSizeAfterAdd2ThenRemove()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsSizeAfterAdd2ThenRemove()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: 2 ratings have been added then 1 rating was removed, so the size of Ratings should be 1 ==&gt; expected: &lt;1&gt; but was: &lt;-1&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: 2 ratings have been added then 1 rating was removed, so the size of Ratings should be 1 ==&gt; expected: &lt;1&gt; but was: &lt;-1&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -2330,7 +2330,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedUsersPosMixOver()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedUsersPosMixOver()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2420,7 +2420,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedUsersPosMix()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedUsersPosMix()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2688,7 +2688,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetUserRatingsPos2()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetUserRatingsPos2()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2778,7 +2778,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetUserAverageRatingsNeg()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetUserAverageRatingsNeg()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: There are no ratings with this user (though there are ratings), therefore return -1.0f ==&gt; expected: &lt;-1.0&gt; but was: &lt;-2.0&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: There are no ratings with this user (though there are ratings), therefore return -1.0f ==&gt; expected: &lt;-1.0&gt; but was: &lt;-2.0&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -2867,7 +2867,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetUserAverageRatingsPos()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetUserAverageRatingsPos()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: There is only 1 rating for the user, so should return that ==&gt; expected: &lt;3.0&gt; but was: &lt;-2.0&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: There is only 1 rating for the user, so should return that ==&gt; expected: &lt;3.0&gt; but was: &lt;-2.0&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -3045,7 +3045,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMovieAverageRatingsPos()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMovieAverageRatingsPos()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: There is only one rating for the film, and the film exists in the Movies store. Therefore, the result should be the entry ==&gt; expected: &lt;3.0&gt; but was: &lt;-2.0&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: There is only one rating for the film, and the film exists in the Movies store. Therefore, the result should be the entry ==&gt; expected: &lt;3.0&gt; but was: &lt;-2.0&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -3134,7 +3134,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesPosMix2()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetTopAverageRatedMoviesPosMix2()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -3314,7 +3314,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedMoviesPosMix()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMostRatedMoviesPosMix()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -3584,7 +3584,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSetPosSameMovie()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsSetPosSameMovie()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: Data should be able to be set (in this case, added), as user and movie IDs together are unique (movie on its own is not unique) ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Data should be able to be set (in this case, added), as user and movie IDs together are unique (movie on its own is not unique) ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -4210,7 +4210,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedMoviesDefault()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedMoviesDefault()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -4654,7 +4654,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsRemoveNegUnique()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsRemoveNegUnique()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetMostRatedUsersPosMix2()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -4835,7 +4835,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesPos()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetTopAverageRatedMoviesPos()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -5014,7 +5014,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetNumRatingsDefault()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetNumRatingsDefault()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The stores are empty, so there are no ratings or movies to check against. Therefore, return -1 ==&gt; expected: &lt;-1&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The stores are empty, so there are no ratings or movies to check against. Therefore, return -1 ==&gt; expected: &lt;-1&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -5192,7 +5192,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedUsersDefault0()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedUsersDefault0()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -5282,7 +5282,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsRemovePos()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsRemovePos()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: Data should be able to be removed, as the element exists ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Data should be able to be removed, as the element exists ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -5370,7 +5370,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetUserAverageRatingsPosMix()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetUserAverageRatingsPosMix()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: There are 2 applicable ratings for the user, so should return the average of the applicable ratings ==&gt; expected: &lt;3.5&gt; but was: &lt;-2.0&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: There are 2 applicable ratings for the user, so should return the average of the applicable ratings ==&gt; expected: &lt;3.5&gt; but was: &lt;-2.0&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -5459,7 +5459,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetNumRatingsNegNoRating()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetNumRatingsNegNoRating()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The Movies store has an entry for the film, but there are no ratings. Therefore, return 0 ==&gt; expected: &lt;0&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The Movies store has an entry for the film, but there are no ratings. Therefore, return 0 ==&gt; expected: &lt;0&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -5548,7 +5548,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSizeAfterAddThenRemove()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsSizeAfterAddThenRemove()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: A rating was added, then removed. Therefore, there should be nothing in the store ==&gt; expected: &lt;0&gt; but was: &lt;-1&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: A rating was added, then removed. Therefore, there should be nothing in the store ==&gt; expected: &lt;0&gt; but was: &lt;-1&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -5637,7 +5637,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSetDefault()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsSetDefault()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: Data should be able to be set (in this case, added) when the store is empty ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Data should be able to be set (in this case, added) when the store is empty ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -5994,7 +5994,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMovieRatingsPos()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMovieRatingsPos()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The results from getMovieArray should never be null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The results from getMovieArray should never be null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -6084,7 +6084,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsRemoveDefault()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsRemoveDefault()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetMostRatedUsersPosMixLimit()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -6175,7 +6175,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesDefault()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetTopAverageRatedMoviesDefault()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -6354,7 +6354,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetNumRatingsPos()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetNumRatingsPos()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The Movies store has an entry for the movie, and there is only 1 rating for this movie ==&gt; expected: &lt;1&gt; but was: &lt;-2&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The Movies store has an entry for the movie, and there is only 1 rating for this movie ==&gt; expected: &lt;1&gt; but was: &lt;-2&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -6532,7 +6532,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSetPosSameUser()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsSetPosSameUser()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: Data should be able to be set (in this case, added), as user and movie IDs together are unique (user on its own is not unique) ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Data should be able to be set (in this case, added), as user and movie IDs together are unique (user on its own is not unique) ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at app//org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:40)
@@ -6620,7 +6620,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetUserRatingsDefault()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetUserRatingsDefault()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The results from getUserArray should never be null ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -6800,7 +6800,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesDefault0()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetTopAverageRatedMoviesDefault0()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)

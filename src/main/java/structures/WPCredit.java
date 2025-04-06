@@ -10,6 +10,7 @@ public class WPCredit {
         this.cast = cast;
         castQuickSort(cast, 0, cast.length - 1);
         this.crew = crew; 
+        crewQuickSort(crew, 0, crew.length - 1);
         this.id = id;
     }
 
@@ -84,6 +85,58 @@ public class WPCredit {
 
     private void castSwap(CastCredit[] arr, int i, int j) {
         CastCredit temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    // Sorting for crews 
+    private void crewQuickSort(CrewCredit[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = crewMedianOfThreePartition(arr, low, high);
+            crewQuickSort(arr, low, pivotIndex - 1);
+            crewQuickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    private int crewMedianOfThreePartition(CrewCredit[] arr, int low, int high) {
+        int mid = low + (high - low) / 2;
+
+        int lowOrder = arr[low].getID();
+        int midOrder = arr[mid].getID();
+        int highOrder = arr[high].getID();
+
+        // Find the median index among low, mid, high
+        int medianIndex;
+        if ((lowOrder <= midOrder && midOrder <= highOrder) || (highOrder <= midOrder && midOrder <= lowOrder)) {
+            medianIndex = mid;
+        } else if ((midOrder <= lowOrder && lowOrder <= highOrder) || (highOrder <= lowOrder && lowOrder <= midOrder)) {
+            medianIndex = low;
+        } else {
+            medianIndex = high;
+        }
+
+        // Move median to the end to use as pivot
+        crewSwap(arr, medianIndex, high);
+        return crewPartition(arr, low, high);
+    }
+
+    private int crewPartition(CrewCredit[] arr, int low, int high) {
+        int pivot = arr[high].getID();
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j].getID() <= pivot) {
+                i++;
+                crewSwap(arr, i, j);
+            }
+        }
+
+        crewSwap(arr, i + 1, high);
+        return i + 1;
+    }
+
+    private void crewSwap(CrewCredit[] arr, int i, int j) {
+        CrewCredit temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
