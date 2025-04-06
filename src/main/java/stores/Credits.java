@@ -39,7 +39,7 @@ public class Credits implements ICredits{
             // Store the credit object in the hashmap of credits
             // need to sort cast and need to sort crew here. 
             // Quicksort seems to be the best bet
-            WPCredit newCredit = new WPCredit(cast, crew, id);
+            WPCredit newCredit = new WPCredit(cast.clone(), crew.clone(), id);
             credits.put(id, newCredit);
 
             // Store each individual person in array of CastCredit 
