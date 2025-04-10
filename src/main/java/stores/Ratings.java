@@ -7,7 +7,8 @@ import structures.*;
 
 public class Ratings implements IRatings {
     Stores stores;
-
+    WPHashMap<Integer, WPRating> movieRatings;
+    WPHashMap<Integer, WPRating> userRatings;
     /**
      * The constructor for the Ratings data store. This is where you should
      * initialise your data structures.
@@ -16,7 +17,8 @@ public class Ratings implements IRatings {
      */
     public Ratings(Stores stores) {
         this.stores = stores;
-        // TODO Add initialisation of data structure here
+        this.movieRatings = new WPHashMap<Integer, WPRating>();
+        this.userRatings = new WPHashMap<Integer, WPRating>();
     }
 
     /**
@@ -32,7 +34,12 @@ public class Ratings implements IRatings {
      */
     @Override
     public boolean add(int userid, int movieid, float rating, LocalDateTime timestamp) {
-        // TODO Implement this function
+        if (movieRatings.get(movieid) == null || userRatings.get(userid) == null) {
+            WPRating newRating = new WPRating(rating, timestamp);
+            movieRatings.put(movieid, newRating);
+            userRatings.put(userid, newRating);
+            return true;
+        }
         return false;
     }
 
