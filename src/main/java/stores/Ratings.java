@@ -53,7 +53,11 @@ public class Ratings implements IRatings {
      */
     @Override
     public boolean remove(int userid, int movieid) {
-        // TODO Implement this function
+        if (movieRatings.containsKey(movieid) && userRatings.containsKey(userid)) {
+            movieRatings.remove(movieid);
+            userRatings.remove(userid);
+            return true;
+        }
         return false;
     }
 
