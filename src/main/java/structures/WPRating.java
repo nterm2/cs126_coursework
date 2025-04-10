@@ -4,10 +4,14 @@ import java.time.LocalDateTime;
 public class WPRating {
     private float rating;
     private LocalDateTime timestamp;
+    private int movieID;
+    private int userID;
 
-    public WPRating(float rating, LocalDateTime timestamp) {
+    public WPRating(float rating, LocalDateTime timestamp, int movieID, int userID) {
         this.rating = rating;
         this.timestamp = timestamp;
+        this.movieID = movieID;
+        this.userID = userID;
     }
 
     public float getRating() {

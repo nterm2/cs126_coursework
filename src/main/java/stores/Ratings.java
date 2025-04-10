@@ -35,7 +35,7 @@ public class Ratings implements IRatings {
     @Override
     public boolean add(int userid, int movieid, float rating, LocalDateTime timestamp) {
         if (movieRatings.get(movieid) == null || userRatings.get(userid) == null) {
-            WPRating newRating = new WPRating(rating, timestamp);
+            WPRating newRating = new WPRating(rating, timestamp, movieid, userid);
             movieRatings.put(movieid, newRating);
             userRatings.put(userid, newRating);
             return true;
