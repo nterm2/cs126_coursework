@@ -121,8 +121,18 @@ public class Ratings implements IRatings {
      */
     @Override
     public float[] getUserRatings(int userid) {
-        // TODO Implement this function
-        return null;
+        WPHashMap<Integer, WPRating> singleUserRatings = userRatings.get(userid);
+        if (singleUserRatings == null || singleUserRatings.size() == 0) {
+            return new float[0];
+        }
+        
+        Integer[] keys = singleUserRatings.getKeys();
+        float[] ratings = new float[singleUserRatings.size()];
+        for (int i = 0; i < singleUserRatings.size(); i++) {
+            ratings[i] = singleUserRatings.get(keys[i]).getRating();
+        }
+
+        return ratings;
     }
 
     /**
