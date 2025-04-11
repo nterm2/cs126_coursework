@@ -145,8 +145,23 @@ public class Ratings implements IRatings {
      */
     @Override
     public float getMovieAverageRating(int movieid) {
-        // TODO Implement this function
-        return -2.0f;
+        String movieTitle = stores.getMovies().getTitle(movieid);
+        WPHashMap<Integer, WPRating> singleMovieRatings = movieRatings.get(movieid);
+        if (movieTitle != null && singleMovieRatings == null) {
+            return 0.0f;
+        } 
+        if (movieTitle == null && singleMovieRatings == null) {
+            return -1.0f;
+        }
+        
+        Integer[] keys = singleMovieRatings.getKeys();
+        float average = 0;
+
+        for (int i = 0; i < singleMovieRatings.size(); i++) {
+            average += singleMovieRatings.get(keys[i]).getRating();
+        }
+
+        return average / singleMovieRatings.size();
     }
 
     /**
