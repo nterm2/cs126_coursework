@@ -7,8 +7,8 @@ import structures.*;
 
 public class Ratings implements IRatings {
     Stores stores;
-    WPHashMap<Integer, WPRating> movieRatings;
-    WPHashMap<Integer, WPRating> userRatings;
+    WPHashMap<Integer, WPHashMap<Integer, WPRating>> movieRatings;
+    WPHashMap<Integer, WPHashMap<Integer, WPRating>> userRatings;
     /**
      * The constructor for the Ratings data store. This is where you should
      * initialise your data structures.
@@ -17,8 +17,8 @@ public class Ratings implements IRatings {
      */
     public Ratings(Stores stores) {
         this.stores = stores;
-        this.movieRatings = new WPHashMap<Integer, WPRating>();
-        this.userRatings = new WPHashMap<Integer, WPRating>();
+        this.movieRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
+        this.userRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
     }
 
     /**
@@ -36,8 +36,17 @@ public class Ratings implements IRatings {
     public boolean add(int userid, int movieid, float rating, LocalDateTime timestamp) {
         if (movieRatings.get(movieid) == null || userRatings.get(userid) == null) {
             WPRating newRating = new WPRating(rating, timestamp, movieid, userid);
-            movieRatings.put(movieid, newRating);
-            userRatings.put(userid, newRating);
+
+            if (!movieRatings.containsKey(movieid)) {
+                movieRatings.put(movieid, new WPHashMap<Integer, WPRating>());
+            }
+            movieRatings.get(movieid).put(userid, newRating);
+
+            if (!userRatings.containsKey(userid)) {
+                userRatings.put(userid, new WPHashMap<Integer, WPRating>());
+            }
+            userRatings.get(userid).put(movieid, newRating);
+
             return true;
         }
         return false;
@@ -76,8 +85,8 @@ public class Ratings implements IRatings {
      */
     @Override
     public boolean set(int userid, int movieid, float rating, LocalDateTime timestamp) {
-        // TODO Implement this function
-        return false;
+        remove(userid, movieid); // Guaranteed to remove old if exists
+        return add(userid, movieid, rating, timestamp);
     }
 
     /**
@@ -89,8 +98,18 @@ public class Ratings implements IRatings {
      */
     @Override
     public float[] getMovieRatings(int movieid) {
-        // TODO Implement this function
-        return null;
+        WPHashMap<Integer, WPRating> singleMovieRatings = movieRatings.get(movieid);
+        if (singleMovieRatings == null || singleMovieRatings.size() == 0) {
+            return new float[0];
+        }
+        
+        Integer[] keys = singleMovieRatings.getKeys();
+        float[] ratings = new float[singleMovieRatings.size()];
+        for (int i = 0; i < singleMovieRatings.size(); i++) {
+            ratings[i] = singleMovieRatings.get(keys[i]).getRating();
+        }
+
+        return ratings;
     }
 
     /**
@@ -197,7 +216,6 @@ public class Ratings implements IRatings {
      */
     @Override
     public int size() {
-        // TODO Implement this function
-        return -1;
+        return movieRatings.size();
     }
 }
