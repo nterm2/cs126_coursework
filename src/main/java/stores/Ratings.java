@@ -220,7 +220,7 @@ public class Ratings implements IRatings {
         return null;
     }
 
-    /**
+       /**
      * Get the number of ratings that a movie has
      * 
      * @param movieid The movie id to be found
@@ -230,10 +230,30 @@ public class Ratings implements IRatings {
      */
     @Override
     public int getNumRatings(int movieid) {
-        // TODO Implement this function
-        return -2;
+        // Check if the movie exists in the Movies store
+        String movieTitle = stores.getMovies().getTitle(movieid);
+        
+        // If movie does not exist in Movies store, check if it exists in Ratings store
+        WPHashMap<Integer, WPRating> singleMovieRatings = movieRatings.get(movieid);
+        
+        // If the movie doesn't exist in the Movies store, and there are no ratings for it, return -1
+        if (movieTitle == null && singleMovieRatings == null) {
+            return -1; // Movie doesn't exist in either store
+        }
+    
+        // If the movie exists in the Movies store but has no ratings in the Ratings store, return 0
+        if (movieTitle != null && (singleMovieRatings == null || singleMovieRatings.size() == 0)) {
+            return 0; // Movie exists in Movies store but has no ratings
+        }
+    
+        // If the movie exists in the Ratings store and has ratings, return the number of ratings
+        if (singleMovieRatings != null) {
+            return singleMovieRatings.size(); // Movie has ratings
+        }
+    
+        return 0; // Default case, should never hit this line.
     }
-
+    
     /**
      * Get the highest average rated film IDs, in order of there average rating
      * (hightst first).
