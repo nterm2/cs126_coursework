@@ -9,7 +9,7 @@ public class Ratings implements IRatings {
     Stores stores;
     WPHashMap<Integer, WPHashMap<Integer, WPRating>> movieRatings;
     WPHashMap<Integer, WPHashMap<Integer, WPRating>> userRatings;
-    int cachedSize;
+    int numRatings;
 
     /**
      * The constructor for the Ratings data store. This is where you should
@@ -21,7 +21,6 @@ public class Ratings implements IRatings {
         this.stores = stores;
         this.movieRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
         this.userRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
-        this.cachedSize = 0;
     }
 
     /**
@@ -40,24 +39,23 @@ public class Ratings implements IRatings {
         if (movieRatings.containsKey(movieid) && movieRatings.get(movieid).containsKey(userid)) {
             return false;
         }
-
+    
         WPRating newRating = new WPRating(rating, timestamp, movieid, userid);
-
+    
         if (!movieRatings.containsKey(movieid)) {
             movieRatings.put(movieid, new WPHashMap<Integer, WPRating>());
         }
         movieRatings.get(movieid).put(userid, newRating);
-
+    
         if (!userRatings.containsKey(userid)) {
             userRatings.put(userid, new WPHashMap<Integer, WPRating>());
         }
         userRatings.get(userid).put(movieid, newRating);
-
-        cachedSize++;
+    
+        numRatings += 1; // Correct: increment every time a unique rating is added
+    
         return true;
-
     }
-
     /**
      * Removes a given rating, using the user ID and the movie ID as the unique
      * identifier
@@ -69,12 +67,9 @@ public class Ratings implements IRatings {
     @Override
     public boolean remove(int userid, int movieid) {
         if (movieRatings.containsKey(movieid) && userRatings.containsKey(userid)) {
-            movieRatings.get(movieid).remove(userid);
-            userRatings.get(userid).remove(movieid);
-            if (movieRatings.get(movieid).size() == 0) movieRatings.remove(movieid);
-            if (userRatings.get(userid).size() == 0) userRatings.remove(userid);
-            
-            cachedSize--;
+            movieRatings.remove(movieid);
+            userRatings.remove(userid);
+            numRatings -= 1;
             return true;
         }
         return false;
@@ -183,19 +178,8 @@ public class Ratings implements IRatings {
      */
     @Override
     public float getUserAverageRating(int userid) {
-        WPHashMap<Integer, WPRating> singleUserRatings = userRatings.get(userid);
-        if (singleUserRatings == null) {
-            return -1.0f;
-        }
-
-        Integer[] keys = singleUserRatings.getKeys();
-        float average = 0;
-
-        for (int i = 0; i < singleUserRatings.size(); i++) {
-            average += singleUserRatings.get(keys[i]).getRating();
-        }
-
-        return average / singleUserRatings.size();
+        // TODO Implement this function
+        return -2.0f;
     }
 
     /**
@@ -262,6 +246,6 @@ public class Ratings implements IRatings {
      */
     @Override
     public int size() {
-        return cachedSize;
+        return numRatings;
     }
 }

@@ -12,7 +12,7 @@ package structures;
  * Improvements: when internalarray reaches full capacity, doubles in size in size
  * can lead to memory issues. check if arrau is growing infitely
  */
-public class WPArrayList<E> implements IWPList<E>{
+public class WPArrayList<E> {
     Object[] internalArray;
     int size;
     int capacity;

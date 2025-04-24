@@ -2,6 +2,7 @@ package structures;
 
 import stores.Person;
 
+// THINK ABOUT EXTENDING PERSON. 
 public class WPCrewMember {
     protected WPArrayList<Integer> films;
     protected Person person;
