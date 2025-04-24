@@ -178,8 +178,18 @@ public class Ratings implements IRatings {
      */
     @Override
     public float getUserAverageRating(int userid) {
-        // TODO Implement this function
-        return -2.0f;
+        WPHashMap<Integer, WPRating> singleUserRatings = userRatings.get(userid);
+        if (singleUserRatings == null) {
+            return -1.0f;
+        } 
+        Integer[] keys = singleUserRatings.getKeys();
+        float average = 0;
+
+        for (int i = 0; i < singleUserRatings.size(); i++) {
+            average += singleUserRatings.get(keys[i]).getRating();
+        }
+
+        return average / singleUserRatings.size();
     }
 
     /**
