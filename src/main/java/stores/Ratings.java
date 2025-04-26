@@ -231,8 +231,22 @@ public class Ratings implements IRatings {
      */
     @Override
     public int[] getMostRatedUsers(int num) {
-        // TODO Implement this function
-        return null;
+        Integer[] keys = userRatings.getKeys();
+        Pair<Integer, Integer>[] mypairs = new Pair[keys.length];
+        
+        for (int i=0; i < keys.length; i++) {
+            mypairs[i] = new Pair<Integer, Integer>(keys[i], userRatings.get(keys[i]).size());
+        }
+
+        QuickSort.quickSort(mypairs, 0, mypairs.length -1);
+
+        int[] sortedMovieIDs = new int[Math.min(num, keys.length)];
+        for (int i = 0; i < Math.min(num, keys.length); i++) {
+            sortedMovieIDs[i] = (Integer) mypairs[keys.length - 1 - i].getID();
+        }
+        
+        
+        return sortedMovieIDs;
     }
 
        /**
