@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RatingsTest" tests="84" skipped="0" failures="31" errors="0" timestamp="2025-04-24T17:38:12" hostname="code" time="0.078">
+<testsuite name="RatingsTest" tests="84" skipped="0" failures="31" errors="0" timestamp="2025-04-24T17:39:27" hostname="code" time="0.114">
   <properties/>
-  <testcase name="testRatingsGetUserRatingsMix()" classname="RatingsTest" time="0.009"/>
+  <testcase name="testRatingsGetUserRatingsMix()" classname="RatingsTest" time="0.01"/>
   <testcase name="testRatingsGetUserRatingsNeg()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetUserRatingsPos()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetMostRatedUsersDefault()" classname="RatingsTest" time="0.005">
@@ -94,7 +94,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedMoviesPosMixLimit()" classname="RatingsTest" time="0.002">
+  <testcase name="testRatingsGetMostRatedMoviesPosMixLimit()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -184,7 +184,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesPosMixOver()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetTopAverageRatedMoviesPosMixOver()" classname="RatingsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -275,7 +275,7 @@
 </failure>
   </testcase>
   <testcase name="testRatingsSizeAfterAddThenSet()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetMostRatedMoviesPosMix2()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedMoviesPosMix2()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -817,7 +817,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsAddPosUnique()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsAddPosUnique()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetMostRatedMoviesPos2()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -908,7 +908,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesPosMix()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetTopAverageRatedMoviesPosMix()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1088,10 +1088,10 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetNumRatingsPos2Mix()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetNumRatingsPos2Mix()" classname="RatingsTest" time="0.002"/>
   <testcase name="testRatingsSizeRemove()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetMovieAverageRatingsNegNoRatings()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetMostRatedUsersPos()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMovieAverageRatingsNegNoRatings()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetMostRatedUsersPos()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1271,8 +1271,8 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetNumRatingsPos2()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsSizeAfterAdd2ThenRemove()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsGetNumRatingsPos2()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsSizeAfterAdd2ThenRemove()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetMostRatedUsersPosMixOver()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -1453,7 +1453,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedMoviesPos()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedMoviesPos()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1544,11 +1544,11 @@
 </failure>
   </testcase>
   <testcase name="testRatingsAddPosSameMovie()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetUserRatingsPos2()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetUserAverageRatingsNeg()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetUserRatingsPos2()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetUserAverageRatingsNeg()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetUserAverageRatingsPos()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetMovieAverageRatingsNeg()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetMovieAverageRatingsPos()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsGetMovieAverageRatingsPos()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetTopAverageRatedMoviesPosMix2()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -1639,7 +1639,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesPosOver()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetTopAverageRatedMoviesPosOver()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -1910,10 +1910,10 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSizeAfterAddThenAddViaSet()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsSetPosSameMovie()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsSizeAfterAddThenAddViaSet()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsSetPosSameMovie()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsSizeAfterAdd2()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsAddDefault()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsAddDefault()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsAddNeg()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsRemoveNegSameMovie()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetMostRatedMoviesDefault0()" classname="RatingsTest" time="0.001">
@@ -2008,7 +2008,7 @@
   </testcase>
   <testcase name="testRatingsGetMovieRatingsDefault()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetMovieAverageRatingsNoMovie()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetMostRatedMoviesPosMixOver()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedMoviesPosMixOver()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2098,7 +2098,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetMostRatedMoviesDefault()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMostRatedMoviesDefault()" classname="RatingsTest" time="0.0">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2189,11 +2189,11 @@
 </failure>
   </testcase>
   <testcase name="testRatingsGetUserAverageRatingsDefault()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsSetPosUnique()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsAddPosSameUser()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsSetPosUnique()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsAddPosSameUser()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetUserAverageRatingsPos2()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsRemoveNegUnique()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetMostRatedUsersPosMix2()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetMostRatedUsersPosMix2()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2463,10 +2463,10 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsSizeAfterAdd()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetNumRatingsDefault()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsSizeAfterAdd()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetNumRatingsDefault()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsSizeDefault()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetMostRatedUsersDefault0()" classname="RatingsTest" time="0.001">
+  <testcase name="testRatingsGetMostRatedUsersDefault0()" classname="RatingsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getMostRatedUsers should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2556,13 +2556,13 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsRemovePos()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetUserAverageRatingsPosMix()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetNumRatingsNegNoRating()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsSizeAfterAddThenRemove()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsRemovePos()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetUserAverageRatingsPosMix()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetNumRatingsNegNoRating()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsSizeAfterAddThenRemove()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsSetDefault()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetNumRatingsNoMovie()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetMovieRatingsMix()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetMovieRatingsMix()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetMovieRatingsNeg()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsGetMovieRatingsPos()" classname="RatingsTest" time="0.0"/>
   <testcase name="testRatingsRemoveDefault()" classname="RatingsTest" time="0.001"/>
@@ -2656,7 +2656,7 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetTopAverageRatedMoviesDefault()" classname="RatingsTest" time="0.0">
+  <testcase name="testRatingsGetTopAverageRatedMoviesDefault()" classname="RatingsTest" time="0.002">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
 	at app//org.junit.jupiter.api.Assertions.fail(Assertions.java:117)
@@ -2746,12 +2746,12 @@
 	at app//worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <testcase name="testRatingsGetNumRatingsNeg()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsGetNumRatingsNeg()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetNumRatingsPos()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetMovieAverageRatingsPos2()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsSetPosSameUser()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetUserRatingsDefault()" classname="RatingsTest" time="0.0"/>
-  <testcase name="testRatingsGetMovieRatingsPos2()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsGetUserRatingsDefault()" classname="RatingsTest" time="0.001"/>
+  <testcase name="testRatingsGetMovieRatingsPos2()" classname="RatingsTest" time="0.001"/>
   <testcase name="testRatingsGetTopAverageRatedMoviesDefault0()" classname="RatingsTest" time="0.001">
     <failure message="org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: The function getTopAverageRatedMovies should never return &quot;null&quot; ==&gt; expected: not &lt;null&gt;
 	at app//org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:39)
@@ -2843,7 +2843,7 @@
 </failure>
   </testcase>
   <testcase name="testRatingsGetMovieAverageRatingsPos2Mix()" classname="RatingsTest" time="0.001"/>
-  <testcase name="testRatingsGetMovieAverageRatingDefault()" classname="RatingsTest" time="0.0"/>
+  <testcase name="testRatingsGetMovieAverageRatingDefault()" classname="RatingsTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

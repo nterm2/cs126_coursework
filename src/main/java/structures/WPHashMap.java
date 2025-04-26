@@ -1,7 +1,7 @@
 package structures;
 
 public class WPHashMap<K, V> {
-    private static final int INITIAL_CAPACITY = 100;
+    private static final int INITIAL_CAPACITY = 1000;
     private static final int INCREASE_FACTOR = 2;
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 

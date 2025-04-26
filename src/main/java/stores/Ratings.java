@@ -279,3 +279,20 @@ public class Ratings implements IRatings {
         return numRatings;
     }
 }
+
+
+class Pair<K, V extends Number> implements Comparable<Pair<K,V>>{
+    K id;
+    V value; 
+
+    public Pair(K id, V value) {
+        this.id = id; 
+        this.value = value;
+    }
+
+    @Override
+    public int compareTo(Pair<K, V> other) {
+        return Double.compare(this.value.doubleValue(), other.value.doubleValue());
+    }
+
+}
