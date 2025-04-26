@@ -9,7 +9,7 @@ public class Ratings implements IRatings {
     Stores stores;
     WPHashMap<Integer, WPHashMap<Integer, WPRating>> movieRatings;
     WPHashMap<Integer, WPHashMap<Integer, WPRating>> userRatings;
-    WPHashMap<Integer, Integer> movieRatingsSums;
+    WPHashMap<Integer, Float> movieRatingsSums;
     int numRatings;
 
     /**
@@ -22,7 +22,7 @@ public class Ratings implements IRatings {
         this.stores = stores;
         this.movieRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
         this.userRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
-        this.movieRatingsSums = new WPHashMap<Integer, Integer>();
+        this.movieRatingsSums = new WPHashMap<Integer, Float>();
     }
 
     /**
@@ -48,7 +48,11 @@ public class Ratings implements IRatings {
             movieRatings.put(movieid, new WPHashMap<Integer, WPRating>());
         }
         movieRatings.get(movieid).put(userid, newRating);
-    
+
+        // Update the movieRatingsSums
+        float previousSum = movieRatingsSums.containsKey(movieid) ? movieRatingsSums.get(movieid) : 0;
+        movieRatingsSums.put(movieid, previousSum + rating);
+
         if (!userRatings.containsKey(userid)) {
             userRatings.put(userid, new WPHashMap<Integer, WPRating>());
         }
@@ -72,6 +76,14 @@ public class Ratings implements IRatings {
             return false;
         }
     
+        // Get the rating BEFORE removing it
+        WPRating ratingToRemove = movieRatings.get(movieid).get(userid);
+    
+        // Subtract the rating from the movieRatingsSums
+        float previousSum = movieRatingsSums.get(movieid);
+        movieRatingsSums.put(movieid, previousSum - ratingToRemove.getRating());
+    
+        // Now safe to remove
         movieRatings.get(movieid).remove(userid);
         if (movieRatings.get(movieid).size() == 0) {
             movieRatings.remove(movieid); // clean up empty movies
@@ -85,6 +97,7 @@ public class Ratings implements IRatings {
         numRatings -= 1;
         return true;
     }
+    
 
     /**
      * Sets a rating for a given user ID and movie ID. Therefore, should the given
@@ -305,9 +318,29 @@ public class Ratings implements IRatings {
      */
     @Override
     public int[] getTopAverageRatedMovies(int numResults) {
-        // TODO Implement this function
-        return null;
+        Integer[] movieIDs = movieRatings.getKeys();
+        Pair<Integer, Float>[] pairs = new Pair[movieIDs.length];
+        
+        for (int i = 0; i < movieIDs.length; i++) {
+            int movieID = movieIDs[i];
+            float totalRating = movieRatingsSums.get(movieID);
+            int numberOfRatings = movieRatings.get(movieID).size();
+            float averageRating = totalRating / numberOfRatings;
+            
+            pairs[i] = new Pair<Integer, Float>(movieID, averageRating);
+        }
+        
+        // Sort by average rating
+        QuickSort.quickSort(pairs, 0, pairs.length - 1);
+        
+        int[] topMovies = new int[Math.min(numResults, movieIDs.length)];
+        for (int i = 0; i < topMovies.length; i++) {
+            topMovies[i] = (Integer) pairs[pairs.length - 1 - i].getID(); // Highest average first
+        }
+        
+        return topMovies;
     }
+    
 
     /**
      * Gets the number of ratings in the data structure
