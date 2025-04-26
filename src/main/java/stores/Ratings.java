@@ -9,6 +9,7 @@ public class Ratings implements IRatings {
     Stores stores;
     WPHashMap<Integer, WPHashMap<Integer, WPRating>> movieRatings;
     WPHashMap<Integer, WPHashMap<Integer, WPRating>> userRatings;
+    WPHashMap<Integer, Integer> movieRatingsSums;
     int numRatings;
 
     /**
@@ -21,6 +22,7 @@ public class Ratings implements IRatings {
         this.stores = stores;
         this.movieRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
         this.userRatings = new WPHashMap<Integer, WPHashMap<Integer, WPRating>>();
+        this.movieRatingsSums = new WPHashMap<Integer, Integer>();
     }
 
     /**
@@ -66,13 +68,22 @@ public class Ratings implements IRatings {
      */
     @Override
     public boolean remove(int userid, int movieid) {
-        if (movieRatings.containsKey(movieid) && userRatings.containsKey(userid)) {
-            movieRatings.remove(movieid);
-            userRatings.remove(userid);
-            numRatings -= 1;
-            return true;
+        if (!movieRatings.containsKey(movieid) || !movieRatings.get(movieid).containsKey(userid)) {
+            return false;
         }
-        return false;
+    
+        movieRatings.get(movieid).remove(userid);
+        if (movieRatings.get(movieid).size() == 0) {
+            movieRatings.remove(movieid); // clean up empty movies
+        }
+    
+        userRatings.get(userid).remove(movieid);
+        if (userRatings.get(userid).size() == 0) {
+            userRatings.remove(userid); // clean up empty users
+        }
+    
+        numRatings -= 1;
+        return true;
     }
 
     /**
