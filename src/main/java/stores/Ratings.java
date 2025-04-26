@@ -200,10 +200,25 @@ public class Ratings implements IRatings {
      *         no larger than num. If there are less than num movies in the store,
      *         then the array should be the same length as the number of movies in Ratings
      */
+    @SuppressWarnings("unchecked")
     @Override
     public int[] getMostRatedMovies(int num) {
-        // TODO Implement this function
-        return null;
+        Integer[] keys = movieRatings.getKeys();
+        Pair<Integer, Integer>[] mypairs = new Pair[keys.length];
+        
+        for (int i=0; i < keys.length; i++) {
+            mypairs[i] = new Pair<Integer, Integer>(keys[i], movieRatings.get(keys[i]).size());
+        }
+
+        QuickSort.quickSort(mypairs, 0, mypairs.length -1);
+
+        int[] sortedMovieIDs = new int[Math.min(num, keys.length)];
+        for (int i = 0; i < Math.min(num, keys.length); i++) {
+            sortedMovieIDs[i] = (Integer) mypairs[keys.length - 1 - i].getID();
+        }
+        
+        
+        return sortedMovieIDs;
     }
 
     /**
@@ -299,6 +314,10 @@ class Pair<K, V extends Number> implements Comparable<Pair<K,V>>{
         return this.value;
     }
 
+    public K getID() {
+        return this.id;
+    }
+
 }
 
 class QuickSort {
@@ -331,7 +350,7 @@ class QuickSort {
 
         // Swap median with high so we can use it as pivot
         swap(arr, medianIndex, high);
-        
+
         // Standard Lomuto partition using median as pivot
         T pivot = arr[high];
         int i = low - 1;
