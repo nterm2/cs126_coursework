@@ -295,4 +295,61 @@ class Pair<K, V extends Number> implements Comparable<Pair<K,V>>{
         return Double.compare(this.value.doubleValue(), other.value.doubleValue());
     }
 
+    public V getValue() {
+        return this.value;
+    }
+
+}
+
+class QuickSort {
+
+    public static <T extends Comparable<T>> void quickSort(T[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = medianOfThreePartition(arr, low, high);
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    private static <T extends Comparable<T>> int medianOfThreePartition(T[] arr, int low, int high) {
+        int mid = low + (high - low) / 2;
+
+        T a = arr[low];
+        T b = arr[mid];
+        T c = arr[high];
+
+        int medianIndex;
+
+        // Determine median of a (low), b (mid), c (high)
+        if ((a.compareTo(b) <= 0 && b.compareTo(c) <= 0) || (c.compareTo(b) <= 0 && b.compareTo(a) <= 0)) {
+            medianIndex = mid;
+        } else if ((b.compareTo(a) <= 0 && a.compareTo(c) <= 0) || (c.compareTo(a) <= 0 && a.compareTo(b) <= 0)) {
+            medianIndex = low;
+        } else {
+            medianIndex = high;
+        }
+
+        // Swap median with high so we can use it as pivot
+        swap(arr, medianIndex, high);
+        
+        // Standard Lomuto partition using median as pivot
+        T pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j].compareTo(pivot) <= 0) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+
+    private static <T> void swap(T[] arr, int i, int j) {
+        T temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }
