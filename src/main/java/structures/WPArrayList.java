@@ -1,129 +1,100 @@
 package structures;
 
-/**
- * get an eleement of the array
- * get the index of an array 
- * remove an element of an array 
- * set an eleemnt of an array 
- * We will need to store internal representation of the array (Array of objects)
- * The current size of the array list
- * and the capacity of the arraylist
- * 
- * Improvements: when internalarray reaches full capacity, doubles in size in size
- * can lead to memory issues. check if arrau is growing infitely
- */
 public class WPArrayList<E> {
-    Object[] internalArray;
-    int size;
-    int capacity;
+    private Object[] internalArray;
+    private int size;
+    private int capacity;
+    private static final int DEFAULT_CAPACITY = 10;
 
     public WPArrayList() {
         this.size = 0;
-        this.capacity = 100;
+        this.capacity = DEFAULT_CAPACITY;
         this.internalArray = new Object[this.capacity];
     }
 
-    public Object[] getInternalArray() {
-        return this.internalArray;
-    }
-    /**
-     * First check that we have enough space in our internalArray to add an element. IN the case that we don't 
-     * , create a new internalArray that is double the size of the old array. then copy all the elements in the 
-     * filled up initialArray to new initial array, at which we set initialarray to new initialarray. In the case we 
-     * do/don't, at the end add the element we wish to add to internalArray, and incremeent the size by 1`
-     * 
-     * CONSIDERATION - WHAT HAPPENS IF CAPACITY IS TOO LARGE AND FAILS? 
-     */
     public boolean add(E element) {
-        try {
-            if (this.size >= this.capacity) {
+        ensureCapacity();
+        this.internalArray[this.size++] = element;
+        return true;
+    }
+    // In the case that the size of the internal 
+    private void ensureCapacity() {
+        if (this.size >= this.capacity) {
+            if (this.capacity < 1000) {
                 this.capacity *= 2;
-                Object[] newInternalArray = new Object[this.capacity];
-                for (int i=0; i < this.size; i++) {
-                    newInternalArray[i] = this.internalArray[i];
-                }
-                this.internalArray = newInternalArray;
+            } else {
+                this.capacity += this.capacity / 2;
             }
-            this.internalArray[this.size] = element;
-            this.size++;
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            Object[] newInternalArray = new Object[this.capacity];
+            System.arraycopy(this.internalArray, 0, newInternalArray, 0, this.size);
+            this.internalArray = newInternalArray;
         }
-
     }
-    
-    /**
-     * return accessing the index specified by the array. in the case that the index
-     * is out of bounds, the internal array will return an error. As internalarray 
-     * is an array of objects, an individual element is an object, thus we cast the object
-     * to E in order to be returned in the correct format, as opposed to being returned as 
-     * an object. Not a checked cast, but suprpres warnings to not have warnings.
-     */
+
     @SuppressWarnings("unchecked")
-    public E get(int i) {
-        return (E) this.internalArray[i];
+    public E get(int index) {
+        checkIndex(index);
+        return (E) this.internalArray[index];
     }
 
-    /**
-     * iterate through each eleemnt in the internal arrray. in case we find the 
-     * elemnt we want. return the index. otherwise, throw an exception.
-     */
     public int indexOf(E element) {
-        for (int i=0; i < this.size; i++) {
-            if (element.equals(this.get(i))) {
-                return i;
+        for (int i = 0; i < this.size; i++) {
+            if (element == null) {
+                if (this.internalArray[i] == null) return i;
+            } else {
+                if (element.equals(this.internalArray[i])) return i;
             }
         }
         return -1;
     }
 
-    /**
-      attempts to replace an existing element within the arraylist with another element
-      as such, check that the index provided is less than the size (or number of elements
-      currently stored in the arraylit) - otherwise, an error is raised. Otherwise, 
-      we get the element currently stored in the index we are trying to set a new value of,
-      and then set that index to the element. return the replaced element back.
-     */
-    public E set(int i, E element) {
-        if (i >= this.size) {
-            throw new ArrayIndexOutOfBoundsException("Invalid index");
-        }
-        E replaced = this.get(i); 
-        this.internalArray[i] = element;
+    public E set(int index, E element) {
+        checkIndex(index);
+        @SuppressWarnings("unchecked")
+        E replaced = (E) this.internalArray[index];
+        this.internalArray[index] = element;
         return replaced;
     }
 
-    /**
-     * Need to implement indexOf, get, set 
-     * Removes the first occurance of an element within the arraylist, if it exists. First attempts to get the index 
-     * of thefirst occurance elemnt. In the case that it doesn't exist, we shouldn't be able to remove the element and an error is raised 
-     * should be raised. Otherwise, we need to iterate from the index of the element we want to remove + 1 to the end of the
-     * list, and set the elemnt to i - 1 (taking up empty space from the removed element.)
-     * as such, the last lemnt willl not be null - set it to null, and decrase the size
-     */
     public boolean remove(E element) {
-        int toRemoveIndex = this.indexOf(element);
+        int toRemoveIndex = indexOf(element);
         if (toRemoveIndex >= 0) {
-            for (int i=toRemoveIndex+1; i<this.size; i++) {
-                this.set(i-1, this.get(i));
+            int numMoved = this.size - toRemoveIndex - 1;
+            if (numMoved > 0) {
+                System.arraycopy(this.internalArray, toRemoveIndex + 1, this.internalArray, toRemoveIndex, numMoved);
             }
-            this.internalArray[size-1] = null;
-            this.size--;
+            this.internalArray[--size] = null;
+            if (size < capacity / 4 && capacity > DEFAULT_CAPACITY * 2) {
+                shrink();
+            }
             return true;
         }
         return false;
     }
 
-    public boolean contains(E element) {
-        for (int i = 0; i < size; i++) {
-            if (element.equals(this.internalArray[i])) {return true;}
+    private void shrink() {
+        int newCapacity = Math.max(DEFAULT_CAPACITY, this.capacity / 2);
+        Object[] newInternalArray = new Object[newCapacity];
+        System.arraycopy(this.internalArray, 0, newInternalArray, 0, this.size);
+        this.internalArray = newInternalArray;
+        this.capacity = newCapacity;
+    }
+
+    private void checkIndex(int index) {
+        if (index >= size || index < 0) {
+            throw new ArrayIndexOutOfBoundsException("Invalid index: " + index);
         }
-        return false;
+    }
+
+    public boolean contains(E element) {
+        return indexOf(element) != -1;
     }
 
     public int size() {
         return this.size;
+    }
+
+    public int capacity() {
+        return this.capacity;
     }
 }
