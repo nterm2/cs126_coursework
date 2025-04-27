@@ -395,21 +395,21 @@ public class Credits implements ICredits{
      *         If there are less cast members that the number required, then the
      *         list should be the same number of cast members found.
      */
+    @SuppressWarnings("unchecked")
     @Override
     public Person[] getMostCastCredits(int numResults) {
-        if (castData.size() == 0) {
-            return new Person[0];
-        }
         Integer[] keys = castData.getKeys();
-        WPCastMember[] castMembers = new WPCastMember[castData.size()];
+        WPPair<Person, Integer>[] pairs = new WPPair[castData.size()];
         for (int i=0; i < castData.size(); i++) {
-            castMembers[i] = castData.get(keys[i]);
+            WPCastMember member = castData.get(keys[i]);
+            pairs[i] = new WPPair<Person, Integer>(member.getPerson(), member.getAppearances());
         }
-        castMemberQuickSort(castMembers, 0, castMembers.length - 1);
-        numResults = numResults < castMembers.length ? numResults : castMembers.length;
-        Person[] peopleMostCastCredits = new Person[numResults];
+
+        IntroSort.introsort(pairs);
+
+        Person[] peopleMostCastCredits = new Person[Math.min(numResults, keys.length)];
         for (int i=0; i < peopleMostCastCredits.length; i++) {
-            peopleMostCastCredits[i] = castMembers[i].getPerson();
+            peopleMostCastCredits[i] = pairs[pairs.length - 1 - i].getID();
         }
         return peopleMostCastCredits;
 
