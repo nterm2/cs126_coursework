@@ -105,7 +105,42 @@ public class Credits implements ICredits{
      */
     @Override
     public boolean remove(int id) {
-        return credits.remove(id);
+        WPCredit credit = credits.get(id);
+        if (credit == null) {
+            return false;
+        }
+    
+        // Remove from credits map
+        credits.remove(id);
+    
+        // Remove from castData
+        for (CastCredit castCredit : credit.getCast()) {
+            int castID = castCredit.getID();
+            WPCastMember castMember = castData.get(castID);
+            if (castMember != null) {
+                castMember.removeFilm(id);
+                if (castCredit.getOrder() <= 3) {
+                    castMember.removeStarredFilm(id);
+                }
+                if (castMember.getFilms().isEmpty()) {
+                    castData.remove(castID);
+                }
+            }
+        }
+    
+        // Remove from crewData
+        for (CrewCredit crewCredit : credit.getCrew()) {
+            int crewID = crewCredit.getID();
+            WPCrewMember crewMember = crewData.get(crewID);
+            if (crewMember != null) {
+                crewMember.removeFilm(id);
+                if (crewMember.getFilms().isEmpty()) {
+                    crewData.remove(crewID);
+                }
+            }
+        }
+    
+        return true;
     }
 
     /**
