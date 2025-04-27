@@ -230,7 +230,7 @@ public class Credits implements ICredits{
 
         for (int i = 0; i < castData.size(); i++) {
             Person givenPerson = castData.get(keys[i]).getPerson();
-            if (givenPerson.getName().contains(cast)) {
+            if (LowercaseContains.contains(givenPerson.getName(), cast)) {
                 matchingCast[counter++] = givenPerson;
             }
         }
@@ -255,7 +255,7 @@ public class Credits implements ICredits{
         int counter = 0;
         for (int i = 0; i < crewData.size(); i++) {
             Person givenPerson = crewData.get(keys[i]).getPerson();
-            if (givenPerson.getName().contains(crew)) {
+            if (LowercaseContains.contains(givenPerson.getName(), crew)) {
                 matchingCrew[counter++] = givenPerson;
             }
         }

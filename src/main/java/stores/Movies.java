@@ -458,7 +458,7 @@ public class Movies implements IMovies{
      * particular film, given the ID number of that film
      * 
      * Get the movie at the given id from movies hashmap. In the case that it doesn't
-     * exist (returns null), then return -1. Otherwise return the movie's votecount.
+     * exist (returns null), then return -1. Otherwise return the movie's vote count.
      * 
      * O(1)
      * @param id The movie ID
@@ -475,6 +475,14 @@ public class Movies implements IMovies{
      * Adds a given film to a collection. The collection is required to have an ID
      * number, a name, and a URL to a poster for the collection
      * 
+     * In the case that we attempt to get the movie by film id and it doesn't exist, return false.
+     * Otherwise,  if the collection doesn't already exist in collections, create a new collection and store, for the given collection id,
+     * the new collection object. In the case that it does exist, simply retrieve the new collection object. Then retrieve the movie. Add 
+     * the collection to the movie, and update the given movie so that the movie's collection is updated. Then add to the collection the 
+     * movie included within the collection, and update the given collection so that the collection's movies has the newly added movie.
+     * Return true.
+     * 
+     * O(1)
      * @param filmID                 The movie ID
      * @param collectionID           The collection ID
      * @param collectionName         The name of the collection
@@ -489,18 +497,17 @@ public class Movies implements IMovies{
         if (movies.get(filmID) == null) {
             return false;
         }
-        if (collectionID < 0) {
-            return false;
-        }
-        
+        WPCollection collection = null;
         if (!collections.containsKey(collectionID)) {
-            WPCollection collection = new WPCollection(collectionID, collectionName, collectionPosterPath, collectionBackdropPath);
+            collection = new WPCollection(collectionID, collectionName, collectionPosterPath, collectionBackdropPath);
             collections.put(collectionID, collection);
         }
         
+        if (collection == null) {
+            collection = collections.get(collectionID);
+        }
+
         WPMovie movie = movies.get(filmID);
-        WPCollection collection = collections.get(collectionID);
-    
         movie.addToCollection(collection);
         movies.put(filmID, movie);
         
@@ -514,6 +521,10 @@ public class Movies implements IMovies{
     /**
      * Get all films that belong to a given collection
      * 
+     * Get the collection at the given id from the collections hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the collection's movies.
+     * 
+     * O(1)
      * @param collectionID The collection ID to be searched for
      * @return An array of film IDs that correspond to the given collection ID. If
      *         there are no films in the collection ID, or if the collection ID is
@@ -522,15 +533,16 @@ public class Movies implements IMovies{
     @Override
     public int[] getFilmsInCollection(int collectionID) {
         WPCollection collection = collections.get(collectionID);
-        if (collection == null) {
-            return new int[0]; 
-        } 
-        return collection.getMovies();
+        return collection == null ? new int[0] : collection.getMovies();
     }
 
     /**
      * Gets the name of a given collection
      * 
+     * Get the collection at the given id from the collections hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the collection's name.
+     * 
+     * O(1)
      * @param collectionID The collection ID
      * @return The name of the collection. If the collection cannot be found, then
      *         return null
@@ -538,15 +550,16 @@ public class Movies implements IMovies{
     @Override
     public String getCollectionName(int collectionID) {
         WPCollection collection = collections.get(collectionID);
-        if (collection == null) {
-            return null; 
-        } 
-        return collection.getCollctionName();
+        return collection == null ? null : collection.getCollctionName();
     }
 
     /**
      * Gets the poster URL for a given collection
      * 
+     * Get the collection at the given id from the collections hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the collection's poster path.
+     * 
+     * O(1)
      * @param collectionID The collection ID
      * @return The poster URL of the collection. If the collection cannot be found,
      *         then return null
@@ -554,15 +567,16 @@ public class Movies implements IMovies{
     @Override
     public String getCollectionPoster(int collectionID) {
         WPCollection collection = collections.get(collectionID);
-        if (collection == null) {
-            return null; 
-        } 
-        return collection.getCollectionPosterPath();
+        return collection == null ? null : collection.getCollectionPosterPath();
     }
 
     /**
      * Gets the backdrop URL for a given collection
      * 
+     * Get the collection at the given id from the collections hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the collection's backdrop path.
+     * 
+     * O(1)
      * @param collectionID The collection ID
      * @return The backdrop URL of the collection. If the collection cannot be
      *         found, then return null
@@ -570,15 +584,16 @@ public class Movies implements IMovies{
     @Override
     public String getCollectionBackdrop(int collectionID) {
         WPCollection collection = collections.get(collectionID);
-        if (collection == null) {
-            return null; 
-        } 
-        return collection.getCollectionBackdropPath();
+        return collection == null ? null : collection.getCollectionBackdropPath();
     }
 
     /**
      * Gets the collection ID of a given film
      * 
+     * Get the movie at the given id from the movies hashmap. In the case that it doesn't
+     * exist (returns null), then return -1. Otherwise return the movies's collection id.
+     * 
+     * O(1)
      * @param filmID The movie ID
      * @return The collection ID for the requested film. If the film cannot be
      *         found, then return -1
@@ -586,15 +601,16 @@ public class Movies implements IMovies{
     @Override
     public int getCollectionID(int filmID) {
         WPMovie movie = movies.get(filmID);
-        if (movie == null) {
-            return -1; 
-        } 
-        return movie.getCollectionID();
+        return movie == null ? -1 : movie.getCollectionID();
     }
 
     /**
      * Sets the IMDb ID for a given film
      * 
+     * Attempts to get the movie from the filmID passed in - in the case that it does not exist, return false.
+     * Otherwise, set the imbdID for the given movie to the imdbID provided, at which we return true. 
+     * 
+     * O(1)
      * @param filmID The movie ID
      * @param imdbID The IMDb ID
      * @return TRUE if the data able to be set, FALSE otherwise
@@ -612,6 +628,10 @@ public class Movies implements IMovies{
     /**
      * Gets the IMDb ID for a given film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's imdbID.
+     * 
+     * O(1)
      * @param filmID The movie ID
      * @return The IMDb ID for the requested film. If the film cannot be found,
      *         return null
@@ -619,15 +639,17 @@ public class Movies implements IMovies{
     @Override
     public String getIMDB(int filmID) {
         WPMovie movie = movies.get(filmID);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getImbdID();
+        return movie == null ? null : movie.getImbdID();
     }
 
     /**
      * Sets the popularity of a given film. If the popularity for a film already exists, replace it with the new value
      * 
+     * Get the movie based on the id passed in. In the case that it is doesn't exist, 
+     * return false. Otherwise, set the popularity to the popularity passed in by the user,
+     * and return true.
+     * 
+     * O(1)
      * @param id         The movie ID
      * @param popularity The popularity of the film
      * @return TRUE if the data able to be set, FALSE otherwise
@@ -645,6 +667,10 @@ public class Movies implements IMovies{
     /**
      * Gets the popularity of a given film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return -1.0d. Otherwise return the movie's popularity.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The popularity value of the requested film. If the film cannot be
      *         found, then return -1.0d. If the popularity has not been set, return 0.0
@@ -652,15 +678,17 @@ public class Movies implements IMovies{
     @Override
     public double getPopularity(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return -1.0d; 
-        } 
-        return movie.getPopularity();
+        return movie == null ? -1.0d : movie.getPopularity();
     }
 
     /**
-     * Adds a production company to a given film
+     * Adds a production company to a given fil
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return whether we were successfullly able
+     * to add the passed in company to the movie's production companies. 
+     * 
+     * O(1)
      * @param id      The movie ID
      * @param company A Company object that represents the details on a production
      *                company
@@ -669,15 +697,17 @@ public class Movies implements IMovies{
     @Override
     public boolean addProductionCompany(int id, Company company) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return false; 
-        } 
-        return movie.addProductionCompany(company);
+        return movie == null ? false : movie.addProductionCompany(company);
     }
 
     /**
      * Adds a production country to a given film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return false. Otherwise return boolean indicating whether we 
+     * were able to add the passed in country to the movie's production countries.
+     * 
+     * O(1)
      * @param id      The movie ID
      * @param country A ISO 3166 string containing the 2-character country code
      * @return TRUE if the data able to be added, FALSE otherwise
@@ -685,15 +715,16 @@ public class Movies implements IMovies{
     @Override
     public boolean addProductionCountry(int id, String country) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return false; 
-        } 
-        return movie.addProductionCountry(country);
+        return movie == null ? false : movie.addProductionCountry(country);
     }
 
     /**
      * Gets all the production companies for a given film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's production companies.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return An array of Company objects that represent all the production
      *         companies that worked on the requested film. If the film cannot be
@@ -702,15 +733,16 @@ public class Movies implements IMovies{
     @Override
     public Company[] getProductionCompanies(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getProductionCompanies();
+        return movie == null ? null : movie.getProductionCompanies();
     }
 
     /**
      * Gets all the production companies for a given film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's production countries.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return An array of Strings that represent all the production countries (in
      *         ISO 3166 format) that worked on the requested film. If the film
@@ -719,15 +751,12 @@ public class Movies implements IMovies{
     @Override
     public String[] getProductionCountries(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getProductionCountries();
+        return movie == null ? null : movie.getProductionCountries();
     }
 
     /**
      * States the number of movies stored in the data structure
-     * 
+     * O(1)
      * @return The number of movies stored in the data structure
      */
     @Override
@@ -751,7 +780,7 @@ public class Movies implements IMovies{
         Integer[] keys = movies.getKeys();
         for (int i=0; i < movies.size(); i++) {
             WPMovie movie = movies.get(keys[i]);
-            if (movie.getTitle().contains(searchTerm) || movie.getOriginalTitle().contains(searchTerm) || movie.getOverview().contains(searchTerm)) {
+            if (LowercaseContains.contains(movie.getTitle(), searchTerm) || LowercaseContains.contains(movie.getOriginalTitle(), searchTerm) || LowercaseContains.contains(movie.getOverview(), searchTerm)) {
                 matchingMovies[counter++] = movie.getID();
             }
         }
