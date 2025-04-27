@@ -768,6 +768,15 @@ public class Movies implements IMovies{
      * Produces a list of movie IDs that have the search term in their title,
      * original title or their overview
      * 
+     * Attempt to find a film based on the title, original title or overview. Create an initial int array called 
+     * matchingMovies of the size of the number of movies. Iterate through each movie. In the case that the movies title, 
+     * originalTitle or overview contains the search term, add the movie's id to matchingMovies, and increment counter to point
+     * to the next index to place the next matching movie. Then trim matchingMovies  to remove uneeded null values using System.arraycopy(),
+     * and return the trimmed array. Although not mentioned, realised that using contains did case-sensitive matching, which likely isn't
+     * the intended effect for users searching for films. Thus made a class, LowerCaseContains, that implements a static method contains 
+     * allowing to check if a string contains a search term, case insensitive. 
+     * 
+     * O(n)
      * @param searchTerm The term that needs to be checked
      * @return An array of movie IDs that have the search term in their title,
      *         original title or their overview. If no movies have this search term,
