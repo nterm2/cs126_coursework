@@ -389,27 +389,30 @@ public class Credits implements ICredits{
      * member performed as 2 roles in the same film, then this would count
      * as 2 credits. The list should be ordered by the highest to lowest number of credits.
      * 
+     * Get all of the cast mmbers from castData, and store in array of cast members.
+     * Perform introsort on castMembers, then create a new array storing the top n 
+     * people with the most appearances, which is based on the person attribute from 
+     * the castmember object. Return the array
+     * 
      * @param numResults The maximum number of elements that should be returned
      * @return An array of Person objects corresponding to the cast members
      *         with the most credits, ordered by the highest number of credits.
      *         If there are less cast members that the number required, then the
      *         list should be the same number of cast members found.
      */
-    @SuppressWarnings("unchecked")
     @Override
     public Person[] getMostCastCredits(int numResults) {
         Integer[] keys = castData.getKeys();
-        WPPair<Person, Integer>[] pairs = new WPPair[castData.size()];
+        WPCastMember[] castMembers = new WPCastMember[keys.length];
         for (int i=0; i < castData.size(); i++) {
-            WPCastMember member = castData.get(keys[i]);
-            pairs[i] = new WPPair<Person, Integer>(member.getPerson(), member.getAppearances());
+            castMembers[i] = castData.get(keys[i]);
         }
 
-        IntroSort.introsort(pairs);
+        IntroSort.introsort(castMembers);
 
         Person[] peopleMostCastCredits = new Person[Math.min(numResults, keys.length)];
         for (int i=0; i < peopleMostCastCredits.length; i++) {
-            peopleMostCastCredits[i] = pairs[pairs.length - 1 - i].getID();
+            peopleMostCastCredits[i] = castMembers[i].getPerson();
         }
         return peopleMostCastCredits;
 

@@ -2,7 +2,7 @@ package structures;
 
 import stores.Person;
 
-public class WPCastMember extends WPCrewMember {
+public class WPCastMember extends WPCrewMember implements Comparable<WPCastMember>{
     private int appearances;
     private WPArrayList<Integer> starredFilms;
 
@@ -37,4 +37,10 @@ public class WPCastMember extends WPCrewMember {
         }
         return castedStarredFilms;
     }
+
+    @Override
+    public int compareTo(WPCastMember other) {
+        return Integer.compare(other.appearances, this.appearances);
+    }
+
 }
