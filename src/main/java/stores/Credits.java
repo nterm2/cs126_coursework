@@ -44,6 +44,7 @@ public class Credits implements ICredits{
      * of the crew credit, and use WPCrewMember to create a new crew member based on that Person object (storing it as crewMember). We then add the film
      * to the films for the crew member, and store the crew member into crewData. 
      * 
+     * O(n)
      * @param cast An array of all cast members that starred in the given film
      * @param crew An array of all crew members that worked on a given film
      * @param id   The (unique) movie ID
@@ -98,7 +99,7 @@ public class Credits implements ICredits{
 
     /**
      * Remove a given films data from the data structure
-     * 
+     * NOT GOOD ENOUGH - LEAVES EXCESS DATA FROM CAST AND CREW. NEED TO COME BACK AND FIX.
      * @param id The movie ID
      * @return TRUE if the data was removed, FALSE otherwise
      */
@@ -110,6 +111,11 @@ public class Credits implements ICredits{
     /**
      * Gets all the cast members for a given film
      * 
+     * Get the movie credit for the given film id. In the case that it doesn't exist, return 
+     * an empty array, otherwise return a list of CastCredit members sorted on each CastCredit's 
+     * order, which is done by WPCredit's constructor that uses QuickSort to sort the cast accordingly.
+     * 
+     * O(1)
      * @param filmID The movie ID
      * @return An array of CastCredit objects, one for each member of cast that is 
      *         in the given film. The cast members should be in "order" order. If
@@ -118,15 +124,18 @@ public class Credits implements ICredits{
      */
     @Override
     public CastCredit[] getFilmCast(int filmID) {
-        if (credits.get(filmID) == null) {
-            return new CastCredit[0];
-        }
-        return credits.get(filmID).getFilmCast();
+        WPCredit credit = credits.get(filmID);
+        return credit == null ? new CastCredit[0] : credit.getFilmCast();
     }
 
     /**
      * Gets all the crew members for a given film
      * 
+     * Get the movie credit for the given film id. In the case that it doesn't exist, return 
+     * an empty array, otherwise return a list of CrewCredit members sorted on each CrewCredit's 
+     * id, which is done by WPCredit's constructor that uses QuickSort to sort the crew accordingly.
+     * 
+     * O(1)
      * @param filmID The movie ID
      * @return An array of CrewCredit objects, one for each member of crew that is
      *         in the given film. The crew members should be in "id" order (not "elementID"). If there 
@@ -135,45 +144,52 @@ public class Credits implements ICredits{
      */
     @Override
     public CrewCredit[] getFilmCrew(int filmID) {
-        if (credits.get(filmID) == null) {
-            return new CrewCredit[0];
-        }
-        return credits.get(filmID).getFilmCrew();
+        WPCredit credit = credits.get(filmID);
+        return credit == null ? new CrewCredit[0] : credit.getFilmCrew();
     }
 
     /**
      * Gets the number of cast that worked on a given film
      * 
+     * Get the movie credit for the given film id. In the case that it doesn't exist, return -1. otherwise 
+     * return the size of the cast
+     * 
+     * O(1)
      * @param filmID The movie ID
      * @return The number of cast member that worked on a given film. If the film
      *         cannot be found in Credits, then return -1
      */
     @Override
     public int sizeOfCast(int filmID) {
-        if (credits.get(filmID) == null) {
-            return -1;
-        }
-        return credits.get(filmID).getCastSize();
+        WPCredit credit = credits.get(filmID);
+        return credit == null ? -1 : credit.getCastSize();
     }
 
     /**
      * Gets the number of crew that worked on a given film
      * 
+     * Get the movie credit for the given film id. In the case that it doesn't exist, return -1. otherwise 
+     * return the size of the crew
+     * 
+     * O(1)
      * @param filmID The movie ID
      * @return The number of crew member that worked on a given film. If the film
      *         cannot be found in Credits, then return -1
      */
     @Override
     public int sizeOfCrew(int filmID) {
-        if (credits.get(filmID) == null) {
-            return -1;
-        }
-        return credits.get(filmID).getCrewSize();
+        WPCredit credit = credits.get(filmID);
+        return credit == null ? -1 : credit.getCrewSize();
     }
 
     /**
      * Gets a list of all unique cast members present in the data structure
      * 
+     * As in the add method, we ensure that each cast member added to castData is unique, we simply 
+     * create a Person[] array, and then iterate through each cast in castdata. we then store the corresponding 
+     * cast person into the Person[] array (uniqueCast), which we then return 
+     * 
+     * O(n)
      * @return An array of all unique cast members as Person objects. If there are 
      *         no cast members, then return an empty array
      */
@@ -181,20 +197,22 @@ public class Credits implements ICredits{
     public Person[] getUniqueCast() {
         Integer[] keys = castData.getKeys();
         Person[] uniqueCast = new Person[castData.size()];
-        int counter = 0;
 
         for (int i = 0; i < castData.size(); i++) {
-            uniqueCast[counter++] = castData.get(keys[i]).getPerson();
+            uniqueCast[i] = castData.get(keys[i]).getPerson();
         }
 
-        Person[] trimmedUniqueCast = new Person[counter];
-        System.arraycopy(uniqueCast, 0, trimmedUniqueCast, 0, counter);
-        return trimmedUniqueCast;
+        return uniqueCast;
     }
 
     /**
      * Gets a list of all unique crew members present in the data structure
      * 
+     * As in the add method, we ensure that each crew member added to crewData is unique, we simply create a
+     * Person[] array called uniqueCrew, then iterate through each crew in crewdata. We then store the corresponding 
+     * crew person into uniqueCrew, which we then return
+     * 
+     * O(n)
      * @return An array of all unique crew members as Person objects. If there are
      *         no crew members, then return an empty array
      */
@@ -202,20 +220,23 @@ public class Credits implements ICredits{
     public Person[] getUniqueCrew() {
         Integer[] keys = crewData.getKeys();
         Person[] uniqueCrew = new Person[crewData.size()];
-        int counter = 0;
 
         for (int i = 0; i < crewData.size(); i++) {
-            uniqueCrew[counter++] = crewData.get(keys[i]).getPerson();
+            uniqueCrew[i] = crewData.get(keys[i]).getPerson();
         }
 
-        Person[] trimmedUniqueCrew = new Person[counter];
-        System.arraycopy(uniqueCrew, 0, trimmedUniqueCrew, 0, counter);
-        return trimmedUniqueCrew;
+        return uniqueCrew;
     }
 
     /**
      * Get all the cast members that have the given string within their name
      * 
+     * Create an array of Person objects called matchingCast that is the size of 
+     * castData. Iterate through each cast member, get the the cast person's name. If 
+     * their name contains the search term, then we add the person to matchingCast. Use System.arraycopy 
+     * to remove potential null values from matchingCast, and return the resulting array.
+     * 
+     * O(n)
      * @param cast The string that needs to be found
      * @return An array of unique Person objects of all cast members that have the 
      *         requested string in their name. If there are no matches, return an 
@@ -242,6 +263,12 @@ public class Credits implements ICredits{
     /**
      * Get all the crew members that have the given string within their name
      * 
+     * Create an array of Person objects called matchingCrew that is the size of 
+     * crewData. Iterate through each crew member, get the the crew person's name. If 
+     * their name contains the search term, then we add the person to matchingCrew. Use System.arraycopy 
+     * to remove potential null values from matchingCrew, and return the resulting array.
+     * 
+     * O(n)
      * @param crew The string that needs to be found
      * @return An array of unique Person objects of all crew members that have the 
      *         requested string in their name. If there are no matches, return an 
@@ -267,37 +294,45 @@ public class Credits implements ICredits{
     /**
      * Gets the Person object corresponding to the cast ID
      * 
+     * Get the cast member for the given cast id. In the case that it doesn't exist, return null. otherwise 
+     * return the person associated with the cast member
+     * 
+     * O(1)
      * @param castID The cast ID of the person to be found
      * @return The Person object corresponding to the cast ID provided. 
      *         If a person cannot be found, then return null
      */
     @Override
     public Person getCast(int castID) {
-        if (castData.containsKey(castID)) {
-            return castData.get(castID).getPerson();
-        }
-        return null;
+        WPCastMember castMember = castData.get(castID);
+        return castMember == null ? null : castMember.getPerson();
     }
 
     /**
      * Gets the Person object corresponding to the crew ID
      * 
+     * Get the crew member for the given crew id. In the case that it doesn't exist, return null. otherwise 
+     * return the person associated with the crew member
+     * 
+     * O(1)
      * @param crewID The crew ID of the person to be found
      * @return The Person object corresponding to the crew ID provided. 
      *         If a person cannot be found, then return null
      */
     @Override
-    public Person getCrew(int crewID){
-        if (crewData.containsKey(crewID)) {
-            return crewData.get(crewID).getPerson();
-        }
-        return null;
+    public Person getCrew(int crewID) {
+        WPCrewMember crewMember = crewData.get(crewID);
+        return crewMember == null ? null : crewMember.getPerson();
     }
 
     
     /**
      * Get an array of film IDs where the cast member has starred in
      * 
+     * Get the cast member for the given cast id. In the case that it doesn't exist, return an empty array. otherwise 
+     * return the films associated with the cast member
+     * 
+     * O(1)
      * @param castID The cast ID of the person
      * @return An array of all the films the member of cast has starred
      *         in. If there are no films attached to the cast member, 
@@ -305,15 +340,17 @@ public class Credits implements ICredits{
      */
     @Override
     public int[] getCastFilms(int castID){
-        if (castData.containsKey(castID)) {
-            return castData.get(castID).getFilms();
-        }
-        return new int[0];
+        WPCastMember castMember = castData.get(castID);
+        return castMember == null ? new int[0] : castMember.getFilms();
     }
 
     /**
      * Get an array of film IDs where the crew member has starred in
      * 
+     * Get the crew member for the given crew id. In the case that it doesn't exist, return an empty array. otherwise 
+     * return the films associated with the crew member
+     * 
+     * O(1)
      * @param crewID The crew ID of the person
      * @return An array of all the films the member of crew has starred
      *         in. If there are no films attached to the crew member, 
@@ -321,10 +358,8 @@ public class Credits implements ICredits{
      */
     @Override
     public int[] getCrewFilms(int crewID) {
-        if (crewData.containsKey(crewID)) {
-            return crewData.get(crewID).getFilms();
-        }
-        return new int[0];
+        WPCrewMember crewMember = crewData.get(crewID);
+        return crewMember == null ? new int[0] : crewMember.getFilms();
     }
 
     /**
@@ -332,6 +367,10 @@ public class Credits implements ICredits{
      * members/top 3 billing). This is determined by the order field in
      * the CastCredit class
      * 
+     * Get the cast member for the given cast id. In the case that it doesn't exist, return an empty array. otherwise 
+     * return the starred films associated with the cast member
+     * 
+     * O(1)
      * @param castID The cast ID of the cast member to be searched for
      * @return An array of film IDs where the the cast member stars in.
      *         If there are no films where the cast member has starred in,
@@ -339,11 +378,8 @@ public class Credits implements ICredits{
      */
     @Override
     public int[] getCastStarsInFilms(int castID){
-        if (castData.containsKey(castID)) {
-            WPCastMember cast = castData.get(castID);
-            return cast.getStarredFilms();
-        }
-        return new int[0];
+        WPCastMember castMember = castData.get(castID);
+        return castMember == null ? new int[0] : castMember.getStarredFilms();
     }
     
     /**
@@ -365,15 +401,10 @@ public class Credits implements ICredits{
             return new Person[0];
         }
         Integer[] keys = castData.getKeys();
-        // What we need to do is quicksort on all th cast members based on 
-        // appearances. Then create a list of person of the size of wanted 
-        // results. Iterate through each result, store the person by getting 
-        // index at sorted list.getPerson().
         WPCastMember[] castMembers = new WPCastMember[castData.size()];
         for (int i=0; i < castData.size(); i++) {
             castMembers[i] = castData.get(keys[i]);
         }
-        // Perform quicksort on castMembers
         castMemberQuickSort(castMembers, 0, castMembers.length - 1);
         numResults = numResults < castMembers.length ? numResults : castMembers.length;
         Person[] peopleMostCastCredits = new Person[numResults];
@@ -410,56 +441,5 @@ public class Credits implements ICredits{
     @Override
     public int size() {
         return credits.size();
-    }
-
-    private void castMemberQuickSort(WPCastMember[] arr, int low, int high) {
-        if (low < high) {
-            int pivotIndex = castMembertMedianOfThreePartition(arr, low, high);
-            castMemberQuickSort(arr, low, pivotIndex - 1);
-            castMemberQuickSort(arr, pivotIndex + 1, high);
-        }
-    }
-
-    private int castMembertMedianOfThreePartition(WPCastMember[] arr, int low, int high) {
-        int mid = low + (high - low) / 2;
-
-        int lowOrder = arr[low].getAppearances();
-        int midOrder = arr[mid].getAppearances();
-        int highOrder = arr[high].getAppearances();
-
-        // Find the median index among low, mid, high
-        int medianIndex;
-        if ((lowOrder <= midOrder && midOrder <= highOrder) || (highOrder <= midOrder && midOrder <= lowOrder)) {
-            medianIndex = mid;
-        } else if ((midOrder <= lowOrder && lowOrder <= highOrder) || (highOrder <= lowOrder && lowOrder <= midOrder)) {
-            medianIndex = low;
-        } else {
-            medianIndex = high;
-        }
-
-        // Move median to the end to use as pivot
-        castMemberSwap(arr, medianIndex, high);
-        return castMemberPartition(arr, low, high);
-    }
-
-    private int castMemberPartition(WPCastMember[] arr, int low, int high) {
-        int pivot = arr[high].getAppearances();
-        int i = low - 1;
-
-        for (int j = low; j < high; j++) {
-            if (arr[j].getAppearances() >= pivot) {
-                i++;
-                castMemberSwap(arr, i, j);
-            }
-        }
-
-        castMemberSwap(arr, i + 1, high);
-        return i + 1;
-    }
-
-    private void castMemberSwap(WPCastMember[] arr, int i, int j) {
-        WPCastMember temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
     }
 }
