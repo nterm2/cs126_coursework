@@ -34,25 +34,16 @@ public class WPArrayList<E>{
      * 
      * CONSIDERATION - WHAT HAPPENS IF CAPACITY IS TOO LARGE AND FAILS? 
      */
-    public boolean add(E element) {
-        try {
-            if (this.size >= this.capacity) {
-                this.capacity *= 2;
-                Object[] newInternalArray = new Object[this.capacity];
-                for (int i=0; i < this.size; i++) {
-                    newInternalArray[i] = this.internalArray[i];
-                }
-                this.internalArray = newInternalArray;
-            }
-            this.internalArray[this.size] = element;
-            this.size++;
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
+public boolean add(E element) {
+    if (this.size >= this.capacity) {
+        this.capacity *= 2;
+        Object[] newInternalArray = new Object[this.capacity];
+        System.arraycopy(this.internalArray, 0, newInternalArray, 0, this.size);
+        this.internalArray = newInternalArray;
     }
+    this.internalArray[this.size++] = element;
+    return true;
+}
     
     /**
      * return accessing the index specified by the array. in the case that the index
@@ -106,11 +97,11 @@ public class WPArrayList<E>{
     public boolean remove(E element) {
         int toRemoveIndex = this.indexOf(element);
         if (toRemoveIndex >= 0) {
-            for (int i=toRemoveIndex+1; i<this.size; i++) {
-                this.set(i-1, this.get(i));
+            int numMoved = size - toRemoveIndex - 1;
+            if (numMoved > 0) {
+                System.arraycopy(internalArray, toRemoveIndex + 1, internalArray, toRemoveIndex, numMoved);
             }
-            this.internalArray[size-1] = null;
-            this.size--;
+            internalArray[--size] = null; // clear last element
             return true;
         }
         return false;
