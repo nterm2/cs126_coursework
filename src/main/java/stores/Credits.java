@@ -27,74 +27,70 @@ public class Credits implements ICredits{
      * Adds data about the people who worked on a given film. The movie ID should be
      * unique
      * 
+     * In the case that a credit sharing the same credit id we want to add already exists 
+     * in credits, return false. Otherwise, create a new credit, using WPCredit. As in later parts of Credits 
+     * it is required that both cast and crew need to be sorted (which is achieved using an in-place sorting algorithm),
+     * we pass into the constructor a clone of cast and crew, such that the original order of cast and crew is not changed, but
+     * rather preserved (passing by value).
+     * 
+     * 
      * @param cast An array of all cast members that starred in the given film
      * @param crew An array of all crew members that worked on a given film
      * @param id   The (unique) movie ID
      * @return TRUE if the data able to be added, FALSE otherwise
      */
     @Override
-    /**
-     * CHECK FOR UNIQUENESS FIRST, THEN  CREATE CREDIT OBJECT. ALLOWS US TO DO IT IN PLACE THAN HAVING TO CREATE A CLONEEEEE! LESS MEMORY USED
-     */
     public boolean add(CastCredit[] cast, CrewCredit[] crew, int id) {
-        
-        if (credits.get(id) == null) {
-            // Store the credit object in the hashmap of credits
-            // need to sort cast and need to sort crew here. 
-            // Quicksort seems to be the best bet
-            WPCredit newCredit = new WPCredit(cast.clone(), crew.clone(), id);
-            credits.put(id, newCredit);
-
-            // Store each individual person in array of CastCredit 
-            //, with the value being the person and the key being the id.
-            // For cast credits:
-            for (CastCredit singleCast : cast) {
-                int currentCastID = singleCast.getID();
-                WPCastMember castMember;
-                
-                if (castData.containsKey(currentCastID)) {
-                    // Retrieve and update the existing instance
-                    castMember = castData.get(currentCastID);
-                } else {
-                    // Create a new cast member and add the film
-                    Person castPerson = new Person(singleCast.getID(), singleCast.getName(), singleCast.getProfilePath());
-                    castMember = new WPCastMember(castPerson);
-                }
-                
-                if (singleCast.getOrder() <= 3) {
-                    castMember.addStarredFilm(id);
-                }
-                // Add the film ID (avoid duplicate addition inside addStarredFilm)
-                castMember.addFilm(id);
-                castData.put(currentCastID, castMember);
-            }
-
-
-            // Store each individual in the array of CrewCredit, with the value 
-            // being the person, and the key being the id.
-            // For cast credits:
-            for (CrewCredit singleCrew : crew) {
-                int currentCrewID = singleCrew.getID();
-                WPCrewMember crewMember;
-                
-                if (crewData.containsKey(currentCrewID)) {
-                    // Retrieve and update the existing instance
-                    crewMember = crewData.get(currentCrewID);
-                } else {
-                    // Create a new cast member and add the film
-                    Person crewPerson = new Person(singleCrew.getID(), singleCrew.getName(), singleCrew.getProfilePath());
-                    crewMember = new WPCrewMember(crewPerson);
-                }
-                
-                // Add the film ID (avoid duplicate addition inside addStarredFilm)
-                crewMember.addFilm(id);
-                crewData.put(currentCrewID, crewMember);
-            }
-
-
-            return true;
+        if (credits.get(id) != null) {
+            return false;
         }
-        return false;
+
+        WPCredit newCredit = new WPCredit(cast.clone(), crew.clone(), id);
+        credits.put(id, newCredit);
+
+        for (CastCredit singleCast : cast) {
+            int currentCastID = singleCast.getID();
+            WPCastMember castMember = null;
+            
+            if (castData.containsKey(currentCastID)) {
+                castMember = castData.get(currentCastID);
+            } else {
+                Person castPerson = new Person(singleCast.getID(), singleCast.getName(), singleCast.getProfilePath());
+                castMember = new WPCastMember(castPerson);
+            }
+            
+            if (singleCast.getOrder() <= 3) {
+                castMember.addStarredFilm(id);
+            }
+            // Add the film ID (avoid duplicate addition inside addStarredFilm)
+            castMember.addFilm(id);
+            castData.put(currentCastID, castMember);
+        }
+
+
+        // Store each individual in the array of CrewCredit, with the value 
+        // being the person, and the key being the id.
+        // For cast credits:
+        for (CrewCredit singleCrew : crew) {
+            int currentCrewID = singleCrew.getID();
+            WPCrewMember crewMember;
+            
+            if (crewData.containsKey(currentCrewID)) {
+                // Retrieve and update the existing instance
+                crewMember = crewData.get(currentCrewID);
+            } else {
+                // Create a new cast member and add the film
+                Person crewPerson = new Person(singleCrew.getID(), singleCrew.getName(), singleCrew.getProfilePath());
+                crewMember = new WPCrewMember(crewPerson);
+            }
+            
+            // Add the film ID (avoid duplicate addition inside addStarredFilm)
+            crewMember.addFilm(id);
+            crewData.put(currentCrewID, crewMember);
+        }
+
+
+        return true;
     }
 
     /**
