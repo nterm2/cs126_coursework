@@ -122,7 +122,7 @@ public class Credits implements ICredits{
                 if (castCredit.getOrder() <= 3) {
                     castMember.removeStarredFilm(id);
                 }
-                if (castMember.getFilms().isEmpty()) {
+                if (castMember.emptyFilms()) {
                     castData.remove(castID);
                 }
             }
@@ -134,7 +134,7 @@ public class Credits implements ICredits{
             WPCrewMember crewMember = crewData.get(crewID);
             if (crewMember != null) {
                 crewMember.removeFilm(id);
-                if (crewMember.getFilms().isEmpty()) {
+                if (crewMember.emptyFilms()) {
                     crewData.remove(crewID);
                 }
             }

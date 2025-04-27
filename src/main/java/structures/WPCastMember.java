@@ -38,6 +38,12 @@ public class WPCastMember extends WPCrewMember implements Comparable<WPCastMembe
         return castedStarredFilms;
     }
 
+    public void removeStarredFilm(int filmID) {
+        if (this.films.contains(filmID)) {
+            this.starredFilms.remove(filmID);
+        }
+    }
+
     @Override
     public int compareTo(WPCastMember other) {
         return Integer.compare(other.appearances, this.appearances);

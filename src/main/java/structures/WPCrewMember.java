@@ -2,7 +2,6 @@ package structures;
 
 import stores.Person;
 
-// THINK ABOUT EXTENDING PERSON. 
 public class WPCrewMember {
     protected WPArrayList<Integer> films;
     protected Person person;
@@ -18,6 +17,16 @@ public class WPCrewMember {
         }
     }
 
+    public void removeFilm(int filmID) {
+        if (this.films.contains(filmID)) {
+            this.films.remove(filmID);
+        }
+    }
+
+    public boolean emptyFilms() {
+        return this.films.size() == 0;
+    }
+    
     public Person getPerson() {
         return this.person;
     }
