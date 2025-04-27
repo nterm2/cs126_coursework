@@ -7,32 +7,32 @@ import stores.Genre;
 
 public class WPMovie {
     // Attributes that are added through the add function in the Movies class
-    int id;
-    String title;
-    String originalTitle;
-    String overview;
-    String tagline;
-    String status;
-    Genre[] genres;
-    LocalDate release;
-    long budget; 
-    long revenue; 
-    String[] languages;
-    String originalLanguage;
-    double runtime;
-    String homepage;
-    boolean adult;
-    boolean video;
-    String poster;
+    private int id;
+    private String title;
+    private String originalTitle;
+    private String overview;
+    private String tagline;
+    private String status;
+    private Genre[] genres;
+    private LocalDate release;
+    private long budget; 
+    private long revenue; 
+    private String[] languages;
+    private String originalLanguage;
+    private double runtime;
+    private String homepage;
+    private boolean adult;
+    private boolean video;
+    private String poster;
 
     // Attributes that are added through other methods in the Movies class. 
-    WPCollection belongsToCollection;
-    String imdbID;
-    double popularity;
-    WPArrayList<Company> productionCompanies; 
-    WPArrayList<String> productionCountries;
-    double voteAverage;
-    int voteCount;
+    private WPCollection belongsToCollection;
+    private String imdbID;
+    private double popularity;
+    private WPArrayList<Company> productionCompanies; 
+    private WPArrayList<String> productionCountries;
+    private double voteAverage;
+    private int voteCount;
 
     public WPMovie(int id, String title, String originalTitle, String overview, String tagline, String status, Genre[] genres, LocalDate release, long budget, long revenue, String[] languages, String originalLanguage, double runtime, String homepage, boolean adult, boolean video, String poster) {
         this.id = id;
@@ -124,10 +124,6 @@ public class WPMovie {
     public String getPoster() {
         return this.poster;
     }
-
-    // public WPCollection getBelongsToCollection() {
-    //     return this.belongsToCollection;
-    // }
 
     public int getCollectionID() {
         if (this.belongsToCollection == null) {

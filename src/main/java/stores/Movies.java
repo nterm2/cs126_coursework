@@ -550,7 +550,7 @@ public class Movies implements IMovies{
     @Override
     public String getCollectionName(int collectionID) {
         WPCollection collection = collections.get(collectionID);
-        return collection == null ? null : collection.getCollctionName();
+        return collection == null ? null : collection.getCollectionName();
     }
 
     /**
@@ -772,9 +772,7 @@ public class Movies implements IMovies{
      * matchingMovies of the size of the number of movies. Iterate through each movie. In the case that the movies title, 
      * originalTitle or overview contains the search term, add the movie's id to matchingMovies, and increment counter to point
      * to the next index to place the next matching movie. Then trim matchingMovies  to remove uneeded null values using System.arraycopy(),
-     * and return the trimmed array. Although not mentioned, realised that using contains did case-sensitive matching, which likely isn't
-     * the intended effect for users searching for films. Thus made a class, LowerCaseContains, that implements a static method contains 
-     * allowing to check if a string contains a search term, case insensitive. 
+     * and return the trimmed array. 
      * 
      * O(n)
      * @param searchTerm The term that needs to be checked
@@ -789,7 +787,7 @@ public class Movies implements IMovies{
         Integer[] keys = movies.getKeys();
         for (int i=0; i < movies.size(); i++) {
             WPMovie movie = movies.get(keys[i]);
-            if (LowercaseContains.contains(movie.getTitle(), searchTerm) || LowercaseContains.contains(movie.getOriginalTitle(), searchTerm) || LowercaseContains.contains(movie.getOverview(), searchTerm)) {
+            if (movie.getTitle().contains(searchTerm) || movie.getOriginalTitle().contains(searchTerm) || movie.getOverview().contains(searchTerm)) {
                 matchingMovies[counter++] = movie.getID();
             }
         }
