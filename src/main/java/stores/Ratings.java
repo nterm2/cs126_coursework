@@ -239,7 +239,7 @@ public class Ratings implements IRatings {
 
         int[] sortedMovieIDs = new int[Math.min(num, keys.length)];
         for (int i = 0; i < Math.min(num, keys.length); i++) {
-            sortedMovieIDs[i] = (Integer) mypairs[keys.length - 1 - i].getID();
+            sortedMovieIDs[i] = (Integer) mypairs[i].getID();
         }
         
         
@@ -268,7 +268,7 @@ public class Ratings implements IRatings {
 
         int[] sortedMovieIDs = new int[Math.min(num, keys.length)];
         for (int i = 0; i < Math.min(num, keys.length); i++) {
-            sortedMovieIDs[i] = (Integer) mypairs[keys.length - 1 - i].getID();
+            sortedMovieIDs[i] = (Integer) mypairs[i].getID();
         }
         
         
@@ -338,7 +338,7 @@ public class Ratings implements IRatings {
         
         int[] topMovies = new int[Math.min(numResults, movieIDs.length)];
         for (int i = 0; i < topMovies.length; i++) {
-            topMovies[i] = (Integer) pairs[pairs.length - 1 - i].getID(); // Highest average first
+            topMovies[i] = (Integer) pairs[i].getID(); // Highest average first
         }
         
         return topMovies;

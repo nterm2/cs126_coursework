@@ -11,7 +11,7 @@ public class WPPair<K, V extends Number> implements Comparable<WPPair<K,V>>{
 
     @Override
     public int compareTo(WPPair<K, V> other) {
-        return Double.compare(this.value.doubleValue(), other.value.doubleValue());
+        return Double.compare(other.value.doubleValue(), this.value.doubleValue());
     }
 
     public V getValue() {
