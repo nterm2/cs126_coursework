@@ -5,7 +5,7 @@ public class WPArrayList<E> {
     private Object[] internalArray;
     private int size;
     private int capacity;
-    private static final int DEFAULT_CAPACITY = 100;
+    private static final int DEFAULT_CAPACITY = 1000;
 
     public WPArrayList() {
         this.size = 0;

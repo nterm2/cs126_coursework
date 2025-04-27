@@ -398,9 +398,9 @@ class QuickSort {
         int medianIndex;
 
         // Determine median of a (low), b (mid), c (high)
-        if ((a.compareTo(b) <= 0 && b.compareTo(c) <= 0) || (c.compareTo(b) <= 0 && b.compareTo(a) <= 0)) {
+        if (a.compareTo(b) <= 0 && b.compareTo(c) <= 0) {
             medianIndex = mid;
-        } else if ((b.compareTo(a) <= 0 && a.compareTo(c) <= 0) || (c.compareTo(a) <= 0 && a.compareTo(b) <= 0)) {
+        } else if (b.compareTo(a) <= 0 && a.compareTo(c) <= 0) {
             medianIndex = low;
         } else {
             medianIndex = high;

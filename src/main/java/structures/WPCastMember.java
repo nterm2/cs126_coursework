@@ -2,7 +2,6 @@ package structures;
 
 import stores.Person;
 
-// can refactor to remove appearances 
 public class WPCastMember extends WPCrewMember {
     private int appearances;
     private WPArrayList<Integer> starredFilms;
