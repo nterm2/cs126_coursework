@@ -394,6 +394,7 @@ public class Credits implements ICredits{
      * people with the most appearances, which is based on the person attribute from 
      * the castmember object. Return the array
      * 
+     * O(nlogn)
      * @param numResults The maximum number of elements that should be returned
      * @return An array of Person objects corresponding to the cast members
      *         with the most credits, ordered by the highest number of credits.
@@ -424,16 +425,18 @@ public class Credits implements ICredits{
      * played. For example, if a cast member performed as 2 roles in the same film,
      * then this would count as 2 credits.
      * 
+     * Get the number of cast credits for the given cast id. In the case that it doesn't exist, 
+     * return -1. Otherwise, return the number of appearances for the given cast member.
+     * 
+     * O(1)
      * @param castID A cast ID representing the cast member to be found
      * @return The number of credits the given cast member has. If the cast member
      *         cannot be found, return -1
      */
     @Override
     public int getNumCastCredits(int castID) {
-        if (castData.containsKey(castID)) {
-            return castData.get(castID).getAppearances();
-        }
-        return -1;
+        WPCastMember castMember = castData.get(castID);
+        return castMember == null ? -1 : castMember.getAppearances();
     }
 
     /**
