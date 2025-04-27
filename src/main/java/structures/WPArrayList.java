@@ -1,128 +1,129 @@
 package structures;
 
-// My implementation of an arraylist
-public class WPArrayList<E> {
-    private Object[] internalArray;
-    private int size;
-    private int capacity;
-    private static final int DEFAULT_CAPACITY = 1000;
+/**
+ * get an eleement of the array
+ * get the index of an array 
+ * remove an element of an array 
+ * set an eleemnt of an array 
+ * We will need to store internal representation of the array (Array of objects)
+ * The current size of the array list
+ * and the capacity of the arraylist
+ * 
+ * Improvements: when internalarray reaches full capacity, doubles in size in size
+ * can lead to memory issues. check if arrau is growing infitely
+ */
+public class WPArrayList<E>{
+    Object[] internalArray;
+    int size;
+    int capacity;
 
     public WPArrayList() {
         this.size = 0;
-        this.capacity = DEFAULT_CAPACITY;
+        this.capacity = 100;
         this.internalArray = new Object[this.capacity];
     }
 
-    // Before adding, check that the capacity of the internal array is large enough to account for the element that we are 
-    // going to add using ensureCapacity. Then increase insert the element to be added into the internal array. Has an 
-    // amortized time complexity of O(1) (expensive only when resizing)
+    public Object[] getInternalArray() {
+        return this.internalArray;
+    }
+    /**
+     * First check that we have enough space in our internalArray to add an element. IN the case that we don't 
+     * , create a new internalArray that is double the size of the old array. then copy all the elements in the 
+     * filled up initialArray to new initial array, at which we set initialarray to new initialarray. In the case we 
+     * do/don't, at the end add the element we wish to add to internalArray, and incremeent the size by 1`
+     * 
+     * CONSIDERATION - WHAT HAPPENS IF CAPACITY IS TOO LARGE AND FAILS? 
+     */
     public boolean add(E element) {
-        ensureCapacity();
-        this.internalArray[this.size++] = element;
-        return true;
-    }
-
-    // In the case that the supposed size of the array is greater than the capacity, 
-    // if the capacity of array is less than 1000, then we double the capacity of the array, 
-    // otherwise we increase the capacity of the internal array by the current capacity / 2.
-    // This helps regulate memory usage, as past the 1000 element threshold, we don't increase array capacity as 
-    // aggressively, leading to less memory being used. 
-    private void ensureCapacity() {
-        if (this.size >= this.capacity) {
-            if (this.capacity < 1000) {
+        try {
+            if (this.size >= this.capacity) {
                 this.capacity *= 2;
-            } else {
-                this.capacity += this.capacity / 2;
+                Object[] newInternalArray = new Object[this.capacity];
+                for (int i=0; i < this.size; i++) {
+                    newInternalArray[i] = this.internalArray[i];
+                }
+                this.internalArray = newInternalArray;
             }
-            Object[] newInternalArray = new Object[this.capacity];
-            System.arraycopy(this.internalArray, 0, newInternalArray, 0, this.size);
-            this.internalArray = newInternalArray;
+            this.internalArray[this.size] = element;
+            this.size++;
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
-    }
 
-    // First check that an elment at the provided index exists - if not, throw an error. Otherwise, return the 
-    // element at the provided index. Has time complexity of O(1)
+    }
+    
+    /**
+     * return accessing the index specified by the array. in the case that the index
+     * is out of bounds, the internal array will return an error. As internalarray 
+     * is an array of objects, an individual element is an object, thus we cast the object
+     * to E in order to be returned in the correct format, as opposed to being returned as 
+     * an object. Not a checked cast, but suprpres warnings to not have warnings.
+     */
     @SuppressWarnings("unchecked")
-    public E get(int index) {
-        checkIndex(index);
-        return (E) this.internalArray[index];
+    public E get(int i) {
+        return (E) this.internalArray[i];
     }
 
-    // Get the index of a particular element. Need to iterate through each element in the 
-    // arraylist. In the case that the element isn't present in the 
-    // arraylist, return -1. Otherwise return the position at which the element exists in the 
-    // arraylist. 0(n) time complexity. 
+    /**
+     * iterate through each eleemnt in the internal arrray. in case we find the 
+     * elemnt we want. return the index. otherwise, throw an exception.
+     */
     public int indexOf(E element) {
-        for (int i = 0; i < this.size; i++) {
-            if (element == null) {
-                if (this.internalArray[i] == null) return i;
-            } else {
-                if (element.equals(this.internalArray[i])) return i;
+        for (int i=0; i < this.size; i++) {
+            if (element.equals(this.get(i))) {
+                return i;
             }
         }
         return -1;
     }
 
-    // Set an element in a given index within the arraylist. first check that the index is valid. 
-    // In the case that it is, retrieve the current element and temporarily store it, then set the index to 
-    // store the new element, and return the previously stored elemennt. Has a time complexity of O(1).
-    public E set(int index, E element) {
-        checkIndex(index);
-        @SuppressWarnings("unchecked")
-        E replaced = (E) this.internalArray[index];
-        this.internalArray[index] = element;
+    /**
+      attempts to replace an existing element within the arraylist with another element
+      as such, check that the index provided is less than the size (or number of elements
+      currently stored in the arraylit) - otherwise, an error is raised. Otherwise, 
+      we get the element currently stored in the index we are trying to set a new value of,
+      and then set that index to the element. return the replaced element back.
+     */
+    public E set(int i, E element) {
+        if (i >= this.size) {
+            throw new ArrayIndexOutOfBoundsException("Invalid index");
+        }
+        E replaced = this.get(i); 
+        this.internalArray[i] = element;
         return replaced;
     }
 
-    // Remove an element from an ArrayList. Retrieve the index of the element we wish to remove O(n). In the case that 
-    // the element exists in the arraylist, remove the given element, and if possible, decrease the size of the arraylist.
+    /**
+     * Need to implement indexOf, get, set 
+     * Removes the first occurance of an element within the arraylist, if it exists. First attempts to get the index 
+     * of thefirst occurance elemnt. In the case that it doesn't exist, we shouldn't be able to remove the element and an error is raised 
+     * should be raised. Otherwise, we need to iterate from the index of the element we want to remove + 1 to the end of the
+     * list, and set the elemnt to i - 1 (taking up empty space from the removed element.)
+     * as such, the last lemnt willl not be null - set it to null, and decrase the size
+     */
     public boolean remove(E element) {
-        int toRemoveIndex = indexOf(element);
+        int toRemoveIndex = this.indexOf(element);
         if (toRemoveIndex >= 0) {
-            int numMoved = this.size - toRemoveIndex - 1;
-            if (numMoved > 0) {
-                System.arraycopy(this.internalArray, toRemoveIndex + 1, this.internalArray, toRemoveIndex, numMoved);
+            for (int i=toRemoveIndex+1; i<this.size; i++) {
+                this.set(i-1, this.get(i));
             }
-            this.internalArray[--size] = null;
-            if (size < capacity / 4 && capacity > DEFAULT_CAPACITY * 2) {
-                shrink();
-            }
+            this.internalArray[size-1] = null;
+            this.size--;
             return true;
         }
         return false;
     }
 
-    // Method used to decrease the size of the arraylist. Set the new capacity to be the biggest between the original capacity of 
-    // the internal array used by the arraylist and half of the current capacity of the arraylist. Uses System.arraycopy to move existing contents 
-    // of internal array to smaller internal array. This ensures that we are not using an unessecary amount of memory. 
-    private void shrink() {
-        int newCapacity = Math.max(DEFAULT_CAPACITY, this.capacity / 2);
-        Object[] newInternalArray = new Object[newCapacity];
-        System.arraycopy(this.internalArray, 0, newInternalArray, 0, this.size);
-        this.internalArray = newInternalArray;
-        this.capacity = newCapacity;
-    }
-
-    // If the index is invalid (greater than the size or less than 0), we throw an ArrayIndxOutOfBounds exception.
-    private void checkIndex(int index) {
-        if (index >= size || index < 0) {
-            throw new ArrayIndexOutOfBoundsException("Invalid index: " + index);
-        }
-    }
-
-    // Check if the arraylist contains the given element. This method relies on the indexOf method (which returns -1 if the the index of the element
-    // doesn't exist), thus has a time complexity of O(n).
     public boolean contains(E element) {
-        return indexOf(element) != -1;
+        for (int i = 0; i < size; i++) {
+            if (element.equals(this.internalArray[i])) {return true;}
+        }
+        return false;
     }
 
-    // Returns the size of the arraylist. 0(1) operation.
     public int size() {
         return this.size;
-    }
-
-    // Returns the capacity of the arraylist. 0(1) operation.
-    public int capacity() {
-        return this.capacity;
     }
 }

@@ -1,7 +1,7 @@
 package structures;
 
 public class WPHashMap<K, V> {
-    private static final int INITIAL_CAPACITY = 1000;
+    private static final int INITIAL_CAPACITY = 1024;
     private static final int INCREASE_FACTOR = 2;
     private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
@@ -32,11 +32,10 @@ public class WPHashMap<K, V> {
         }
     }
 
-    // Uses hashing to determine bucket index.
     private int getBucketIndex(K key) {
-        return Math.abs(key.hashCode() % capacity);
+        return key.hashCode() & (capacity - 1);
     }
-
+    
     public void put(K key, V value) {
         // Disallow storing null keys.
         if (key == null || value == null) {
