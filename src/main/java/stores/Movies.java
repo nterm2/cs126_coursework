@@ -48,32 +48,38 @@ public class Movies implements IMovies{
     @Override
     public boolean add(int id, String title, String originalTitle, String overview, String tagline, String status, Genre[] genres, LocalDate release, long budget, long revenue, String[] languages, String originalLanguage, double runtime, String homepage, boolean adult, boolean video, String poster) {
         if (movies.get(id) == null) {
+            // In the case that the movie hasn't already been stored, create a new Movie instance and then store it in the movies hashmap. As a movie has been successfully added, return true.
             WPMovie newMovie = new WPMovie(id, title, originalTitle, overview, tagline, status, genres, release, budget, revenue, languages, originalLanguage, runtime, homepage, adult, video, poster);
             movies.put(id, newMovie);
             return true;
         }
+        // In the case that the movie id is already present in the Movies store, cannot add duplicate / overwrite movies, so return false.
         return false;
     }
 
     /**
      * Removes a film from the data structure, and any data
      * added through this class related to the film
-     * 
+     * O(n)
      * @param id The film ID
      * @return TRUE if the film has been removed successfully, FALSE otherwise
      */
     @Override
     public boolean remove(int id) {
+        // Remove the given movie. As remove returns a boolean as to whether it was able to successful remove a movie, return the resulting boolean.
         return movies.remove(id);
     }
 
     /**
      * Gets all the IDs for all films
-     * 
-     * @return An array of all film IDs stored
+     * O(n)
      */
     @Override
     public int[] getAllIDs() {
+        // As keys in movies represents ids, use getKeys() to retrieve all the keys in the movies hashmap. 
+        // Since the hashmap utilises generics, can't have int[] keys, only Integer[]. Thus, we need to 
+        // create a new int[] array and copy the integers from movies.getKeys() to the int[] array, which
+        // we return
         Integer[] keys = movies.getKeys();
         int[] castedKeys = new int[movies.size()];
         for (int i=0; i < movies.size(); i++) {
@@ -85,7 +91,18 @@ public class Movies implements IMovies{
     /**
      * Finds the film IDs of all films released within a given range. If a film is
      * released either on the start or end dates, then that film should not be
-     * included
+     * included.
+     * 
+     * As keys in movies represents ids, use getKeys() to retrieve all the ids in the movies hashmap.
+     * Initialise an int[] array to initially be the size of the number of movies we have (it is possible 
+     * that all movies are released in the specified range). Then iterate through each movie. In the case
+     * that the movie is released after the start and is before the end, then add the id of the movie 
+     * to idsReleasedInRange, subsequently incrementing releasedInRangeCounter to the next index.
+     * Then create a shrinked version of trimmedIDsReleasedInRange based on how many ids were 
+     * within the given range. Use System.arraycopy to copy the contents of the old array to the new
+     * array, and return the trimmedIDsReleasedInRange
+     * 
+     * O(n)
      * 
      * @param start The start point of the range of dates
      * @param end   The end point of the range of dates
@@ -93,18 +110,17 @@ public class Movies implements IMovies{
      */
     @Override
     public int[] getAllIDsReleasedInRange(LocalDate start, LocalDate end) {
+
         Integer[] keys = movies.getKeys();
         int[] idsReleasedInRange = new int[movies.size()];
         int releasedInRangeCounter = 0;
 
         for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(keys[i]).getRelease() != null) {
-                WPMovie givenMovie = movies.get(keys[i]);
-                LocalDate release = givenMovie.getRelease();
+            WPMovie givenMovie = movies.get(keys[i]);
+            LocalDate release = givenMovie.getRelease();
 
-                if (release.isAfter(start) && release.isBefore(end)) {
-                    idsReleasedInRange[releasedInRangeCounter++] = givenMovie.getID();
-                }
+            if (release.isAfter(start) && release.isBefore(end)) {
+                idsReleasedInRange[releasedInRangeCounter++] = givenMovie.getID();
             }
         }
 
@@ -116,6 +132,10 @@ public class Movies implements IMovies{
     /**
      * Gets the title of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's title.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The title of the requested film. If the film cannot be found, then
      *         return null
@@ -123,16 +143,18 @@ public class Movies implements IMovies{
     @Override
     public String getTitle(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getTitle();
+        return movie == null ? null : movie.getTitle();
     }
 
     /**
      * Gets the original title of a particular film, given the ID number of that
      * film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's original 
+     * title.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The original title of the requested film. If the film cannot be
      *         found, then return null
@@ -140,15 +162,16 @@ public class Movies implements IMovies{
     @Override
     public String getOriginalTitle(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getOriginalTitle();
+        return movie == null ? null : movie.getOriginalTitle();
     }
 
     /**
      * Gets the overview of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's overview.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The overview of the requested film. If the film cannot be found, then
      *         return null
@@ -156,15 +179,16 @@ public class Movies implements IMovies{
     @Override
     public String getOverview(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getOverview();
+        return movie == null ? null : movie.getOverview();
     }
 
     /**
      * Gets the tagline of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's tagline.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The tagline of the requested film. If the film cannot be found, then
      *         return null
@@ -172,15 +196,16 @@ public class Movies implements IMovies{
     @Override
     public String getTagline(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getTagline();
+        return movie == null ? null : movie.getTagline();
     }
 
     /**
      * Gets the status of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's status.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The status of the requested film. If the film cannot be found, then
      *         return null
@@ -188,15 +213,16 @@ public class Movies implements IMovies{
     @Override
     public String getStatus(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getStatus();
+        return movie == null ? null : movie.getStatus();
     }
 
     /**
      * Gets the genres of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's genres.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The genres of the requested film. If the film cannot be found, then
      *         return null
@@ -204,15 +230,16 @@ public class Movies implements IMovies{
     @Override
     public Genre[] getGenres(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getGenres();
+        return movie == null ? null : movie.getGenres();
     }
 
     /**
      * Gets the release date of a particular film, given the ID number of that film
+     *
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's release.
      * 
+     * O(1)
      * @param id The movie ID
      * @return The release date of the requested film. If the film cannot be found,
      *         then return null
@@ -220,15 +247,16 @@ public class Movies implements IMovies{
     @Override
     public LocalDate getRelease(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getRelease();
+        return movie == null ? null : movie.getRelease();
     }
 
     /**
      * Gets the budget of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return -1. Otherwise return the movie's budget.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The budget of the requested film. If the film cannot be found, then
      *         return -1
@@ -236,15 +264,16 @@ public class Movies implements IMovies{
     @Override
     public long getBudget(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return -1; 
-        } 
-        return movie.getBudget();
+        return movie == null ? -1 : movie.getBudget();
     }
 
     /**
      * Gets the revenue of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return -1. Otherwise return the movie's revenue.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The revenue of the requested film. If the film cannot be found, then
      *         return -1
@@ -252,15 +281,16 @@ public class Movies implements IMovies{
     @Override
     public long getRevenue(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return -1; 
-        } 
-        return movie.getRevenue();
+        return movie == null ? -1 : movie.getRevenue();
     }
 
     /**
      * Gets the languages of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's languages.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The languages of the requested film. If the film cannot be found,
      *         then return null
@@ -268,16 +298,18 @@ public class Movies implements IMovies{
     @Override
     public String[] getLanguages(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getLanguages();
+        return movie == null ? null : movie.getLanguages();
     }
 
     /**
      * Gets the original language of a particular film, given the ID number of that
      * film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's original 
+     * language.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The original language of the requested film. If the film cannot be
      *         found, then return null
@@ -285,15 +317,16 @@ public class Movies implements IMovies{
     @Override
     public String getOriginalLanguage(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getOriginalLanguage();
+        return movie == null ? null : movie.getOriginalLanguage();
     }
 
     /**
      * Gets the runtime of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return -1.0d. Otherwise return the movie's runtime.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The runtime of the requested film. If the film cannot be found, then
      *         return -1.0d
@@ -301,15 +334,16 @@ public class Movies implements IMovies{
     @Override
     public double getRuntime(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return -1.0d; 
-        } 
-        return movie.getRuntime();
+        return movie == null ? -1.0d : movie.getRuntime();
     }
 
     /**
      * Gets the homepage of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's homepage.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The homepage of the requested film. If the film cannot be found, then
      *         return null
@@ -317,16 +351,18 @@ public class Movies implements IMovies{
     @Override
     public String getHomepage(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getHomepage();
+        return movie == null ? null : movie.getHomepage();
     }
 
     /**
      * Gets weather a particular film is classed as "adult", given the ID number of
      * that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return false. Otherwise return boolean indicating 
+     * whether movie is an adult movie.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The "adult" status of the requested film. If the film cannot be
      *         found, then return false
@@ -334,16 +370,18 @@ public class Movies implements IMovies{
     @Override
     public boolean getAdult(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return false; 
-        } 
-        return movie.getAdult();
+        return movie == null ? false : movie.getAdult();
     }
 
     /**
      * Gets weather a particular film is classed as "direct-to-video", given the ID
      * number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return false. Otherwise return boolean representing whether
+     * film is classed as direct-to-video.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The "direct-to-video" status of the requested film. If the film
      *         cannot be found, then return false
@@ -351,15 +389,16 @@ public class Movies implements IMovies{
     @Override
     public boolean getVideo(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return false; 
-        } 
-        return movie.getVideo();
+        return movie == null ? false : movie.getVideo();
     }
 
     /**
      * Gets the poster URL of a particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return null. Otherwise return the movie's poster.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The poster URL of the requested film. If the film cannot be found,
      *         then return null
@@ -367,16 +406,18 @@ public class Movies implements IMovies{
     @Override
     public String getPoster(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return null; 
-        } 
-        return movie.getPoster();
+        return movie == null ? null : movie.getPoster();
     }
 
     /**
      * Sets the average IMDb score and the number of reviews used to generate this
      * score, for a particular film
      * 
+     * Get the movie based on the id passed in. In the case that it is doesn't exist, 
+     * return false. Otherwise, set the vote average to the vote average passed in by the user,
+     * and set the vote count to be the vote count passed in by the user. Return true.
+     * 
+     * O(1)
      * @param id          The movie ID
      * @param voteAverage The average score on IMDb for the film
      * @param voteCount   The number of reviews on IMDb that were used to generate
@@ -398,6 +439,10 @@ public class Movies implements IMovies{
      * Gets the average score for IMDb reviews of a particular film, given the ID
      * number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return -1.0d. Otherwise return the movie's vote average.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The average score for IMDb reviews of the requested film. If the film
      *         cannot be found, then return -1.0d
@@ -405,16 +450,17 @@ public class Movies implements IMovies{
     @Override
     public double getVoteAverage(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return -1.0d; 
-        } 
-        return movie.getVoteAverage();
+        return movie == null ? -1.0d : movie.getVoteAverage();
     }
 
     /**
      * Gets the amount of IMDb reviews used to generate the average score of a
      * particular film, given the ID number of that film
      * 
+     * Get the movie at the given id from movies hashmap. In the case that it doesn't
+     * exist (returns null), then return -1. Otherwise return the movie's votecount.
+     * 
+     * O(1)
      * @param id The movie ID
      * @return The amount of IMDb reviews used to generate the average score of the
      *         requested film. If the film cannot be found, then return -1
@@ -422,10 +468,7 @@ public class Movies implements IMovies{
     @Override
     public int getVoteCount(int id) {
         WPMovie movie = movies.get(id);
-        if (movie == null) {
-            return -1; 
-        } 
-        return movie.getVoteCount();
+        return movie == null ? -1 : movie.getVoteCount();
     }
 
     /**
