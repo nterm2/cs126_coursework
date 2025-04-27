@@ -27,12 +27,22 @@ public class Credits implements ICredits{
      * Adds data about the people who worked on a given film. The movie ID should be
      * unique
      * 
-     * In the case that a credit sharing the same credit id we want to add already exists 
+     * In the case that a movie sharing the same movie id we want to add already exists 
      * in credits, return false. Otherwise, create a new credit, using WPCredit. As in later parts of Credits 
      * it is required that both cast and crew need to be sorted (which is achieved using an in-place sorting algorithm),
      * we pass into the constructor a clone of cast and crew, such that the original order of cast and crew is not changed, but
      * rather preserved (passing by value).
      * 
+     * We then iterate through each cast member from the list of castcredits that we wish to add. In the case that the cast credit's member
+     * has already been stored in castData, we get the cast member. Otherwise, we create a new person based on the id, name and profile 
+     * path of the cast credit, and use WPCastMember to create a new cast member based on that person (storing it as castMember). As a cast
+     * member who has an order greater than or equal to 3 is a in a starred film, if this is the case, then we add to the cast member's starred films 
+     * the id for the given movie. We then add the film to the films for the cast member, and store the cast member into castData.
+     * 
+     * We subsequently iterate through each crew member from the list of crew credits that we wish to add. In the case that the crew credit's 
+     * member has already been stored in crewData, we get the crew member. Otherwise, we create a new person based on the id, name and profile path
+     * of the crew credit, and use WPCrewMember to create a new crew member based on that Person object (storing it as crewMember). We then add the film
+     * to the films for the crew member, and store the crew member into crewData. 
      * 
      * @param cast An array of all cast members that starred in the given film
      * @param crew An array of all crew members that worked on a given film
@@ -50,7 +60,7 @@ public class Credits implements ICredits{
 
         for (CastCredit singleCast : cast) {
             int currentCastID = singleCast.getID();
-            WPCastMember castMember = null;
+            WPCastMember castMember;
             
             if (castData.containsKey(currentCastID)) {
                 castMember = castData.get(currentCastID);
@@ -62,29 +72,22 @@ public class Credits implements ICredits{
             if (singleCast.getOrder() <= 3) {
                 castMember.addStarredFilm(id);
             }
-            // Add the film ID (avoid duplicate addition inside addStarredFilm)
+            
             castMember.addFilm(id);
             castData.put(currentCastID, castMember);
         }
 
-
-        // Store each individual in the array of CrewCredit, with the value 
-        // being the person, and the key being the id.
-        // For cast credits:
         for (CrewCredit singleCrew : crew) {
             int currentCrewID = singleCrew.getID();
             WPCrewMember crewMember;
             
             if (crewData.containsKey(currentCrewID)) {
-                // Retrieve and update the existing instance
                 crewMember = crewData.get(currentCrewID);
             } else {
-                // Create a new cast member and add the film
                 Person crewPerson = new Person(singleCrew.getID(), singleCrew.getName(), singleCrew.getProfilePath());
                 crewMember = new WPCrewMember(crewPerson);
             }
             
-            // Add the film ID (avoid duplicate addition inside addStarredFilm)
             crewMember.addFilm(id);
             crewData.put(currentCrewID, crewMember);
         }
