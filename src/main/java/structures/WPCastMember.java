@@ -30,6 +30,10 @@ public class WPCastMember extends WPCrewMember implements Comparable<WPCastMembe
         }
     }
 
+    public boolean containsStarredFilm(int filmID) {
+        return this.starredFilms.contains(filmID);
+    }
+    
     public int[] getStarredFilms() {
         int[] castedStarredFilms = new int[starredFilms.size()];
         for (int i=0; i < starredFilms.size(); i++) {

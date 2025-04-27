@@ -110,32 +110,29 @@ public class Credits implements ICredits{
             return false;
         }
     
-        // Remove from credits map
         credits.remove(id);
-    
-        // Remove from castData
-        for (CastCredit castCredit : credit.getCast()) {
-            int castID = castCredit.getID();
-            WPCastMember castMember = castData.get(castID);
+        
+        Integer[] castKeys = castData.getKeys();
+        for (int i=0; i < castData.size(); i++) {
+            WPCastMember castMember = castData.get(castKeys[i]);
             if (castMember != null) {
                 castMember.removeFilm(id);
-                if (castCredit.getOrder() <= 3) {
+                if (castMember.containsStarredFilm(id)) {
                     castMember.removeStarredFilm(id);
                 }
                 if (castMember.emptyFilms()) {
-                    castData.remove(castID);
+                    castData.remove(id);
                 }
             }
         }
-    
-        // Remove from crewData
-        for (CrewCredit crewCredit : credit.getCrew()) {
-            int crewID = crewCredit.getID();
-            WPCrewMember crewMember = crewData.get(crewID);
+        
+        Integer[] crewKeys = crewData.getKeys();
+        for (int i=0; i < crewData.size(); i++) {
+            WPCrewMember crewMember = crewData.get(crewKeys[i]);
             if (crewMember != null) {
                 crewMember.removeFilm(id);
                 if (crewMember.emptyFilms()) {
-                    crewData.remove(crewID);
+                    crewData.remove(id);
                 }
             }
         }
