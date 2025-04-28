@@ -44,7 +44,7 @@ public class Credits implements ICredits{
      * of the crew credit, and use WPCrewMember to create a new crew member based on that Person object (storing it as crewMember). We then add the film
      * to the films for the crew member, and store the crew member into crewData. 
      * 
-     * O(n)
+     * O(nlogn)
      * @param cast An array of all cast members that starred in the given film
      * @param crew An array of all crew members that worked on a given film
      * @param id   The (unique) movie ID
