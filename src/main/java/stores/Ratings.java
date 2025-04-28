@@ -26,30 +26,44 @@ public class Ratings implements IRatings {
     }
 
     /**
-     * Adds a rating to the data structure. The rating is made unique by its user ID
-     * and its movie ID
+     * Adds a rating to the data structure. The rating must be unique based on the user ID and movie ID combination.
      * 
-     * @param userID    The user ID
-     * @param movieID   The movie ID
-     * @param rating    The rating gave to the film by this user (between 0 and 5
-     *                  inclusive)
-     * @param timestamp The time at which the rating was made
-     * @return TRUE if the data able to be added, FALSE otherwise
+     * If a rating by the same user for the same movie already exists, return false. 
+     * Otherwise, create a new WPRating object using the given rating, timestamp, movie ID, and user ID.
+     * If this is the first rating for the movie (i.e., the movie ID does not yet exist in movieRatings), 
+     * we create a new inner WPHashMap for that movie ID to store user-specific ratings.
+     * 
+     * We then insert the new rating into the movieRatings data structure, under movieID → userID → WPRating.
+     * 
+     * Next, we update the movieRatingsSums structure by adding the new rating to the existing total sum 
+     * of ratings for that movie. If no prior sum exists, we initialize it to the given rating.
+     * Similarly, if this is the first rating from the user (i.e., the user ID does not yet exist in userRatings), 
+     * we create a new WPHashMap for that user ID to store movie-specific ratings.
+     * 
+     * We then insert the new rating into the userRatings structure under userID → movieID → WPRating.
+     * Finally, we increment numRatings to reflect that a new unique rating has been added.
+     * 
+     * This operation is O(1) on average due to hash map access times.
+     * 
+     * @param userid    The ID of the user giving the rating
+     * @param movieid   The ID of the movie being rated
+     * @param rating    The rating value (0 to 5 inclusive)
+     * @param timestamp The time when the rating was made
+     * @return TRUE if the rating was successfully added, FALSE otherwise
      */
     @Override
     public boolean add(int userid, int movieid, float rating, LocalDateTime timestamp) {
         if (movieRatings.containsKey(movieid) && movieRatings.get(movieid).containsKey(userid)) {
             return false;
         }
-    
+
         WPRating newRating = new WPRating(rating, timestamp, movieid, userid);
-    
+
         if (!movieRatings.containsKey(movieid)) {
             movieRatings.put(movieid, new WPHashMap<Integer, WPRating>());
         }
         movieRatings.get(movieid).put(userid, newRating);
 
-        // Update the movieRatingsSums
         float previousSum = movieRatingsSums.containsKey(movieid) ? movieRatingsSums.get(movieid) : 0;
         movieRatingsSums.put(movieid, previousSum + rating);
 
@@ -57,66 +71,85 @@ public class Ratings implements IRatings {
             userRatings.put(userid, new WPHashMap<Integer, WPRating>());
         }
         userRatings.get(userid).put(movieid, newRating);
-    
-        numRatings += 1; // Correct: increment every time a unique rating is added
-    
+
+        numRatings += 1;
+
         return true;
     }
+
     /**
-     * Removes a given rating, using the user ID and the movie ID as the unique
-     * identifier
+     * Removes a given rating based on the user ID and movie ID combination.
      * 
-     * @param userID  The user ID
-     * @param movieID The movie ID
-     * @return TRUE if the data was removed successfully, FALSE otherwise
+     * If no rating exists for the given user and movie combination, return false.
+     * Otherwise, retrieve the WPRating object associated with the user and movie.
+     * Subtract the rating value from the total rating sum for the given movie in movieRatingsSums.
+     * 
+     * Remove the WPRating from the movieRatings structure:
+     * - If this removal leaves no more ratings for that movie, remove the movie entry altogether to avoid dangling keys.
+     * 
+     * Remove the WPRating from the userRatings structure:
+     * - If this removal leaves no more ratings from that user, remove the user entry altogether.
+     * 
+     * Finally, decrement numRatings to reflect that one rating has been successfully removed.
+     * 
+     * This operation is O(1) on average due to hash map access times.
+     *
+     * @param userid  The ID of the user whose rating is to be removed
+     * @param movieid The ID of the movie for which the rating is to be removed
+     * @return TRUE if the rating was successfully removed, FALSE otherwise
      */
     @Override
     public boolean remove(int userid, int movieid) {
         if (!movieRatings.containsKey(movieid) || !movieRatings.get(movieid).containsKey(userid)) {
             return false;
         }
-    
-        // Get the rating BEFORE removing it
+
         WPRating ratingToRemove = movieRatings.get(movieid).get(userid);
-    
-        // Subtract the rating from the movieRatingsSums
+
         float previousSum = movieRatingsSums.get(movieid);
         movieRatingsSums.put(movieid, previousSum - ratingToRemove.getRating());
-    
-        // Now safe to remove
+
         movieRatings.get(movieid).remove(userid);
         if (movieRatings.get(movieid).size() == 0) {
-            movieRatings.remove(movieid); // clean up empty movies
+            movieRatings.remove(movieid);
         }
-    
+
         userRatings.get(userid).remove(movieid);
         if (userRatings.get(userid).size() == 0) {
-            userRatings.remove(userid); // clean up empty users
+            userRatings.remove(userid);
         }
-    
+
         numRatings -= 1;
+
         return true;
     }
-    
-
+        
     /**
-     * Sets a rating for a given user ID and movie ID. Therefore, should the given
-     * user have already rated the given movie, the new data should overwrite the
-     * existing rating. However, if the given user has not already rated the given
-     * movie, then this rating should be added to the data structure
+     * Sets (adds or updates) a rating for a given user ID and movie ID.
      * 
-     * @param userID    The user ID
-     * @param movieID   The movie ID
-     * @param rating    The new rating to be given to the film by this user (between
-     *                  0 and 5 inclusive)
+     * If the user has already rated the movie, the existing rating is first removed by calling remove(userid, movieid).
+     * - This ensures that all associated structures (movieRatings, userRatings, movieRatingsSums, and numRatings) 
+     *   are correctly updated to reflect the removal of the old rating.
+     * 
+     * After removal (or if no prior rating existed), a new rating is added by calling add(userid, movieid, rating, timestamp).
+     * 
+     * Therefore, the set operation effectively overwrites any existing rating for the same (user, movie) pair,
+     * while correctly maintaining the internal consistency of the data structures.
+     * 
+     * This operation runs in O(1) time on average, because both remove and add are O(1) on average (due to hash map access).
+     *
+     * @param userid    The ID of the user setting the rating
+     * @param movieid   The ID of the movie being rated
+     * @param rating    The new rating value (between 0 and 5 inclusive)
      * @param timestamp The time at which the new rating was made
-     * @return TRUE if the data able to be added/updated, FALSE otherwise
+     * @return TRUE if the rating was successfully set (added or updated), FALSE otherwise
      */
     @Override
     public boolean set(int userid, int movieid, float rating, LocalDateTime timestamp) {
-        remove(userid, movieid); // Guaranteed to remove old if exists
+        remove(userid, movieid);
         return add(userid, movieid, rating, timestamp);
     }
+
 
     /**
      * Get all the ratings for a given film
@@ -210,12 +243,24 @@ public class Ratings implements IRatings {
     }
 
     /**
-     * Gets the top N movies with the most ratings, in order from most to least
+     * Retrieves the top N movies with the most ratings, ordered from most to least.
      * 
-     * @param num The number of movies that should be returned
-     * @return A sorted array of movie IDs with the most ratings. The array should be
-     *         no larger than num. If there are less than num movies in the store,
-     *         then the array should be the same length as the number of movies in Ratings
+     * First, for each movie ID in movieRatings, create a WPPair where:
+     * - The first element is the movie ID
+     * - The second element is the number of ratings the movie has
+     * 
+     * Then, sort these WPPairs in descending order of number of ratings using IntroSort.
+     * 
+     * After sorting, populate a new array of movie IDs with the top num results.
+     * If there are fewer movies than num, return as many as available.
+     * 
+     * This operation involves:
+     * - O(n) to construct the array of WPPairs (where n is the number of rated movies)
+     * - O(n log n) for sorting with IntroSort
+     * - O(k) for copying the top results (where k = min(num, n))
+     * 
+     * @param num The maximum number of top-rated movies to return
+     * @return A sorted array of movie IDs with the most ratings. Array size is at most num.
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -231,7 +276,7 @@ public class Ratings implements IRatings {
 
         int[] sortedMovieIDs = new int[Math.min(num, keys.length)];
         for (int i = 0; i < Math.min(num, keys.length); i++) {
-            sortedMovieIDs[i] = (Integer) mypairs[i].getID();
+            sortedMovieIDs[i] = mypairs[i].getID();
         }
         
         
@@ -239,12 +284,24 @@ public class Ratings implements IRatings {
     }
 
     /**
-     * Gets the top N users with the most ratings, in order from most to least
+     * Retrieves the top N users who have submitted the most ratings, ordered from most to least.
      * 
-     * @param num The number of users that should be returned
-     * @return A sorted array of user IDs with the most ratings. The array should be
-     *         no larger than num. If there are less than num users in the store,
-     *         then the array should be the same length as the number of users in Ratings
+     * First, for each user ID in userRatings, create a WPPair where:
+     * - The first element is the user ID
+     * - The second element is the number of ratings submitted by that user
+     * 
+     * Then, sort these WPPairs in descending order of number of ratings using IntroSort.
+     * 
+     * After sorting, populate a new array of user IDs with the top num results.
+     * If there are fewer users than num, return as many as available.
+     * 
+     * This operation involves:
+     * - O(n) to construct the array of WPPairs (where n is the number of users)
+     * - O(n log n) for sorting with IntroSort
+     * - O(k) for copying the top results (where k = min(num, n))
+     * 
+     * @param num The maximum number of top-rated users to return
+     * @return A sorted array of user IDs with the most ratings. Array size is at most num.
      */
     @Override
     public int[] getMostRatedUsers(int num) {
@@ -260,45 +317,44 @@ public class Ratings implements IRatings {
 
         int[] sortedMovieIDs = new int[Math.min(num, keys.length)];
         for (int i = 0; i < Math.min(num, keys.length); i++) {
-            sortedMovieIDs[i] = (Integer) mypairs[i].getID();
+            sortedMovieIDs[i] = mypairs[i].getID();
         }
         
         
         return sortedMovieIDs;
     }
 
-       /**
-     * Get the number of ratings that a movie has
+    /**
+     * Retrieves the number of ratings associated with a specific movie.
      * 
-     * @param movieid The movie id to be found
-     * @return The number of ratings the specified movie has. 
-     *         If the movie exists in the Movies store, but there are no ratings for it, then return 0. 
-     *         If the movie does not exist in the Ratings or Movies store, then return -1.
+     * First, check if the movie exists in the Movies store using the movie ID.
+     * Then, attempt to retrieve all ratings for that movie from the Ratings structure.
+     * 
+     * The method handles three cases:
+     * - If the movie does not exist in both the Movies and Ratings stores, return -1.
+     * - If the movie exists in the Movies store but has no ratings in the Ratings store, return 0.
+     * - If ratings exist for the movie, return the count of those ratings.
+     * 
+     * This method ensures that missing entries are properly distinguished from existing entries
+     * with no ratings, according to the specified behavior.
+     * 
+     * This operation is O(1) on average due to direct hash map lookups.
+     *
+     * @param movieid The ID of the movie whose number of ratings is to be retrieved
+     * @return The number of ratings for the movie, 0 if none, or -1 if the movie does not exist
      */
     @Override
     public int getNumRatings(int movieid) {
-        // Check if the movie exists in the Movies store
         String movieTitle = stores.getMovies().getTitle(movieid);
-        
-        // If movie does not exist in Movies store, check if it exists in Ratings store
         WPHashMap<Integer, WPRating> singleMovieRatings = movieRatings.get(movieid);
-        
-        // If the movie doesn't exist in the Movies store, and there are no ratings for it, return -1
+
         if (movieTitle == null && singleMovieRatings == null) {
-            return -1; // Movie doesn't exist in either store
+            return -1; 
+        } else if (movieTitle != null && (singleMovieRatings == null || singleMovieRatings.size() == 0)) {
+            return 0;
         }
-    
-        // If the movie exists in the Movies store but has no ratings in the Ratings store, return 0
-        if (movieTitle != null && (singleMovieRatings == null || singleMovieRatings.size() == 0)) {
-            return 0; // Movie exists in Movies store but has no ratings
-        }
-    
-        // If the movie exists in the Ratings store and has ratings, return the number of ratings
-        if (singleMovieRatings != null) {
-            return singleMovieRatings.size(); // Movie has ratings
-        }
-    
-        return 0; // Default case, should never hit this line.
+        return singleMovieRatings.size();
+
     }
     
     /**
