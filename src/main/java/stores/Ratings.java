@@ -198,48 +198,67 @@ public class Ratings implements IRatings {
     }
 
     /**
-     * Get the average rating for a given film
+     * Retrieves the average rating for a given movie based on user ratings.
      * 
-     * @param movieID The movie ID
-     * @return Produces the average rating for a given film. 
-     *         If the film cannot be found in Ratings, but does exist in the Movies store, return 0.0f. 
-     *         If the film cannot be found in Ratings or Movies stores, return -1.0f.
+     * First, checks whether the movie exists:
+     * - If the movie exists in the Movies store but has no ratings in the Ratings store, return 0.0f.
+     * - If the movie cannot be found in either the Movies store or the Ratings store, return -1.0f.
+     * 
+     * If the movie exists and has ratings:
+     * - Fetch the total sum of ratings for the movie from movieRatingsSums.
+     * - Divide the total sum by the number of ratings to compute the average rating.
+     * 
+     * This operation is O(1) on average due to hash map access times.
+     *
+     * @param movieid The ID of the movie
+     * @return The average rating of the movie, 0.0f if no ratings exist, or -1.0f if the movie doesn't exist
      */
     @Override
     public float getMovieAverageRating(int movieid) {
         String movieTitle = stores.getMovies().getTitle(movieid);
-        WPHashMap<Integer, WPRating> singleMovieRatings = movieRatings.get(movieid);
-        if (movieTitle != null && singleMovieRatings == null) {
-            return 0.0f;
-        } 
-        if (movieTitle == null && singleMovieRatings == null) {
+        
+        if (movieTitle == null && movieRatings.get(movieid) == null) {
             return -1.0f;
         }
         
+        WPHashMap<Integer, WPRating> singleMovieRatings = movieRatings.get(movieid);
+        if (singleMovieRatings == null || singleMovieRatings.size() == 0) {
+            return 0.0f;
+        }
+    
         return movieRatingsSums.get(movieid) / singleMovieRatings.size();
     }
+    
 
     /**
-     * Get the average rating for a given user
+     * Retrieves the average rating given by a specific user across all their rated movies.
      * 
-     * @param userID The user ID
-     * @return Produces the average rating for a given user. If the user cannot be
-     *         found in Ratings, or there are no rating, return -1.0f
+     * First, checks whether the user has any ratings:
+     * - If the user does not exist in the Ratings store, or has no ratings, return -1.0f.
+     * 
+     * If the user exists and has ratings:
+     * - Iterate through all of the user's ratings and compute the sum of their rating values.
+     * - Divide the total by the number of ratings to produce the average rating.
+     * 
+     * This operation is O(N) where N is the number of ratings by the user.
+     *
+     * @param userid The ID of the user
+     * @return The average rating the user has given, or -1.0f if no ratings exist
      */
     @Override
     public float getUserAverageRating(int userid) {
         WPHashMap<Integer, WPRating> singleUserRatings = userRatings.get(userid);
-        if (singleUserRatings == null) {
+        if (singleUserRatings == null || singleUserRatings.size() == 0) {
             return -1.0f;
-        } 
-        Integer[] keys = singleUserRatings.getKeys();
-        float average = 0;
-
-        for (int i = 0; i < singleUserRatings.size(); i++) {
-            average += singleUserRatings.get(keys[i]).getRating();
         }
-
-        return average / singleUserRatings.size();
+    
+        Integer[] movieIDs = singleUserRatings.getKeys();
+        float total = 0.0f;
+    
+        for (Integer movieID : movieIDs) {
+            total += singleUserRatings.get(movieID).getRating();
+        }
+        return total / singleUserRatings.size();
     }
 
     /**
@@ -303,10 +322,10 @@ public class Ratings implements IRatings {
      * @param num The maximum number of top-rated users to return
      * @return A sorted array of user IDs with the most ratings. Array size is at most num.
      */
+    @SuppressWarnings("unchecked")
     @Override
     public int[] getMostRatedUsers(int num) {
         Integer[] keys = userRatings.getKeys();
-        @SuppressWarnings("unchecked")
         WPPair<Integer, Integer>[] mypairs = new WPPair[keys.length];
         
         for (int i=0; i < keys.length; i++) {
@@ -358,18 +377,29 @@ public class Ratings implements IRatings {
     }
     
     /**
-     * Get the highest average rated film IDs, in order of there average rating
-     * (hightst first).
+     * Retrieves the top N movies based on their average ratings, ordered from highest to lowest.
      * 
-     * @param numResults The maximum number of results to be returned
-     * @return An array of the film IDs with the highest average ratings, highest
-     *         first. If there are less than num movies in the store,
-     *         then the array should be the same length as the number of movies in Ratings
+     * For each movie ID in the Ratings store:
+     * - Calculate the average rating by dividing the total sum of ratings by the number of ratings.
+     * - Create a WPPair containing the movie ID and its corresponding average rating.
+     * 
+     * After collecting all movie-average pairs:
+     * - Sort the pairs in descending order based on their average ratings using IntroSort.
+     * 
+     * Return an array of the movie IDs corresponding to the highest average ratings,
+     * up to a maximum of numResults. 
+     * If there are fewer movies than numResults, return an array containing all available movies.
+     * 
+     * This operation depends on sorting and therefore runs in O(N log N) time,
+     * where N is the number of movies with ratings.
+     *
+     * @param numResults The maximum number of top-rated movies to return
+     * @return An array of movie IDs with the highest average ratings, sorted in descending order
      */
+    @SuppressWarnings("unchecked")
     @Override
     public int[] getTopAverageRatedMovies(int numResults) {
         Integer[] movieIDs = movieRatings.getKeys();
-        @SuppressWarnings("unchecked")
         WPPair<Integer, Float>[] pairs = new WPPair[movieIDs.length];
         
         for (int i = 0; i < movieIDs.length; i++) {
