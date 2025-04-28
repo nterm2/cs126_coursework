@@ -98,10 +98,28 @@ public class Credits implements ICredits{
     }
 
     /**
-     * Remove a given films data from the data structure
-     * NOT GOOD ENOUGH - LEAVES EXCESS DATA FROM CAST AND CREW. NEED TO COME BACK AND FIX.
+     * Removes a given film's data from the data structure.
+     * 
+     * If the given movie ID does not exist in credits, return false. 
+     * Otherwise, proceed to remove the associated WPCredit object from credits.
+     * 
+     * Once the film is removed from credits, we must also update the cast and crew data.
+     * 
+     * We first retrieve all the cast members from castData. For each cast member:
+     * - Remove the given film ID from their list of films.
+     * - If the film was one of their starred films (order <= 3), remove it from the starred films list as well.
+     * - If, after removal, the cast member has no films left associated with them, 
+     *   remove the cast member from castData entirely to prevent dangling entries.
+     * 
+     * We then retrieve all crew members from crewData. For each crew member:
+     * - Remove the given film ID from their list of films.
+     * - If the crew member has no films left after removal, remove them from crewData as well.
+     * 
+     * Since we must iterate through all cast and crew entries and modify multiple structures, 
+     * this operation runs in O(n²) time in the worst case, where n is the number of cast/crew members.
+     *
      * @param id The movie ID
-     * @return TRUE if the data was removed, FALSE otherwise
+     * @return TRUE if the data was successfully removed, FALSE otherwise
      */
     @Override
     public boolean remove(int id) {
@@ -109,11 +127,11 @@ public class Credits implements ICredits{
         if (credit == null) {
             return false;
         }
-    
+
         credits.remove(id);
         
         Integer[] castKeys = castData.getKeys();
-        for (int i=0; i < castData.size(); i++) {
+        for (int i = 0; i < castData.size(); i++) {
             WPCastMember castMember = castData.get(castKeys[i]);
             if (castMember != null) {
                 castMember.removeFilm(id);
@@ -121,22 +139,22 @@ public class Credits implements ICredits{
                     castMember.removeStarredFilm(id);
                 }
                 if (castMember.emptyFilms()) {
-                    castData.remove(id);
+                    castData.remove(castKeys[i]);
                 }
             }
         }
         
         Integer[] crewKeys = crewData.getKeys();
-        for (int i=0; i < crewData.size(); i++) {
+        for (int i = 0; i < crewData.size(); i++) {
             WPCrewMember crewMember = crewData.get(crewKeys[i]);
             if (crewMember != null) {
                 crewMember.removeFilm(id);
                 if (crewMember.emptyFilms()) {
-                    crewData.remove(id);
+                    crewData.remove(crewKeys[i]);
                 }
             }
         }
-    
+
         return true;
     }
 
