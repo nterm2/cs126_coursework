@@ -9,7 +9,7 @@ public class WPHashMap<K, V> {
     private EntryNode<K,V>[] buckets;
     private int capacity;
 
-    // INitialise buckets to contain the default number of entries
+    // Initialise buckets to contain the default number of entries
     @SuppressWarnings("unchecked")
     public WPHashMap() {
         this.size = 0;
@@ -32,10 +32,31 @@ public class WPHashMap<K, V> {
         }
     }
 
+    /**
+     * Calculates the bucket index for a given key.
+     * 
+     * This method computes the bucket index by applying the hash code of the key and performing a bitwise AND with the 
+     * capacity minus one. This helps in determining the correct bucket in the hash table where the key-value pair should be stored.
+     * The method assumes that the capacity of the hash table is a power of two, ensuring efficient bucket placement.
+     * 
+     * @param key The key for which the bucket index is calculated.
+     * @return The index of the bucket where the key-value pair should be stored.
+     */
     private int getBucketIndex(K key) {
         return key.hashCode() & (capacity - 1);
     }
-    
+
+    /**
+     * Adds a key-value pair to the dictionary.
+     * 
+     * This method stores the given key and value in the dictionary. It first checks if the key or value is null, in which case it does nothing. 
+     * If the current size-to-capacity ratio exceeds the default load factor, it triggers a rehash to resize the dictionary. 
+     * The method calculates the bucket index based on the key and either adds the new entry if the bucket is empty or appends the entry 
+     * to the linked list in case of collisions. If the key already exists, it updates the corresponding value.
+     * 
+     * @param key The key associated with the value to be added.
+     * @param value The value associated with the key.
+     */
     public void put(K key, V value) {
         // Disallow storing null keys.
         if (key == null || value == null) {
@@ -77,6 +98,16 @@ public class WPHashMap<K, V> {
         this.size++;
     }
 
+    /**
+     * Retrieves the value associated with the given key.
+     * 
+     * This method calculates the appropriate bucket index using the key's hash code and then searches through 
+     * the linked list in the bucket to find the entry with the matching key. If the key exists, the corresponding 
+     * value is returned. If the key is not found, it returns null.
+     * 
+     * @param key The key whose associated value is to be retrieved.
+     * @return The value associated with the specified key, or null if the key is not found.
+     */
     public V get(K key) {
         int index = getBucketIndex(key);
 
@@ -91,7 +122,17 @@ public class WPHashMap<K, V> {
         return null;
     }
 
-    // todo
+    /**
+     * Removes the entry with the specified key from the dictionary.
+     * 
+     * This method calculates the appropriate bucket index for the given key, then iterates through the linked 
+     * list in the bucket to find the entry with the matching key. If found, the entry is removed by adjusting 
+     * the pointers in the linked list. If the entry is the first in the list, the head is updated. The size of 
+     * the dictionary is decremented upon successful removal.
+     * 
+     * @param key The key of the entry to be removed.
+     * @return {@code true} if the entry was removed, {@code false} if no such key exists in the dictionary.
+     */
     public boolean remove(K key) {
         // get bucket index for kv pair we want to remove
         int index = getBucketIndex(key);
@@ -126,6 +167,15 @@ public class WPHashMap<K, V> {
         return false;
     }
 
+    /**
+     * Returns an array containing all the keys in the dictionary.
+     * 
+     * This method iterates through all the buckets in the dictionary and collects the keys from each entry node 
+     * into an array. The size of the array is equal to the current size of the dictionary. The keys are cast to 
+     * {@code Integer} before being added to the array.
+     * 
+     * @return An array of {@code Integer} keys stored in the dictionary.
+     */
     public Integer[] getKeys() {
         Integer[] keysArray = new Integer[size]; // Allocate array of exact required size
         int index = 0;
@@ -141,6 +191,16 @@ public class WPHashMap<K, V> {
         return keysArray;
     }    
     
+    /**
+     * Checks whether the dictionary contains a specified key.
+     * 
+     * This method checks if the key exists in the dictionary by attempting to retrieve 
+     * its corresponding value. If the key is found, it returns {@code true}; otherwise, 
+     * it returns {@code false}.
+     * 
+     * @param key The key to check for in the dictionary.
+     * @return {@code true} if the dictionary contains the specified key, {@code false} otherwise.
+     */
     public boolean containsKey(K key) {
         return get(key) != null;
     }
@@ -173,7 +233,15 @@ public class WPHashMap<K, V> {
         buckets = newBuckets;
     }
 
-    // return how many k-v pairs are being stored in the hashmap
+    /**
+     * Returns the number of key-value pairs currently stored in the dictionary.
+     * 
+     * This method retrieves the value of the {@code size} field, which tracks how many 
+     * key-value pairs are present in the dictionary. It provides a way to check the 
+     * current capacity of the dictionary.
+     * 
+     * @return The number of key-value pairs stored in the dictionary.
+     */
     public int size() {
         return this.size;
     }
